@@ -1,26 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
+import fetch from 'node-fetch';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      list: []
+    }
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3500/book')
+      .then(res => res.json())
+      .then(response => { console.log(response); this.setState({ list: response }) })
+  }
+
+  render() {
+
+    const save = () => {
+      fetch('http://localhost:3500/savebook')
+        .then( () => {
+          fetch('http://localhost:3500/book')
+            .then(res => res.json())
+            .then(response => { console.log(response); this.setState({ list: response }) })
+        })
+
+    }
+    const { list } = this.state
+
+    return (
+      <div className="App">
+        <input type="button" onClick={ save } value="Save" />
+        <br />
+        {
+          list.map(({name}) => <div key={name}>{name}</div>)
+        }
+      </div>
+    );
+  }
 }
 
 export default App;
