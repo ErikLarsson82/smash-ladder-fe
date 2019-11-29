@@ -135,61 +135,58 @@ function Ladder(props) {
 
   return (
     <div className="App">
-    <img src="logo.png" className="logo" alt="logo" />
-    <hr />
-    {
-      schedule.map(({p1,p2, date}, idx, list) => {
-        return (
-          <div className="match-box" key={`${p1}-${p2}-${date}`}>
-            {p1} vs. {p2}<br />
-            <img onClick={() => setscreen('RESOLVE', p1, p2)} src="banner.png" alt="schedule-banner" />
-
-          </div>
-        )
-      })
-    }
-    <hr />
-    <table>
-      <thead>
-      <tr>
-        <th>#</th>
-        <th>Spelare</th>
-        <th>Main</th>
-        <th>Secondary</th>
-      </tr>
-      </thead>
-      <tbody>
+      <img src="logo.png" className="logo" alt="logo" />
+      <hr />
       {
-        players.map(({name, main, secondary}, idx) => {
-          const odd = idx % 2 === 0 ? 'odd' : ''
+        schedule.map(({p1,p2, date}, idx, list) => {
           return (
-            <tr key={name} className={odd}>
-              <td>{idx+1}</td>
-              <td>{name}</td>
-              <td>{main}</td>
-              <td>{secondary}</td>
-            </tr>
+            <div className="match-box" key={`${p1}-${p2}-${date}`}>
+              {p1} vs. {p2}<br />
+              <img onClick={() => setscreen('RESOLVE', p1, p2)} className="banner" src="banner.png" alt="schedule-banner" />
+
+            </div>
           )
         })
       }
-      </tbody>
-    </table>
-    <hr />
-    <div className="icon-row">
-      <img onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
-      <img onClick={() => {}}  src="scoreboard.png" alt="Registrera resultat" />
-      <img src="gear.png" alt="Inställningar" />
-    </div>
-    <hr />
-
-    <hr />
-    <h2>Matcher</h2>
-    <ol>
+      <hr />
+      <table className="players" border="0" cellSpacing="0">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Spelare</th>
+          <th>Main</th>
+          <th>Secondary</th>
+        </tr>
+        </thead>
+        <tbody>
         {
-          matches.map(({p1, p2, winner, score, date}) =>
-            <li key={`${p1}-${p2}-${date}`}>{p1} - {p2} vinnare: {winner} resultat: {score}</li>)
+          players.map(({name, main, secondary}, idx) => {
+            const odd = idx % 2 === 0 ? 'odd' : ''
+            return (
+              <tr key={name} className={odd}>
+                <td>{idx+1}</td>
+                <td>{name}</td>
+                <td>{main}</td>
+                <td>{secondary}</td>
+              </tr>
+            )
+          })
         }
-    </ol>
+        </tbody>
+      </table>
+      <hr />
+      <h2>Matcher</h2>
+      <ol>
+          {
+            matches.map(({p1, p2, winner, score, date}) =>
+              <li key={`${p1}-${p2}-${date}`}>{p1} - {p2} vinnare: {winner} resultat: {score}</li>)
+          }
+      </ol>
+      <div className="icon-row">
+        <img onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
+        <img onClick={() => {}}  src="scoreboard.png" alt="Registrera resultat" />
+        <img src="gear.png" alt="Inställningar" />
+      </div>
     </div>
   );
 }
@@ -291,7 +288,7 @@ class Resolve extends React.Component {
         }
         { scoreSet }
         {
-          winner && (
+          valid && winner && (
             <img alt="resolve" onClick={() => { setscreen('LADDER'); resolvefight({p1: p1, p2: p2, result: ['p1', 'p2', 'p1'], date: new Date().toISOString() }) } } key="resolve" src="resolve.png" />
           )
         }
