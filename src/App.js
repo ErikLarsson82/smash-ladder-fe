@@ -248,30 +248,51 @@ class Resolve extends React.Component {
     super(props)
 
     this.state = {
-      winner: null,
-      score: null
+      result: []
     }
   }
 
   render() {
     const { resolvefight, setscreen, resolveCandidate } = this.props
-    const { winner, score } = this.state
+    const { result } = this.state
     const { p1, p2 } = resolveCandidate
 
+    const p1count = result.filter(x => x === 'p1').length
+    const p2count = result.filter(x => x === 'p2').length
+    const valid = result.length === 3 || p1count === 2 || p2count === 2
+    const winner = p1count > p2count ? 'p1' : 'p2'
+    const scoreSet = `${p1count} - ${p2count}`
+
+    const reset = () => this.setState({ result: [] })
+    const set = player => {
+      if (valid && winner)
+        return
+      this.setState({ result: result.concat(player) })
+    }
     return (
       <div className="resolvefight">
         <h2>Resultat</h2>
-        <img alt="p1" onClick={() => this.setState({ winner: 'p1' })} src="p1.png" className={ winner !== 'p1' ? 'dim' : ''} />
-        <img alt="p2" onClick={() => this.setState({ winner: 'p2' })} src="p2.png" className={ winner !== 'p2' ? 'dim' : ''} />
+        <img alt="p1" onClick={() => set('p1')} src="p1.png" className={ valid && winner === 'p2' ? 'dim' : ''} />
+        <input type="button" value="Reset" onClick={reset} />
+        <img alt="p2" onClick={() => set('p2')} src="p2.png" className={ valid && winner === 'p1' ? 'dim' : ''} />
         {
-          winner !== null && [
-            <img alt="2-1" key="2-1" onClick={() => this.setState({ score: '2-1' })} src="2-1.png" className={ score !== '2-1' ? 'dim' : ''} />,
-            <img alt="2-0" key="2-0" onClick={() => this.setState({ score: '2-0' })} src="2-0.png" className={ score !== '2-0' ? 'dim' : ''} />
-          ]
+          result.map((player, idx) => {
+            return (
+              <div key={`${player}${idx}`}>
+                {
+                  player === 'p1' ? <div>{'<-'}</div> : <div>{'->'}</div>
+                }
+               {
+                idx >= result.length && <hr />
+               }
+              </div>
+            )
+          })
         }
+        { scoreSet }
         {
-          winner && score && (
-            <img alt="resolve" onClick={() => { setscreen('LADDER'); resolvefight({p1: p1, p2: p2, winner: winner, score: score, date: new Date().toISOString() }) } } key="resolve" src="resolve.png" />
+          winner && (
+            <img alt="resolve" onClick={() => { setscreen('LADDER'); resolvefight({p1: p1, p2: p2, result: ['p1', 'p2', 'p1'], date: new Date().toISOString() }) } } key="resolve" src="resolve.png" />
           )
         }
       </div>
@@ -281,21 +302,3 @@ class Resolve extends React.Component {
 }
 
 export default App;
-
-      /*
-
-      const p1 = React.createRef()
-  const p2 = React.createRef()
-  const s1 = React.createRef()
-  const s2 = React.createRef()
-
-  const playerInput = React.createRef()
-
-  <h2>Mata in match</h2>
-    Spelare 1 <input type="text" ref={p1} /> Poäng <input type="text" ref={s1} /><br />
-    Spelare 2 <input type="text" ref={p2} /> Poäng <input type="text" ref={s2} /><br />
-    <input disabled={saving} type="button" onClick={ matchplayed } value="Skicka match" />
-    <hr />
-    <h2>Ny spelare</h2>
-    <input type="text" ref={playerInput} /><input disabled={saving} type="button" onClick={ newplayer } value="Skapa spelare" />
-    */
