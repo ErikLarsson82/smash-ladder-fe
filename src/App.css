@@ -33,3 +33,7 @@ body {
 .challonge {
   background-color: #002F3E;
 }
+
+.dim {
+  opacity: 0.2
+}

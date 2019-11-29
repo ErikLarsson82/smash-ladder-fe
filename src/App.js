@@ -11,6 +11,7 @@ class App extends React.Component {
       matches: [],
       schedule: [],
       screen: 'LADDER',
+      resolveCandidate: null,
       saving: false
     }
 
@@ -18,7 +19,7 @@ class App extends React.Component {
     this.updateMatches = this.updateMatches.bind(this)
     this.updateSchedule = this.updateSchedule.bind(this)
     this.newplayer = this.newplayer.bind(this)
-    this.matchplayed = this.matchplayed.bind(this)
+    this.resolvefight = this.resolvefight.bind(this)
     this.setscreen = this.setscreen.bind(this)
     this.newfight = this.newfight.bind(this)
   }
@@ -29,8 +30,10 @@ class App extends React.Component {
     this.updateSchedule()
   }
 
-  setscreen(screen) {
+  setscreen(screen, p1, p2) {
     this.setState({ screen: screen })
+    if (p1 && p2)
+      this.setState({ resolveCandidate: { p1: p1, p2: p2} })
   }
 
   newfight(p1, p2) {
@@ -72,25 +75,27 @@ class App extends React.Component {
       )
   }
 
-  matchplayed() {
-    const { p1, p2, s1, s2 } = this.refs
-    const json = JSON.stringify({ p1: p1.value, p2: p2.value, s1: s1.value, s2: s2.value, date: new Date().toISOString() })
+  resolvefight(data) {
+    const { p1, p2 } = this.state.resolveCandidate
+    const { winner, score, date } = data
+    const json = JSON.stringify({ p1: p1, p2: p2, winner: winner, score: score, date: date })
     const params = {
       method: 'post',
       body: json,
       headers: { 'Content-Type': 'application/json' }
     }
-    this.setState({ saving: true })
+    this.setState({ saving: true, resolveCandidate: null })
 
-    fetch('http://localhost:3500/matchplayed', params)
+    fetch('http://localhost:3500/resolvefight', params)
       .then(this.updateMatches)
+      .then(this.updateSchedule)
       .then(
         () => setTimeout(() => this.setState({ saving: false }), 1000)
       )
   }
 
   render() {
-    const { schedule, matches, players, saving, screen } = this.state
+    const { schedule, matches, players, saving, screen, resolveCandidate } = this.state
 
     if (screen === 'LADDER') {
       return (
@@ -112,20 +117,21 @@ class App extends React.Component {
           newfight={this.newfight} />
       )
     }
-    return <div>Kurt</div>
+    if (screen === 'RESOLVE') {
+      return (
+        <Resolve
+          setscreen={this.setscreen}
+          resolvefight={this.resolvefight}
+          resolveCandidate={resolveCandidate} />
+      )
+    }
+    return <div>Naaaaiiii</div>
   }
 }
 
 function Ladder(props) {
 
-  const { schedule, matches, players, saving, matchplayed, newplayer, setscreen } = props
-
-  const p1 = React.createRef()
-  const p2 = React.createRef()
-  const s1 = React.createRef()
-  const s2 = React.createRef()
-
-  const playerInput = React.createRef()
+  const { schedule, matches, players, setscreen } = props
 
   return (
     <div className="App">
@@ -136,7 +142,7 @@ function Ladder(props) {
         return (
           <div className="match-box" key={`${p1}-${p2}-${date}`}>
             {p1} vs. {p2}<br />
-            <img src="banner.png" alt="schedule-banner" />
+            <img onClick={() => setscreen('RESOLVE', p1, p2)} src="banner.png" alt="schedule-banner" />
 
           </div>
         )
@@ -171,7 +177,7 @@ function Ladder(props) {
     <hr />
     <div className="icon-row">
       <img onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
-      <img src="scoreboard.png" alt="Registrera resultat" />
+      <img onClick={() => {}}  src="scoreboard.png" alt="Registrera resultat" />
       <img src="gear.png" alt="Inställningar" />
     </div>
     <hr />
@@ -180,8 +186,8 @@ function Ladder(props) {
     <h2>Matcher</h2>
     <ol>
         {
-          matches.map(({p1, p2, s1, s2, date}) =>
-            <li key={`${p1}-${p2}-${date}`}>{p1} - {p2} {s1} - {s2}</li>)
+          matches.map(({p1, p2, winner, score, date}) =>
+            <li key={`${p1}-${p2}-${date}`}>{p1} - {p2} vinnare: {winner} resultat: {score}</li>)
         }
     </ol>
     </div>
@@ -236,9 +242,56 @@ class Challonge extends React.Component {
 
 }
 
+
+class Resolve extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      winner: null,
+      score: null
+    }
+  }
+
+  render() {
+    const { resolvefight, setscreen, resolveCandidate } = this.props
+    const { winner, score } = this.state
+    const { p1, p2 } = resolveCandidate
+
+    return (
+      <div className="resolvefight">
+        <h2>Resultat</h2>
+        <img alt="p1" onClick={() => this.setState({ winner: 'p1' })} src="p1.png" className={ winner !== 'p1' ? 'dim' : ''} />
+        <img alt="p2" onClick={() => this.setState({ winner: 'p2' })} src="p2.png" className={ winner !== 'p2' ? 'dim' : ''} />
+        {
+          winner !== null && [
+            <img alt="2-1" key="2-1" onClick={() => this.setState({ score: '2-1' })} src="2-1.png" className={ score !== '2-1' ? 'dim' : ''} />,
+            <img alt="2-0" key="2-0" onClick={() => this.setState({ score: '2-0' })} src="2-0.png" className={ score !== '2-0' ? 'dim' : ''} />
+          ]
+        }
+        {
+          winner && score && (
+            <img alt="resolve" onClick={() => { setscreen('LADDER'); resolvefight({p1: p1, p2: p2, winner: winner, score: score, date: new Date().toISOString() }) } } key="resolve" src="resolve.png" />
+          )
+        }
+      </div>
+    )
+  }
+
+}
+
 export default App;
 
-      /*<h2>Mata in match</h2>
+      /*
+
+      const p1 = React.createRef()
+  const p2 = React.createRef()
+  const s1 = React.createRef()
+  const s2 = React.createRef()
+
+  const playerInput = React.createRef()
+
+  <h2>Mata in match</h2>
     Spelare 1 <input type="text" ref={p1} /> Poäng <input type="text" ref={s1} /><br />
     Spelare 2 <input type="text" ref={p2} /> Poäng <input type="text" ref={s2} /><br />
     <input disabled={saving} type="button" onClick={ matchplayed } value="Skicka match" />
