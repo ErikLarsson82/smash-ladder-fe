@@ -175,17 +175,37 @@ function Ladder(props) {
         </tbody>
       </table>
       <hr />
-      <h2>Matcher</h2>
-      <ol>
+      <h2 className="matches">Matcher</h2>
+      {
+        /*<ol>
           {
             matches.map(({p1, p2, winner, score, date}) =>
               <li key={`${p1}-${p2}-${date}`}>{p1} - {p2} vinnare: {winner} resultat: {score}</li>)
           }
-      </ol>
+        </ol>
+        */
+      }
+      <div>
+        {
+          matches.map(({p1, p2, result, date}) => {
+            return (
+              <div className="resolved-container" key={`${p1}-${p2}-${date}`}>
+                <div>
+                  <img src="ike.png" width="40px" alt="ike" /> vs. <img src="joker.png" width="40px" alt="ike" /><br />
+                </div>
+                <div className="score-box">
+                  2-1
+                </div>
+              </div>
+            )
+          })
+        }
+      </div>
+      <div className="footer">Powered by Cargo</div>
       <div className="icon-row">
-        <img onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
-        <img onClick={() => {}}  src="scoreboard.png" alt="Registrera resultat" />
-        <img src="gear.png" alt="Inställningar" />
+        <img className="menu-icon" onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
+        <img className="menu-icon" onClick={() => {}}  src="scoreboard.png" alt="Registrera resultat" />
+        <img className="menu-icon" src="gear.png" alt="Inställningar" />
       </div>
     </div>
   );

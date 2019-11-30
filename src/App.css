@@ -48,6 +48,31 @@ thead {
   width: 355px;
 }
 
+.menu-icon:hover {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
 .odd {
   background: #383838;
 }
@@ -61,6 +86,11 @@ thead {
   width: 100%;
   padding: 20px;
   background-color: cadetblue;
+}
+
+.matches {
+  padding-top: 30px;
+  padding-bottom: 20px;
 }
 
 .match-box {
@@ -103,4 +133,28 @@ thead {
   background-color: darkslategray;
   width: 100%;
   height: 100vh;
+}
+
+.resolved-container {
+  flex-direction: column;
+  background-color: #383838;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: x-large;
+}
+
+.footer {
+  margin-bottom: 80px;
+  margin-top: 50px;
+  font-size: xx-small;
 }
