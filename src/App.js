@@ -13,7 +13,8 @@ class App extends React.Component {
       screen: 'LADDER',
       resolveCandidate: null,
       saving: false,
-      error: null
+      error: null,
+      highlight: document.cookie
     }
 
     this.updatePlayers = this.updatePlayers.bind(this)
@@ -23,6 +24,7 @@ class App extends React.Component {
     this.resolvefight = this.resolvefight.bind(this)
     this.setscreen = this.setscreen.bind(this)
     this.newfight = this.newfight.bind(this)
+    this.highlightPlayer = this.highlightPlayer.bind(this)
   }
 
   componentDidMount() {
@@ -98,8 +100,25 @@ class App extends React.Component {
       )
   }
 
+  highlightPlayer(name) {
+    const highlight = this.state.highlight
+    const result = (highlight === slug(name)) ? null : slug(name)
+
+    this.setState({ highlight: result })
+    document.cookie = result
+  }
+
   render() {
-    const { schedule, matches, players, saving, screen, resolveCandidate, error } = this.state
+    const {
+      schedule,
+      matches,
+      players,
+      saving,
+      screen,
+      resolveCandidate,
+      error,
+      highlight
+    } = this.state
 
     if (screen === 'LADDER') {
       return (
@@ -111,7 +130,9 @@ class App extends React.Component {
           matchplayed={this.matchplayed}
           newplayer={this.newplayer}
           setscreen={this.setscreen}
-          error={error} />
+          highlightPlayer={this.highlightPlayer}
+          error={error}
+          highlight={highlight} />
         )
     }
     if (screen === 'CHALLONGE') {
@@ -142,12 +163,16 @@ function slug(str) {
   if (!str) return null
   return str.replace(/ /g, '-')
     .replace(/\./g, '')
+    .replace(/[äÄ]/g, 'a')
+    .replace(/[åÅ]/g, 'a')
+    .replace(/[öÖ]/g, 'o')
+    .replace(/è/g, 'e')
     .toLowerCase()
 }
 
 function Ladder(props) {
 
-  const { schedule, matches, players, setscreen, error } = props
+  const { schedule, matches, players, setscreen, error, highlight, highlightPlayer } = props
 
   return (
     <div className="App">
@@ -180,8 +205,12 @@ function Ladder(props) {
           players.length > 0 &&
           players.map(({name, main, secondary}, idx) => {
             const odd = idx % 2 === 0 ? 'odd' : ''
+            const _highlight = slug(name) === highlight ? 'highlight' : ''
             return (
-              <tr key={name} className={odd}>
+              <tr
+                key={name}
+                className={[odd, _highlight].join(' ')}
+                onClick={() => highlightPlayer(name)}>
                 <td>{idx+1}</td>
                 <td>{name}</td>
                 <td>{main}</td>

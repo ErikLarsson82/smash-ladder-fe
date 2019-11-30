@@ -118,6 +118,10 @@ thead {
   height: 70px;
 }
 
+.highlight {
+  background-color: cadetblue;
+}
+
 .in-middle {
   display: flex;
   flex-direction: column;
