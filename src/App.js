@@ -12,7 +12,8 @@ class App extends React.Component {
       schedule: [],
       screen: 'LADDER',
       resolveCandidate: null,
-      saving: false
+      saving: false,
+      error: null
     }
 
     this.updatePlayers = this.updatePlayers.bind(this)
@@ -45,18 +46,21 @@ class App extends React.Component {
     fetch('http://localhost:3500/players')
       .then(res => res.json())
       .then(res => this.setState({ players: res }))
+      .catch( () => this.setState({error: true}) )
   }
 
   updateMatches() {
     fetch('http://localhost:3500/matches')
       .then(res => res.json())
       .then(res => this.setState({ matches: res }))
+      .catch( () => this.setState({error: true}) )
   }
 
   updateSchedule() {
     fetch('http://localhost:3500/schedule')
       .then(res => res.json())
       .then(res => this.setState({ schedule: res }))
+      .catch( () => this.setState({error: true}) )
   }
 
   newplayer() {
@@ -95,7 +99,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { schedule, matches, players, saving, screen, resolveCandidate } = this.state
+    const { schedule, matches, players, saving, screen, resolveCandidate, error } = this.state
 
     if (screen === 'LADDER') {
       return (
@@ -106,7 +110,8 @@ class App extends React.Component {
           saving={saving}
           matchplayed={this.matchplayed}
           newplayer={this.newplayer}
-          setscreen={this.setscreen} />
+          setscreen={this.setscreen}
+          error={error} />
         )
     }
     if (screen === 'CHALLONGE') {
@@ -129,9 +134,20 @@ class App extends React.Component {
   }
 }
 
+function Icon({name}) {
+  return <img src={`heroes/${slug(name)}.png`} alt={name} width="32" height="32" />
+}
+
+function slug(str) {
+  if (!str) return null
+  return str.replace(/ /g, '-')
+    .replace(/\./g, '')
+    .toLowerCase()
+}
+
 function Ladder(props) {
 
-  const { schedule, matches, players, setscreen } = props
+  const { schedule, matches, players, setscreen, error } = props
 
   return (
     <div className="App">
@@ -143,7 +159,6 @@ function Ladder(props) {
             <div className="match-box" key={`${p1}-${p2}-${date}`}>
               {p1} vs. {p2}<br />
               <img onClick={() => setscreen('RESOLVE', p1, p2)} className="banner" src="banner.png" alt="schedule-banner" />
-
             </div>
           )
         })
@@ -155,11 +170,14 @@ function Ladder(props) {
           <th>#</th>
           <th>Spelare</th>
           <th>Main</th>
+          <th></th>
           <th>Secondary</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
         {
+          players.length > 0 &&
           players.map(({name, main, secondary}, idx) => {
             const odd = idx % 2 === 0 ? 'odd' : ''
             return (
@@ -167,24 +185,31 @@ function Ladder(props) {
                 <td>{idx+1}</td>
                 <td>{name}</td>
                 <td>{main}</td>
+                <td><Icon name={main} /></td>
                 <td>{secondary}</td>
+                <td>{secondary && <Icon name={secondary} />}</td>
               </tr>
             )
           })
         }
         </tbody>
       </table>
+      {
+        players.length === 0 && !error && (
+          <div className="loading">
+            Laddar spelare...... undrar vart Mega Man är på listan?
+          </div>
+        )
+      }
+      {
+        error && (
+          <div className="loading">
+            Kunde inte hämta listan - är servern uppe?
+          </div>
+        )
+      }
       <hr />
       <h2 className="matches">Matcher</h2>
-      {
-        /*<ol>
-          {
-            matches.map(({p1, p2, winner, score, date}) =>
-              <li key={`${p1}-${p2}-${date}`}>{p1} - {p2} vinnare: {winner} resultat: {score}</li>)
-          }
-        </ol>
-        */
-      }
       <div>
         {
           matches.map(({p1, p2, result, date}) => {
@@ -201,7 +226,7 @@ function Ladder(props) {
           })
         }
       </div>
-      <div className="footer">Powered by Cargo</div>
+      <div className="footer">Powered by Cargo and Bonko</div>
       <div className="icon-row">
         <img className="menu-icon" onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
         <img className="menu-icon" onClick={() => {}}  src="scoreboard.png" alt="Registrera resultat" />
@@ -225,12 +250,15 @@ class Challonge extends React.Component {
     const { players, setscreen, newfight } = this.props
     const { p1, p2 } = this.state
 
+    //<input type="button" value="Tillbaka" onClick={() => setscreen('LADDER')} /><br />
+
     return (
       <div className="challonge">
-        <h2>Utmaning</h2>
-        <input type="button" value="Tillbaka" onClick={() => setscreen('LADDER')} /><br />
+        <div className="centered">
+          <img src="utmaning.png" alt="Utmaning" />
+        </div>
         <div className="challonge-container">
-          <div className="player-list">
+          <div className="player-list in-middle">
             {
               players.map(({name}) => {
                 const selected = p1 === name ? 'selected' : ''
@@ -238,8 +266,10 @@ class Challonge extends React.Component {
               })
             }
           </div>
-          <img src="player-versus-player.png" alt="VS" />
-          <div>
+          <div className="in-middle">
+            <img className="vs-logo" src="player-versus-player.png" alt="VS" />
+          </div>
+          <div className="player-list in-middle">
             {
               players.map(({name}) => {
                 const selected = p2 === name ? 'selected' : ''
@@ -248,11 +278,13 @@ class Challonge extends React.Component {
             }
           </div>
         </div>
-        {
-          p1 && p2 && (
-            <input type="button" value="Fight" onClick={() => { newfight(p1, p2); setscreen('LADDER') }} />
-          )
-        }
+        <div className="centered">
+          <img
+            src="fight.png"
+            alt="Slåss"
+            style={ {opacity: p1 && p2 ? 1 : 0 } }
+            onClick={() => { newfight(p1, p2); setscreen('LADDER') }} />
+        </div>
       </div>
     )
   }
