@@ -54,10 +54,6 @@ thead {
   align-items: center;
 }
 
-.logo {
-  width: 355px;
-}
-
 .menu-icon:hover {
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
@@ -112,6 +108,22 @@ thead {
   align-items: center;
 }
 
+.banner-container {
+  position: relative;
+}
+
+.banner-p1 {
+  position: absolute;
+  top: 72px;
+  left: 19px;
+}
+
+.banner-p2 {
+  position: absolute;
+  top: 9px;
+  left: 348px;
+}
+
 .banner {
   width: 500px;
   cursor: pointer;
@@ -135,7 +147,7 @@ thead {
   opacity: 0;
 }
 
-.in-middle {
+.spacer {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -155,6 +167,12 @@ thead {
   color: black;
 }
 
+.player-heading {
+  color: cadetblue;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .selected {
   background-color: green;
 }
@@ -162,6 +180,11 @@ thead {
 .selected.player-list:hover {
   background-color: darkgray;
   color: black;
+}
+
+.qc-icon {
+  padding-bottom: 2px;
+  padding-left: 5px;
 }
 
 .challonge {

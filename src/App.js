@@ -179,14 +179,17 @@ function Ladder(props) {
 
   return (
     <div className="App">
-      <img src="logo.png" className="logo" alt="logo" />
+      <img src="logo.png" width="355" height="221" alt="logo" />
       <hr />
       {
         schedule.map(({p1,p2, date}, idx, list) => {
           return (
             <div className="match-box" key={`${p1}-${p2}-${date}`}>
-              {p1} vs. {p2}<br />
-              <img onClick={() => setscreen('RESOLVE', p1, p2)} className="banner" src="banner.png" alt="schedule-banner" />
+              <div className="banner-container">
+                <img onClick={() => setscreen('RESOLVE', p1, p2)} className="banner" src="banner.png" alt="schedule-banner" />
+                <div className="banner-p1">{p1}</div>
+                <div className="banner-p2">{p2}</div>
+              </div>
             </div>
           )
         })
@@ -259,15 +262,20 @@ function Ladder(props) {
   );
 }
 
-function PlayerRow({name, main, secondary, idx, highlight, highlightPlayer}) {
+function QcIcon({place}) {
+  return <img src={`qc-${place}.png`} className="qc-icon" width="10" height="10" alt="Plats" />
+}
+
+function PlayerRow({name, main, secondary, qc, idx, highlight, highlightPlayer}) {
   const odd = idx % 2 === 0 ? 'odd' : ''
   const _highlight = slug(name) === highlight ? 'highlight' : ''
+  const qcIcons = qc.map(x => <QcIcon key={`${name}-${x}`} place={x} />)
   return (
     <tr
       className={[_highlight, 'player-row', odd].join(' ')}
       onClick={() => highlightPlayer(name)}>
       <td>{idx+1}</td>
-      <td>{name}</td>
+      <td>{name}{ qcIcons.length > 0 && qcIcons}</td>
       <td>{main}</td>
       <td><Icon name={main} /></td>
       <td>{secondary}</td>
@@ -295,10 +303,11 @@ class Challonge extends React.Component {
     return (
       <div className="challonge">
         <div className="centered">
-          <img src="utmaning.png" alt="Utmaning" />
+          <img src="utmaning.png" width="238" height="65" alt="Utmaning" />
         </div>
         <div className="challonge-container">
-          <div className="in-middle">
+          <div className="spacer">
+            <h2 className="player-heading">Challanger</h2>
             {
               players.map(({name}) => {
                 const selected = p1 === name ? 'selected' : ''
@@ -310,10 +319,11 @@ class Challonge extends React.Component {
               })
             }
           </div>
-          <div className="in-middle">
+          <div className="spacer">
             <img className="vs-logo" src="player-versus-player.png" alt="VS" />
           </div>
-          <div className="in-middle">
+          <div className="spacer">
+            <h2 className="player-heading">Challangee</h2>
             {
               players.map(({name}) => {
                 const selected = p2 === name ? 'selected' : ''
