@@ -4,6 +4,8 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  font-family: 'Bebas Neue', cursive;
+  font-size: larger;
 }
 
 h1 {
@@ -61,6 +63,7 @@ thead {
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
+  cursor: pointer;
 }
 
 @keyframes shake {
@@ -111,6 +114,7 @@ thead {
 
 .banner {
   width: 500px;
+  cursor: pointer;
 }
 
 .vs-logo {
@@ -118,25 +122,46 @@ thead {
   height: 70px;
 }
 
-.highlight {
-  background-color: cadetblue;
+.button {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 1;
+}
+
+.invisible {
+  opacity: 0;
 }
 
 .in-middle {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  padding: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
-.player-list > div {
-  padding: 7px;
-  margin: 5px;
+.player-list {
   font-size: larger;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.player-list:hover {
+  background-color: aliceblue;
+  color: black;
 }
 
 .selected {
-  background-color: #006a9a;
+  background-color: green;
+}
+
+.selected.player-list:hover {
+  background-color: darkgray;
+  color: black;
 }
 
 .challonge {
@@ -152,6 +177,21 @@ thead {
 .challonge-container {
   display: flex;
   justify-content: space-between;
+  font-size: medium;
+}
+
+.player-row:hover {
+  background-color: aliceblue;
+  color: black;
+  cursor: pointer;
+}
+
+.highlight {
+  background-color: cadetblue;
+}
+
+.player-row.highlight:hover {
+  background-color: aqua;
 }
 
 .dim {

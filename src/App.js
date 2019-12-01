@@ -155,8 +155,11 @@ class App extends React.Component {
   }
 }
 
-function Icon({name}) {
-  return <img src={`heroes/${slug(name)}.png`} alt={name} width="32" height="32" />
+function Icon({name, large}) {
+  const size = large ? "45" : "32"
+  return (
+    <img src={`heroes/${slug(name)}.png`} alt={name} width={size} height={size} />
+  )
 }
 
 function slug(str) {
@@ -203,23 +206,14 @@ function Ladder(props) {
         <tbody>
         {
           players.length > 0 &&
-          players.map(({name, main, secondary}, idx) => {
-            const odd = idx % 2 === 0 ? 'odd' : ''
-            const _highlight = slug(name) === highlight ? 'highlight' : ''
-            return (
-              <tr
-                key={name}
-                className={[odd, _highlight].join(' ')}
-                onClick={() => highlightPlayer(name)}>
-                <td>{idx+1}</td>
-                <td>{name}</td>
-                <td>{main}</td>
-                <td><Icon name={main} /></td>
-                <td>{secondary}</td>
-                <td>{secondary && <Icon name={secondary} />}</td>
-              </tr>
-            )
-          })
+          players.map((player, idx) =>
+            <PlayerRow
+              {...player}
+              key={slug(player.name)}
+              idx={idx}
+              highlight={highlight}
+              highlightPlayer={highlightPlayer} />
+          )
         }
         </tbody>
       </table>
@@ -245,7 +239,7 @@ function Ladder(props) {
             return (
               <div className="resolved-container" key={`${p1}-${p2}-${date}`}>
                 <div>
-                  <img src="ike.png" width="40px" alt="ike" /> vs. <img src="joker.png" width="40px" alt="ike" /><br />
+                  <Icon large name={players.find(x => x.name === p1).main} /> vs. <Icon large name={players.find(x => x.name === p2).main} /><br />
                 </div>
                 <div className="score-box">
                   2-1
@@ -263,6 +257,23 @@ function Ladder(props) {
       </div>
     </div>
   );
+}
+
+function PlayerRow({name, main, secondary, idx, highlight, highlightPlayer}) {
+  const odd = idx % 2 === 0 ? 'odd' : ''
+  const _highlight = slug(name) === highlight ? 'highlight' : ''
+  return (
+    <tr
+      className={[_highlight, 'player-row', odd].join(' ')}
+      onClick={() => highlightPlayer(name)}>
+      <td>{idx+1}</td>
+      <td>{name}</td>
+      <td>{main}</td>
+      <td><Icon name={main} /></td>
+      <td>{secondary}</td>
+      <td>{secondary && <Icon name={secondary} />}</td>
+    </tr>
+  )
 }
 
 class Challonge extends React.Component {
@@ -287,22 +298,30 @@ class Challonge extends React.Component {
           <img src="utmaning.png" alt="Utmaning" />
         </div>
         <div className="challonge-container">
-          <div className="player-list in-middle">
+          <div className="in-middle">
             {
               players.map(({name}) => {
                 const selected = p1 === name ? 'selected' : ''
-                return <div key={`${name}-left`} className={selected} onClick={() => this.setState({p1: name})}>{name}</div>
+                return (
+                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1: name})}>
+                    {name}
+                  </div>
+                )
               })
             }
           </div>
           <div className="in-middle">
             <img className="vs-logo" src="player-versus-player.png" alt="VS" />
           </div>
-          <div className="player-list in-middle">
+          <div className="in-middle">
             {
               players.map(({name}) => {
                 const selected = p2 === name ? 'selected' : ''
-                return <div key={`${name}-left`} className={selected} onClick={() => this.setState({p2: name})}>{name}</div>
+                return (
+                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2: name})}>
+                    {name}
+                  </div>
+                )
               })
             }
           </div>
@@ -311,7 +330,7 @@ class Challonge extends React.Component {
           <img
             src="fight.png"
             alt="Slåss"
-            style={ {opacity: p1 && p2 ? 1 : 0 } }
+            className={ [p1 && p2 ? '' : 'invisible', 'button'].join(' ') }
             onClick={() => { newfight(p1, p2); setscreen('LADDER') }} />
         </div>
       </div>
