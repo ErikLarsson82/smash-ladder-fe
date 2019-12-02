@@ -151,14 +151,28 @@ class App extends React.Component {
           resolveCandidate={resolveCandidate} />
       )
     }
-    return <div>Naaaaiiii</div>
+    return <div>Nothing here</div>
   }
+}
+
+
+
+
+function Mugshot({name}) {
+  return (
+    <img src={`mugshots/mug.png`} width="25" height="25" className="mugshot" alt="Mugshot" />
+  )
 }
 
 function Icon({name, large}) {
   const size = large ? "45" : "32"
   return (
-    <img src={`heroes/${slug(name)}.png`} alt={name} width={size} height={size} />
+    <img
+      src={`heroes/${slug(name)}.png`}
+      className="character-icon"
+      alt={name}
+      width={size}
+      height={size} />
   )
 }
 
@@ -173,8 +187,38 @@ function slug(str) {
     .toLowerCase()
 }
 
-function Ladder(props) {
 
+function QcIcon({place}) {
+  return <img src={`qc-${place}.png`} className="qc-icon" width="10" height="10" alt="Plats" />
+}
+
+function PlayerRow({name, main, secondary, qc, idx, highlight, highlightPlayer}) {
+  const odd = idx % 2 === 0 ? 'odd' : ''
+  const _highlight = slug(name) === highlight ? 'highlight' : ''
+  const qcIcons = qc.map(x => <QcIcon key={`${name}-${x}`} place={x} />)
+  return (
+    <tr
+      className={[_highlight, 'player-row', odd].join(' ')}
+      onClick={() => highlightPlayer(name)}>
+      <td><div className="placement">{idx+1}</div></td>
+      <td><Mugshot name={name} />{name}{ qcIcons.length > 0 && qcIcons}</td>
+      <td><Icon name={main} />{main}</td>
+      <td>{secondary && <Icon name={secondary} />}{secondary}</td>
+    </tr>
+  )
+}
+
+function leftpad(str) {
+  if (str.length === 1) {
+    return `0${str}`
+  }
+  return str
+}
+
+
+
+
+function Ladder(props) {
   const { schedule, matches, players, setscreen, error, highlight, highlightPlayer } = props
 
   return (
@@ -198,12 +242,10 @@ function Ladder(props) {
       <table className="players" border="0" cellSpacing="0">
         <thead>
         <tr>
-          <th>#</th>
+          <th><div className="placement">#</div></th>
           <th>Spelare</th>
           <th>Main</th>
-          <th></th>
           <th>Secondary</th>
-          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -262,27 +304,7 @@ function Ladder(props) {
   );
 }
 
-function QcIcon({place}) {
-  return <img src={`qc-${place}.png`} className="qc-icon" width="10" height="10" alt="Plats" />
-}
 
-function PlayerRow({name, main, secondary, qc, idx, highlight, highlightPlayer}) {
-  const odd = idx % 2 === 0 ? 'odd' : ''
-  const _highlight = slug(name) === highlight ? 'highlight' : ''
-  const qcIcons = qc.map(x => <QcIcon key={`${name}-${x}`} place={x} />)
-  return (
-    <tr
-      className={[_highlight, 'player-row', odd].join(' ')}
-      onClick={() => highlightPlayer(name)}>
-      <td>{idx+1}</td>
-      <td>{name}{ qcIcons.length > 0 && qcIcons}</td>
-      <td>{main}</td>
-      <td><Icon name={main} /></td>
-      <td>{secondary}</td>
-      <td>{secondary && <Icon name={secondary} />}</td>
-    </tr>
-  )
-}
 
 class Challonge extends React.Component {
   constructor(props) {
@@ -309,11 +331,11 @@ class Challonge extends React.Component {
           <div className="spacer">
             <h2 className="player-heading">Challanger</h2>
             {
-              players.map(({name}) => {
+              players.map(({name}, idx) => {
                 const selected = p1 === name ? 'selected' : ''
                 return (
                   <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1: name})}>
-                    {name}
+                    {`${leftpad((idx+1).toString())}. `}{name}
                   </div>
                 )
               })
@@ -325,11 +347,11 @@ class Challonge extends React.Component {
           <div className="spacer">
             <h2 className="player-heading">Challangee</h2>
             {
-              players.map(({name}) => {
+              players.map(({name}, idx) => {
                 const selected = p2 === name ? 'selected' : ''
                 return (
                   <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2: name})}>
-                    {name}
+                    {`${leftpad((idx+1).toString())}. `}{name}
                   </div>
                 )
               })
@@ -348,6 +370,7 @@ class Challonge extends React.Component {
   }
 
 }
+
 
 
 class Resolve extends React.Component {
@@ -405,7 +428,7 @@ class Resolve extends React.Component {
       </div>
     )
   }
-
 }
 
-export default App;
+
+export default App
