@@ -333,23 +333,30 @@ class Challonge extends React.Component {
       : slug(players[getPlayerAbove(players, slug(highlight))].name)
 
     this.state = {
-      p1: p1,
-      p2: p2
+      p1slug: p1,
+      p2slug: p2
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { p1, p2 } = this.state
+    const { p1slug, p2slug } = this.state
     const { players } = this.props
 
-    if (prevState.p1 === null && p1 !== null && p2 === null) {
-      this.setState({ p2: slug(players[getPlayerAbove(players, p1)].name) })
+    if (prevState.p1slug === null && p1slug !== null && p2slug === null) {
+      this.setState({ p2slug: slug(players[getPlayerAbove(players, p1slug)].name) })
     }
   }
 
   render() {
     const { players, setscreen, newfight } = this.props
-    const { p1, p2 } = this.state
+    const { p1slug, p2slug } = this.state
+
+    const fightButton = () => {
+      const p1 = players.find(({name}) => slug(name) === p1slug).name
+      const p2 = players.find(({name}) => slug(name) === p2slug).name
+      newfight(p1, p2)
+      setscreen('LADDER')
+    }
 
     return (
       <div className="challonge">
@@ -362,9 +369,9 @@ class Challonge extends React.Component {
             <h2 className="player-heading">Challanger</h2>
             {
               players.map(({name, main}, idx) => {
-                const selected = p1 === slug(name) ? 'selected' : ''
+                const selected = p1slug === slug(name) ? 'selected' : ''
                 return (
-                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1: slug(name)})}>
+                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1slug: slug(name)})}>
                     {`${leftpad((idx+1).toString())}. `}<Icon small name={main} />{name}
                   </div>
                 )
@@ -378,9 +385,9 @@ class Challonge extends React.Component {
             <h2 className="player-heading">Challangee</h2>
             {
               players.map(({name, main}, idx) => {
-                const selected = p2 === slug(name) ? 'selected' : ''
+                const selected = p2slug === slug(name) ? 'selected' : ''
                 return (
-                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2: slug(name)})}>
+                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2slug: slug(name)})}>
                     {`${leftpad((idx+1).toString())}. `}<Icon small name={main} />{name}
                   </div>
                 )
@@ -388,17 +395,17 @@ class Challonge extends React.Component {
             }
           </div>
         </div>
-        <div className="centered">
+        <div className="centered fixed">
           {
-            (p1) && (p2) && (p1 === p2) && (
+            (p1slug) && (p2slug) && (p1slug === p2slug) && (
               <img className="derp" src="spicy-memelord.png" alt="Till dig batsis ;)" />
             )
           }
           <img
             src="fight.png"
             alt="Slåss"
-            className={ [p1 && p2 && (p1 !== p2) ? '' : 'invisible', 'button'].join(' ') }
-            onClick={() => { newfight(p1, p2); setscreen('LADDER') }} />
+            className={ [p1slug && p2slug && (p1slug !== p2slug) ? '' : 'invisible', 'button'].join(' ') }
+            onClick={fightButton} />
         </div>
       </div>
     )

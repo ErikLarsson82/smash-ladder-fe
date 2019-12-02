@@ -45,7 +45,8 @@ thead {
 }
 
 .players {
-  width: 100%;
+  max-width: 850px;
+  min-width: 850px;
 }
 
 .App {
@@ -54,12 +55,18 @@ thead {
   align-items: center;
 }
 
+.menu-icon {
+  padding: 10px;
+}
 .menu-icon:hover {
-  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  animation: shake 0.32s cubic-bezier(.20,.07,.19,.70) both;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
   cursor: pointer;
+  background-color: steelblue;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 @keyframes shake {
@@ -126,6 +133,7 @@ thead {
 
 .banner {
   width: 500px;
+  height: 119px;
   cursor: pointer;
 }
 
@@ -144,7 +152,7 @@ thead {
 }
 
 .invisible {
-  opacity: 0;
+  visibility: hidden;
 }
 
 .spacer {
@@ -211,6 +219,10 @@ thead {
   height: 60px;
 }
 
+.fixed {
+  height: 84px;
+}
+
 .back {
   position: absolute;
   top: 20px;
@@ -220,7 +232,7 @@ thead {
   height: 30px;
   border: 2px solid white;
   border-radius: 20px;
-  padding-left: 18px;
+  padding-left: 20px;
   padding-top: 8px;
   background-color: indianred;
 }
