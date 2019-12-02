@@ -204,6 +204,13 @@ thead {
   text-align: right;
 }
 
+.derp {
+  position: absolute;
+  border-radius: 20px;
+  width: 60px;
+  height: 60px;
+}
+
 .back {
   position: absolute;
   top: 20px;

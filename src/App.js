@@ -140,7 +140,8 @@ class App extends React.Component {
         <Challonge
           players={players}
           setscreen={this.setscreen}
-          newfight={this.newfight} />
+          newfight={this.newfight}
+          highlight={highlight} />
       )
     }
     if (screen === 'RESOLVE') {
@@ -310,15 +311,39 @@ function Ladder(props) {
   );
 }
 
+function getPlayerAbove(players, player_slug) {
+  const current = players.findIndex(({name}) => slug(name) === player_slug)
+  const result = current-1
+  return result === -1 ? 1 : result
+}
 
 
 class Challonge extends React.Component {
   constructor(props) {
     super(props)
 
+    const { highlight, players } = props
+
+    const p1 = highlight === "null" || highlight === null
+      ? null
+      : slug(highlight)
+
+    const p2 = highlight === "null" || highlight === null
+      ? null
+      : slug(players[getPlayerAbove(players, slug(highlight))].name)
+
     this.state = {
-      p1: null,
-      p2: null
+      p1: p1,
+      p2: p2
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { p1, p2 } = this.state
+    const { players } = this.props
+
+    if (prevState.p1 === null && p1 !== null && p2 === null) {
+      this.setState({ p2: slug(players[getPlayerAbove(players, p1)].name) })
     }
   }
 
@@ -337,9 +362,9 @@ class Challonge extends React.Component {
             <h2 className="player-heading">Challanger</h2>
             {
               players.map(({name, main}, idx) => {
-                const selected = p1 === name ? 'selected' : ''
+                const selected = p1 === slug(name) ? 'selected' : ''
                 return (
-                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1: name})}>
+                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1: slug(name)})}>
                     {`${leftpad((idx+1).toString())}. `}<Icon small name={main} />{name}
                   </div>
                 )
@@ -353,9 +378,9 @@ class Challonge extends React.Component {
             <h2 className="player-heading">Challangee</h2>
             {
               players.map(({name, main}, idx) => {
-                const selected = p2 === name ? 'selected' : ''
+                const selected = p2 === slug(name) ? 'selected' : ''
                 return (
-                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2: name})}>
+                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2: slug(name)})}>
                     {`${leftpad((idx+1).toString())}. `}<Icon small name={main} />{name}
                   </div>
                 )
@@ -364,10 +389,15 @@ class Challonge extends React.Component {
           </div>
         </div>
         <div className="centered">
+          {
+            (p1) && (p2) && (p1 === p2) && (
+              <img className="derp" src="spicy-memelord.png" alt="Till dig batsis ;)" />
+            )
+          }
           <img
             src="fight.png"
             alt="Slåss"
-            className={ [p1 && p2 ? '' : 'invisible', 'button'].join(' ') }
+            className={ [p1 && p2 && (p1 !== p2) ? '' : 'invisible', 'button'].join(' ') }
             onClick={() => { newfight(p1, p2); setscreen('LADDER') }} />
         </div>
       </div>
