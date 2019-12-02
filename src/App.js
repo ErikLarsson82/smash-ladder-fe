@@ -164,8 +164,14 @@ function Mugshot({name}) {
   )
 }
 
-function Icon({name, large}) {
-  const size = large ? "45" : "32"
+function Icon({name, large, small}) {
+  let size = '32'
+  if (large) {
+    size = '45'
+  }
+  if (small) {
+    size = '15'
+  }
   return (
     <img
       src={`heroes/${slug(name)}.png`}
@@ -320,10 +326,9 @@ class Challonge extends React.Component {
     const { players, setscreen, newfight } = this.props
     const { p1, p2 } = this.state
 
-    //<input type="button" value="Tillbaka" onClick={() => setscreen('LADDER')} /><br />
-
     return (
       <div className="challonge">
+        <div onClick={() => setscreen('LADDER')} className="back">X</div>
         <div className="centered">
           <img src="utmaning.png" width="238" height="65" alt="Utmaning" />
         </div>
@@ -331,11 +336,11 @@ class Challonge extends React.Component {
           <div className="spacer">
             <h2 className="player-heading">Challanger</h2>
             {
-              players.map(({name}, idx) => {
+              players.map(({name, main}, idx) => {
                 const selected = p1 === name ? 'selected' : ''
                 return (
                   <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1: name})}>
-                    {`${leftpad((idx+1).toString())}. `}{name}
+                    {`${leftpad((idx+1).toString())}. `}<Icon small name={main} />{name}
                   </div>
                 )
               })
@@ -347,11 +352,11 @@ class Challonge extends React.Component {
           <div className="spacer">
             <h2 className="player-heading">Challangee</h2>
             {
-              players.map(({name}, idx) => {
+              players.map(({name, main}, idx) => {
                 const selected = p2 === name ? 'selected' : ''
                 return (
                   <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2: name})}>
-                    {`${leftpad((idx+1).toString())}. `}{name}
+                    {`${leftpad((idx+1).toString())}. `}<Icon small name={main} />{name}
                   </div>
                 )
               })

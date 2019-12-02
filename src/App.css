@@ -204,6 +204,24 @@ thead {
   text-align: right;
 }
 
+.back {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border: 2px solid white;
+  border-radius: 20px;
+  padding-left: 18px;
+  padding-top: 8px;
+  background-color: indianred;
+}
+
+.back:hover {
+  background-color: red;
+}
+
 .challonge {
   background-color: #002F3E;
   width: 100%;
