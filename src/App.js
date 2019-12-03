@@ -1,7 +1,6 @@
 import React from 'react'
 import fetch from 'node-fetch'
 import './App.css'
-import { slug } from './helpers'
 import Ladder from './Ladder'
 import Challonge from './Challonge'
 import Resolve from './Resolve'
@@ -103,9 +102,9 @@ class App extends React.Component {
       )
   }
 
-  highlightPlayer(name) {
+  highlightPlayer(playerslug) {
     const highlight = this.state.highlight
-    const result = (highlight === slug(name)) ? null : slug(name)
+    const result = (highlight === playerslug) ? null : playerslug
 
     this.setState({ highlight: result })
     document.cookie = result

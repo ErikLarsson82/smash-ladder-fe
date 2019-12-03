@@ -1,6 +1,6 @@
 import React from 'react'
 import PlayerRow from './PlayerRow'
-import { slug, Icon } from './helpers'
+import { Icon } from './helpers'
 
 export default function Ladder(props) {
   const { schedule, matches, players, setscreen, error, highlight, highlightPlayer } = props
@@ -38,7 +38,7 @@ export default function Ladder(props) {
           players.map((player, idx) =>
             <PlayerRow
               {...player}
-              key={slug(player.name)}
+              key={player.playerslug}
               idx={idx}
               highlight={highlight}
               highlightPlayer={highlightPlayer} />

@@ -58,10 +58,10 @@ export default class Challonge extends React.Component {
           <div className="spacer">
             <h2 className="player-heading">Challanger</h2>
             {
-              players.map(({name, main}, idx) => {
-                const selected = p1slug === slug(name) ? 'selected' : ''
+              players.map(({playerslug, name, main}, idx) => {
+                const selected = p1slug === playerslug ? 'selected' : ''
                 return (
-                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1slug: slug(name)})}>
+                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1slug: playerslug})}>
                     {`${leftpad((idx+1).toString())}. `}<Icon small name={main} />{name}
                   </div>
                 )
@@ -74,10 +74,10 @@ export default class Challonge extends React.Component {
           <div className="spacer">
             <h2 className="player-heading">Challangee</h2>
             {
-              players.map(({name, main}, idx) => {
-                const selected = p2slug === slug(name) ? 'selected' : ''
+              players.map(({playerslug, name, main}, idx) => {
+                const selected = p2slug === playerslug ? 'selected' : ''
                 return (
-                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2slug: slug(name)})}>
+                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2slug: playerslug})}>
                     {`${leftpad((idx+1).toString())}. `}<Icon small name={main} />{name}
                   </div>
                 )
