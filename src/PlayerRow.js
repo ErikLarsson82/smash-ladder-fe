@@ -6,7 +6,7 @@ export default class PlayerRow extends React.Component {
     const { playerslug, idx } = this.props
     const refStr = `${playerslug}-row`
     setTimeout( () => {
-      this.refs[refStr].classList.add('fade-in')
+      this.refs[refStr] && this.refs[refStr].classList.add('fade-in')
     }, 50 * idx)
   }
   render() {

@@ -49,7 +49,7 @@ export default class Resolve extends React.Component {
         { scoreSet }
         {
           valid && winner && (
-            <img alt="resolve" onClick={() => { setscreen('LADDER'); resolvefight({p1slug: p1slug, p2slug: p2slug, result: ['p1', 'p2', 'p1'], date: new Date().toISOString() }) } } key="resolve" src="resolve.png" />
+            <img alt="resolve" onClick={() => { setscreen('LADDER'); resolvefight({p1slug: p1slug, p2slug: p2slug, result: result, date: new Date().toISOString() }) } } key="resolve" src="resolve.png" />
           )
         }
       </div>

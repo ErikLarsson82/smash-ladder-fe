@@ -265,6 +265,10 @@ thead {
   opacity: 1;
 }
 
+.shake {
+  animation: shake 0.32s cubic-bezier(.20,.07,.19,.70) both;
+}
+
 .highlight {
   background-color: cadetblue;
 }

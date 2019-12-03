@@ -86,8 +86,8 @@ class App extends React.Component {
 
   resolvefight(data) {
     const { p1slug, p2slug } = this.state.resolveCandidate
-    const { winner, score, date } = data
-    const json = JSON.stringify({ p1slug: p1slug, p2slug: p2slug, winner: winner, score: score, date: date })
+    const { winner, score, date, result } = data
+    const json = JSON.stringify({ p1slug: p1slug, p2slug: p2slug, winner: winner, score: score, date: date, result: result })
     const params = {
       method: 'post',
       body: json,
@@ -98,6 +98,7 @@ class App extends React.Component {
     fetch('http://localhost:3500/resolvefight', params)
       .then(this.updateMatches)
       .then(this.updateSchedule)
+      .then(this.updatePlayers)
       .then(
         () => setTimeout(() => this.setState({ saving: false }), 1000)
       )

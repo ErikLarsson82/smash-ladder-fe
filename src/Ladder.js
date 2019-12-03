@@ -11,9 +11,11 @@ export default function Ladder(props) {
       <hr />
       {
         schedule.map(({p1slug, p2slug, date}, idx, list) => {
+          const now = new Date().getTime()
+          const fadeIn = now - new Date(date).getTime() < 5000 ? 'fade-in shake' : ''
           return (
             <div className="match-box" key={`${p1slug}-${p2slug}-${date}`}>
-              <div className="banner-container">
+              <div className={ ['banner-container'].concat(fadeIn).join(' ') }>
                 <img onClick={() => setscreen('RESOLVE', p1slug, p2slug)} className="banner" src="banner.png" alt="schedule-banner" />
                 <div className="banner-p1">{p1slug}</div>
                 <div className="banner-p2">{p2slug}</div>
@@ -64,11 +66,16 @@ export default function Ladder(props) {
       <h2 className="matches">Matcher</h2>
       <div>
         {
-          matches.map(x=>x).reverse().map(({p1slug, p2slug, result, date}) => {
+          matches.map(({p1slug, p2slug, result, date}) => {
+            const find1 = x => x.playerslug === p1slug
+            const find2 = x => x.playerslug === p2slug
+            const name1 = players.find(find1) && players.find(find1).main
+            const name2 = players.find(find2) && players.find(find2).main
+            console.log(players, name1, name2)
             return (
               <div className="resolved-container" key={`${p1slug}-${p2slug}-${date}`}>
                 <div>
-                  <Icon large name={players.find(x => x.playerslug === p1slug).main} /> vs. <Icon large name={players.find(x => x.playerslug === p2slug).main} /><br />
+                  <Icon large name={name1} /> vs. <Icon large name={name2} /><br />
                 </div>
                 <div className="score-box">
                   2-1
