@@ -64,7 +64,7 @@ export default function Ladder(props) {
       <h2 className="matches">Matcher</h2>
       <div>
         {
-          matches.map(({p1slug, p2slug, result, date}) => {
+          matches.map(x=>x).reverse().map(({p1slug, p2slug, result, date}) => {
             return (
               <div className="resolved-container" key={`${p1slug}-${p2slug}-${date}`}>
                 <div>
@@ -76,6 +76,9 @@ export default function Ladder(props) {
               </div>
             )
           })
+        }
+        {
+          matches.length === 0 && <div>Inga matcher spelade än...</div>
         }
       </div>
       <div className="footer">Powered by Cargo and Bonko</div>
