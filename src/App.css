@@ -55,9 +55,18 @@ thead {
   align-items: center;
 }
 
+.menu-icon-container {
+  max-width: 850px;
+  min-width: 850px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 .menu-icon {
   padding: 10px;
 }
+
 .menu-icon:hover {
   animation: shake 0.32s cubic-bezier(.20,.07,.19,.70) both;
   transform: translate3d(0, 0, 0);
@@ -69,37 +78,18 @@ thead {
   border-radius: 10px;
 }
 
-@keyframes shake {
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  20%, 80% {
-    transform: translate3d(2px, 0, 0);
-  }
-
-  30%, 50%, 70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-
-  40%, 60% {
-    transform: translate3d(4px, 0, 0);
-  }
+.icon-row {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: cadetblue;
+  display: flex;
+  justify-content: space-around;
 }
 
 .odd {
   background: #383838;
-}
-
-.icon-row {
-  position: sticky;
-  bottom: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
-  padding: 20px;
-  background-color: cadetblue;
 }
 
 .matches {
@@ -117,24 +107,27 @@ thead {
 
 .banner-container {
   position: relative;
+  cursor: pointer;
 }
 
 .banner-p1 {
   position: absolute;
-  top: 72px;
+  top: 80px;
   left: 19px;
+  cursor: inherit;
 }
 
 .banner-p2 {
   position: absolute;
-  top: 9px;
-  left: 348px;
+  top: 11px;
+  left: 350px;
+  cursor: inherit;
 }
 
 .banner {
   width: 500px;
   height: 119px;
-  cursor: pointer;
+  cursor: inherit;
 }
 
 .vs-logo {
@@ -257,10 +250,19 @@ thead {
   font-size: medium;
 }
 
+.player-row {
+  opacity: 0;
+}
+
 .player-row:hover {
   background-color: aliceblue;
   color: black;
   cursor: pointer;
+}
+
+.fade-in {
+  animation: fadein 2s;
+  opacity: 1;
 }
 
 .highlight {
@@ -277,12 +279,30 @@ thead {
 
 .loading {
   padding: 100px;
+  min-height: 1000px;
 }
 
 .centered {
   display: flex;
   justify-content: center;
 }
+
+.place {
+  width: 70px;
+}
+
+.player {
+  width: 245px;
+}
+
+.main {
+  width: 185px;
+}
+
+.secondary {
+  width: 236px;
+}
+
 
 .resolvefight {
   background-color: darkslategray;

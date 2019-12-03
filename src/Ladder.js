@@ -26,10 +26,10 @@ export default function Ladder(props) {
       <table className="players" border="0" cellSpacing="0">
         <thead>
         <tr>
-          <th><div className="placement">#</div></th>
-          <th>Spelare</th>
-          <th>Main</th>
-          <th>Secondary</th>
+          <th className="place"><div className="placement">#</div></th>
+          <th className="player">Spelare</th>
+          <th className="main">Main</th>
+          <th className="secondary">Secondary</th>
         </tr>
         </thead>
         <tbody>
@@ -83,9 +83,11 @@ export default function Ladder(props) {
       </div>
       <div className="footer">Powered by Cargo and Bonko</div>
       <div className="icon-row">
-        <img className="menu-icon" onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
-        <img className="menu-icon" onClick={() => {}}  src="scoreboard.png" alt="Registrera resultat" />
-        <img className="menu-icon" src="gear.png" alt="Inställningar" />
+        <div className="menu-icon-container">
+          <img className="menu-icon" onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
+          <img className="menu-icon" onClick={() => {}}  src="scoreboard.png" alt="Registrera resultat" />
+          <img className="menu-icon" src="gear.png" alt="Inställningar" />
+        </div>
       </div>
     </div>
   );
