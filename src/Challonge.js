@@ -7,17 +7,17 @@ export default class Challonge extends React.Component {
 
     const { highlight, players } = props
 
-    const p1 = highlight === "null" || highlight === null
+    const p1slug = highlight === "null" || highlight === null
       ? null
       : slug(highlight)
 
-    const p2 = highlight === "null" || highlight === null
+    const p2slug = highlight === "null" || highlight === null
       ? null
       : slug(players[getPlayerAbove(players, slug(highlight))].name)
 
     this.state = {
-      p1slug: p1,
-      p2slug: p2
+      p1slug: p1slug,
+      p2slug: p2slug
     }
   }
 
@@ -36,10 +36,7 @@ export default class Challonge extends React.Component {
 
     const fightButton = () => {
 
-      const p1 = players.find(({name}) => slug(name) === p1slug).name
-      const p2 = players.find(({name}) => slug(name) === p2slug).name
-
-      const json = JSON.stringify({ p1: p1, p2: p2, date: new Date().toISOString() })
+      const json = JSON.stringify({ p1slug: p1slug, p2slug: p2slug, date: new Date().toISOString() })
       const params = {
         method: 'post',
         body: json,

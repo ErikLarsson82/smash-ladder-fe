@@ -10,13 +10,13 @@ export default function Ladder(props) {
       <img src="logo.png" width="355" height="221" alt="logo" />
       <hr />
       {
-        schedule.map(({p1,p2, date}, idx, list) => {
+        schedule.map(({p1slug, p2slug, date}, idx, list) => {
           return (
-            <div className="match-box" key={`${p1}-${p2}-${date}`}>
+            <div className="match-box" key={`${p1slug}-${p2slug}-${date}`}>
               <div className="banner-container">
-                <img onClick={() => setscreen('RESOLVE', p1, p2)} className="banner" src="banner.png" alt="schedule-banner" />
-                <div className="banner-p1">{p1}</div>
-                <div className="banner-p2">{p2}</div>
+                <img onClick={() => setscreen('RESOLVE', p1slug, p2slug)} className="banner" src="banner.png" alt="schedule-banner" />
+                <div className="banner-p1">{p1slug}</div>
+                <div className="banner-p2">{p2slug}</div>
               </div>
             </div>
           )
@@ -64,11 +64,11 @@ export default function Ladder(props) {
       <h2 className="matches">Matcher</h2>
       <div>
         {
-          matches.map(({p1, p2, result, date}) => {
+          matches.map(({p1slug, p2slug, result, date}) => {
             return (
-              <div className="resolved-container" key={`${p1}-${p2}-${date}`}>
+              <div className="resolved-container" key={`${p1slug}-${p2slug}-${date}`}>
                 <div>
-                  <Icon large name={players.find(x => x.name === p1).main} /> vs. <Icon large name={players.find(x => x.name === p2).main} /><br />
+                  <Icon large name={players.find(x => x.playerslug === p1slug).main} /> vs. <Icon large name={players.find(x => x.playerslug === p2slug).main} /><br />
                 </div>
                 <div className="score-box">
                   2-1

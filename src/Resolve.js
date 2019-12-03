@@ -12,7 +12,7 @@ export default class Resolve extends React.Component {
   render() {
     const { resolvefight, setscreen, resolveCandidate } = this.props
     const { result } = this.state
-    const { p1, p2 } = resolveCandidate
+    const { p1slug, p2slug } = resolveCandidate
 
     const p1count = result.filter(x => x === 'p1').length
     const p2count = result.filter(x => x === 'p2').length
@@ -49,7 +49,7 @@ export default class Resolve extends React.Component {
         { scoreSet }
         {
           valid && winner && (
-            <img alt="resolve" onClick={() => { setscreen('LADDER'); resolvefight({p1: p1, p2: p2, result: ['p1', 'p2', 'p1'], date: new Date().toISOString() }) } } key="resolve" src="resolve.png" />
+            <img alt="resolve" onClick={() => { setscreen('LADDER'); resolvefight({p1slug: p1slug, p2slug: p2slug, result: ['p1', 'p2', 'p1'], date: new Date().toISOString() }) } } key="resolve" src="resolve.png" />
           )
         }
       </div>

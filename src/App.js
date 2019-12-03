@@ -85,9 +85,9 @@ class App extends React.Component {
   }
 
   resolvefight(data) {
-    const { p1, p2 } = this.state.resolveCandidate
+    const { p1slug, p2slug } = this.state.resolveCandidate
     const { winner, score, date } = data
-    const json = JSON.stringify({ p1: p1, p2: p2, winner: winner, score: score, date: date })
+    const json = JSON.stringify({ p1slug: p1slug, p2slug: p2slug, winner: winner, score: score, date: date })
     const params = {
       method: 'post',
       body: json,
