@@ -1,6 +1,10 @@
-import React from 'react';
-import fetch from 'node-fetch';
-import './App.css';
+import React from 'react'
+import fetch from 'node-fetch'
+import './App.css'
+import { slug } from './helpers'
+import Ladder from './Ladder'
+import Challonge from './Challonge'
+import Resolve from './Resolve'
 
 class App extends React.Component {
   constructor(props) {
@@ -24,6 +28,7 @@ class App extends React.Component {
     this.resolvefight = this.resolvefight.bind(this)
     this.setscreen = this.setscreen.bind(this)
     this.highlightPlayer = this.highlightPlayer.bind(this)
+    this.setError = this.setError.bind(this)
   }
 
   componentDidMount() {
@@ -32,31 +37,35 @@ class App extends React.Component {
     this.updateSchedule()
   }
 
-  setscreen(screen, p1, p2) {
+  setscreen(screen, p1slug, p2slug) {
     this.setState({ screen: screen })
-    if (p1 && p2)
-      this.setState({ resolveCandidate: { p1: p1, p2: p2} })
+    if (p1slug && p2slug)
+      this.setState({ resolveCandidate: { p1slug: p1slug, p2slug: p2slug} })
   }
 
   updatePlayers() {
     fetch('http://localhost:3500/players')
       .then(res => res.json())
-      .then(res => this.setState({ players: res }))
-      .catch( () => this.setState({error: true}) )
+      .then(res => this.setState({players: res}))
+      .catch(() => this.setState({error: true}))
+  }
+
+  setError() {
+    this.setState({error: true})
   }
 
   updateMatches() {
     fetch('http://localhost:3500/matches')
       .then(res => res.json())
-      .then(res => this.setState({ matches: res }))
-      .catch( () => this.setState({error: true}) )
+      .then(res => this.setState({matches: res}))
+      .catch(() => this.setState({error: true}))
   }
 
   updateSchedule() {
     fetch('http://localhost:3500/schedule')
       .then(res => res.json())
-      .then(res => this.setState({ schedule: res }))
-      .catch( () => this.setState({error: true}) )
+      .then(res => this.setState({ schedule: res}))
+      .catch(() => this.setState({error: true}))
   }
 
   newplayer() {
@@ -150,332 +159,5 @@ class App extends React.Component {
     return <div>Nothing here</div>
   }
 }
-
-
-
-
-function Mugshot({name}) {
-  return (
-    <img src={`mugshots/mug.png`} width="25" height="25" className="mugshot" alt="Mugshot" />
-  )
-}
-
-function Icon({name, large, small}) {
-  let size = '32'
-  if (large) {
-    size = '45'
-  }
-  if (small) {
-    size = '15'
-  }
-  return (
-    <img
-      src={`heroes/${slug(name)}.png`}
-      className="character-icon"
-      alt={name}
-      width={size}
-      height={size} />
-  )
-}
-
-function slug(str) {
-  if (!str) return null
-  return str.replace(/ /g, '-')
-    .replace(/\./g, '')
-    .replace(/[äÄ]/g, 'a')
-    .replace(/[åÅ]/g, 'a')
-    .replace(/[öÖ]/g, 'o')
-    .replace(/è/g, 'e')
-    .toLowerCase()
-}
-
-
-function QcIcon({place}) {
-  return <img src={`qc-${place}.png`} className="qc-icon" width="10" height="10" alt="Plats" />
-}
-
-function PlayerRow({name, main, secondary, qc, idx, highlight, highlightPlayer}) {
-  const odd = idx % 2 === 0 ? 'odd' : ''
-  const _highlight = slug(name) === highlight ? 'highlight' : ''
-  const qcIcons = qc.map(x => <QcIcon key={`${name}-${x}`} place={x} />)
-  return (
-    <tr
-      className={[_highlight, 'player-row', odd].join(' ')}
-      onClick={() => highlightPlayer(name)}>
-      <td><div className="placement">{idx+1}</div></td>
-      <td><Mugshot name={name} />{name}{ qcIcons.length > 0 && qcIcons}</td>
-      <td><Icon name={main} />{main}</td>
-      <td>{secondary && <Icon name={secondary} />}{secondary}</td>
-    </tr>
-  )
-}
-
-function leftpad(str) {
-  if (str.length === 1) {
-    return `0${str}`
-  }
-  return str
-}
-
-
-
-
-function Ladder(props) {
-  const { schedule, matches, players, setscreen, error, highlight, highlightPlayer } = props
-
-  return (
-    <div className="App">
-      <img src="logo.png" width="355" height="221" alt="logo" />
-      <hr />
-      {
-        schedule.map(({p1,p2, date}, idx, list) => {
-          return (
-            <div className="match-box" key={`${p1}-${p2}-${date}`}>
-              <div className="banner-container">
-                <img onClick={() => setscreen('RESOLVE', p1, p2)} className="banner" src="banner.png" alt="schedule-banner" />
-                <div className="banner-p1">{p1}</div>
-                <div className="banner-p2">{p2}</div>
-              </div>
-            </div>
-          )
-        })
-      }
-      <hr />
-      <table className="players" border="0" cellSpacing="0">
-        <thead>
-        <tr>
-          <th><div className="placement">#</div></th>
-          <th>Spelare</th>
-          <th>Main</th>
-          <th>Secondary</th>
-        </tr>
-        </thead>
-        <tbody>
-        {
-          players.length > 0 &&
-          players.map((player, idx) =>
-            <PlayerRow
-              {...player}
-              key={slug(player.name)}
-              idx={idx}
-              highlight={highlight}
-              highlightPlayer={highlightPlayer} />
-          )
-        }
-        </tbody>
-      </table>
-      {
-        players.length === 0 && !error && (
-          <div className="loading">
-            Laddar spelare...... undrar vart Mega Man är på listan?
-          </div>
-        )
-      }
-      {
-        error && (
-          <div className="loading">
-            Kunde inte hämta listan - är servern uppe?
-          </div>
-        )
-      }
-      <hr />
-      <h2 className="matches">Matcher</h2>
-      <div>
-        {
-          matches.map(({p1, p2, result, date}) => {
-            return (
-              <div className="resolved-container" key={`${p1}-${p2}-${date}`}>
-                <div>
-                  <Icon large name={players.find(x => x.name === p1).main} /> vs. <Icon large name={players.find(x => x.name === p2).main} /><br />
-                </div>
-                <div className="score-box">
-                  2-1
-                </div>
-              </div>
-            )
-          })
-        }
-      </div>
-      <div className="footer">Powered by Cargo and Bonko</div>
-      <div className="icon-row">
-        <img className="menu-icon" onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
-        <img className="menu-icon" onClick={() => {}}  src="scoreboard.png" alt="Registrera resultat" />
-        <img className="menu-icon" src="gear.png" alt="Inställningar" />
-      </div>
-    </div>
-  );
-}
-
-function getPlayerAbove(players, player_slug) {
-  const current = players.findIndex(({name}) => slug(name) === player_slug)
-  const result = current-1
-  return result === -1 ? 1 : result
-}
-
-
-class Challonge extends React.Component {
-  constructor(props) {
-    super(props)
-
-    const { highlight, players } = props
-
-    const p1 = highlight === "null" || highlight === null
-      ? null
-      : slug(highlight)
-
-    const p2 = highlight === "null" || highlight === null
-      ? null
-      : slug(players[getPlayerAbove(players, slug(highlight))].name)
-
-    this.state = {
-      p1slug: p1,
-      p2slug: p2
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { p1slug, p2slug } = this.state
-    const { players } = this.props
-
-    if (prevState.p1slug === null && p1slug !== null && p2slug === null) {
-      this.setState({ p2slug: slug(players[getPlayerAbove(players, p1slug)].name) })
-    }
-  }
-
-  render() {
-    const { players, setscreen, updateMatches, updateSchedule } = this.props
-    const { p1slug, p2slug } = this.state
-
-    const fightButton = () => {
-
-      const p1 = players.find(({name}) => slug(name) === p1slug).name
-      const p2 = players.find(({name}) => slug(name) === p2slug).name
-
-      const json = JSON.stringify({ p1: p1, p2: p2, date: new Date().toISOString() })
-      const params = {
-        method: 'post',
-        body: json,
-        headers: { 'Content-Type': 'application/json' }
-      }
-      fetch('http://localhost:3500/schedulefight', params)
-        .then(updateMatches)
-        .then(updateSchedule)
-        .then(() => setscreen('LADDER'))
-    }
-
-    return (
-      <div className="challonge">
-        <div onClick={() => setscreen('LADDER')} className="back">X</div>
-        <div className="centered">
-          <img src="utmaning.png" width="238" height="65" alt="Utmaning" />
-        </div>
-        <div className="challonge-container">
-          <div className="spacer">
-            <h2 className="player-heading">Challanger</h2>
-            {
-              players.map(({name, main}, idx) => {
-                const selected = p1slug === slug(name) ? 'selected' : ''
-                return (
-                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1slug: slug(name)})}>
-                    {`${leftpad((idx+1).toString())}. `}<Icon small name={main} />{name}
-                  </div>
-                )
-              })
-            }
-          </div>
-          <div className="spacer">
-            <img className="vs-logo" src="player-versus-player.png" alt="VS" />
-          </div>
-          <div className="spacer">
-            <h2 className="player-heading">Challangee</h2>
-            {
-              players.map(({name, main}, idx) => {
-                const selected = p2slug === slug(name) ? 'selected' : ''
-                return (
-                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2slug: slug(name)})}>
-                    {`${leftpad((idx+1).toString())}. `}<Icon small name={main} />{name}
-                  </div>
-                )
-              })
-            }
-          </div>
-        </div>
-        <div className="centered fixed">
-          {
-            (p1slug) && (p2slug) && (p1slug === p2slug) && (
-              <img className="derp" src="spicy-memelord.png" alt="Till dig batsis ;)" />
-            )
-          }
-          <img
-            src="fight.png"
-            alt="Slåss"
-            className={ [p1slug && p2slug && (p1slug !== p2slug) ? '' : 'invisible', 'button'].join(' ') }
-            onClick={fightButton} />
-        </div>
-      </div>
-    )
-  }
-
-}
-
-
-
-class Resolve extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      result: []
-    }
-  }
-
-  render() {
-    const { resolvefight, setscreen, resolveCandidate } = this.props
-    const { result } = this.state
-    const { p1, p2 } = resolveCandidate
-
-    const p1count = result.filter(x => x === 'p1').length
-    const p2count = result.filter(x => x === 'p2').length
-    const valid = result.length === 3 || p1count === 2 || p2count === 2
-    const winner = p1count > p2count ? 'p1' : 'p2'
-    const scoreSet = `${p1count} - ${p2count}`
-
-    const reset = () => this.setState({ result: [] })
-    const set = player => {
-      if (valid && winner)
-        return
-      this.setState({ result: result.concat(player) })
-    }
-    return (
-      <div className="resolvefight">
-        <h2>Resultat</h2>
-        <img alt="p1" onClick={() => set('p1')} src="p1.png" className={ valid && winner === 'p2' ? 'dim' : ''} />
-        <input type="button" value="Reset" onClick={reset} />
-        <img alt="p2" onClick={() => set('p2')} src="p2.png" className={ valid && winner === 'p1' ? 'dim' : ''} />
-        {
-          result.map((player, idx) => {
-            return (
-              <div key={`${player}${idx}`}>
-                {
-                  player === 'p1' ? <div>{'<-'}</div> : <div>{'->'}</div>
-                }
-               {
-                idx >= result.length && <hr />
-               }
-              </div>
-            )
-          })
-        }
-        { scoreSet }
-        {
-          valid && winner && (
-            <img alt="resolve" onClick={() => { setscreen('LADDER'); resolvefight({p1: p1, p2: p2, result: ['p1', 'p2', 'p1'], date: new Date().toISOString() }) } } key="resolve" src="resolve.png" />
-          )
-        }
-      </div>
-    )
-  }
-}
-
 
 export default App
