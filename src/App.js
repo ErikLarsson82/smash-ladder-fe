@@ -23,7 +23,6 @@ class App extends React.Component {
     this.newplayer = this.newplayer.bind(this)
     this.resolvefight = this.resolvefight.bind(this)
     this.setscreen = this.setscreen.bind(this)
-    this.newfight = this.newfight.bind(this)
     this.highlightPlayer = this.highlightPlayer.bind(this)
   }
 
@@ -37,11 +36,6 @@ class App extends React.Component {
     this.setState({ screen: screen })
     if (p1 && p2)
       this.setState({ resolveCandidate: { p1: p1, p2: p2} })
-  }
-
-  newfight(p1, p2) {
-    const { schedule } = this.state
-    this.setState({ schedule: schedule.concat({ p1: p1, p2: p2, date: new Date() }) })
   }
 
   updatePlayers() {
@@ -140,7 +134,8 @@ class App extends React.Component {
         <Challonge
           players={players}
           setscreen={this.setscreen}
-          newfight={this.newfight}
+          updateMatches={this.updateMatches}
+          updateSchedule={this.updateSchedule}
           highlight={highlight} />
       )
     }
@@ -348,14 +343,24 @@ class Challonge extends React.Component {
   }
 
   render() {
-    const { players, setscreen, newfight } = this.props
+    const { players, setscreen, updateMatches, updateSchedule } = this.props
     const { p1slug, p2slug } = this.state
 
     const fightButton = () => {
+
       const p1 = players.find(({name}) => slug(name) === p1slug).name
       const p2 = players.find(({name}) => slug(name) === p2slug).name
-      newfight(p1, p2)
-      setscreen('LADDER')
+
+      const json = JSON.stringify({ p1: p1, p2: p2, date: new Date().toISOString() })
+      const params = {
+        method: 'post',
+        body: json,
+        headers: { 'Content-Type': 'application/json' }
+      }
+      fetch('http://localhost:3500/schedulefight', params)
+        .then(updateMatches)
+        .then(updateSchedule)
+        .then(() => setscreen('LADDER'))
     }
 
     return (
