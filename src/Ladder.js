@@ -1,22 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PlayerRow from './PlayerRow'
 import { Icon } from './helpers'
-
-function Delay(props) {
-  const [inProp, setInProp] = useState(false);
-
-  setTimeout( () => setInProp(true), props.delay)
-  return inProp ? props.children : <tr style={ {height: '50px' } }><td></td></tr>
-}
+import Delay from './Delay'
 
 export default function Ladder(props) {
   const { schedule, matches, players, setscreen, error, highlight, highlightPlayer } = props
 
-  const [inProp, setInProp] = useState(false);
-
   return (
     <div className="App">
-      <img src="logo.png" width="355" height="221" alt="logo" onClick={ () => setInProp(true) }/>
+      <img src="logo.png" width="355" height="221" alt="logo" />
       <hr />
       {
         schedule.map(({p1slug, p2slug, date}, idx, list) => {
@@ -48,7 +40,7 @@ export default function Ladder(props) {
             players.length > 0 &&
             players.map((player, idx) => {
               return (
-                <Delay delay={ idx * 100 } key={ player.playerslug }>
+                <Delay delayDuration={ idx * 100 } key={ player.playerslug }>
                   <PlayerRow
                     {...player}
                     key={player.playerslug}
