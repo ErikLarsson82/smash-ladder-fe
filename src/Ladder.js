@@ -44,6 +44,7 @@ export default function Ladder(props) {
               idx={idx}
               highlight={highlight}
               highlightPlayer={highlightPlayer} />
+
           )
         }
         </tbody>
@@ -71,7 +72,7 @@ export default function Ladder(props) {
             const find2 = x => x.playerslug === p2slug
             const name1 = players.find(find1) && players.find(find1).main
             const name2 = players.find(find2) && players.find(find2).main
-            console.log(players, name1, name2)
+            //console.log(players, name1, name2)
             return (
               <div className="resolved-container" key={`${p1slug}-${p2slug}-${date}`}>
                 <div>

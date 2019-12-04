@@ -250,10 +250,6 @@ thead {
   font-size: medium;
 }
 
-.player-row {
-  opacity: 0;
-}
-
 .player-row:hover {
   background-color: aliceblue;
   color: black;

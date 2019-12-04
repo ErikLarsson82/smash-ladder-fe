@@ -40,7 +40,7 @@ class App extends React.Component {
   setscreen(screen, p1slug, p2slug) {
     this.setState({ screen: screen })
     if (p1slug && p2slug)
-      this.setState({ resolveCandidate: { p1slug: p1slug, p2slug: p2slug} })
+      this.setState({ resolveCandidate: { p1slug: p1slug, p2slug: p2slug } })
   }
 
   updatePlayers() {
