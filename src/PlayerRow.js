@@ -8,7 +8,7 @@ export default function PlayerRow(props) {
   const qcIcons = qc.map(x => <QcIcon key={`${name}-${x}`} place={x} />)
   return (
     <tr
-      className={[highlightClass, 'player-row', odd].join(' ')}
+      className={['fade-in', 'player-row', highlightClass, odd].join(' ')}
       onClick={() => highlightPlayer(playerslug)}>
       <td><div className="placement">{idx+1}</div></td>
       <td><Mugshot name={name} />{name}{ qcIcons.length > 0 && qcIcons}</td>

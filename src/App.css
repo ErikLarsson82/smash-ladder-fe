@@ -1,3 +1,21 @@
+.my-node-enter {
+  opacity: 0;
+}
+.my-node-enter-active {
+  opacity: 1;
+  transition: opacity 4000ms;
+  transition-delay: 2000ms;
+}
+.one {
+}
+.my-node-exit {
+  opacity: 1;
+}
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 10000ms;
+}
+
 body {
   background: #000000;
   color: #FFFFFF;
@@ -254,6 +272,10 @@ thead {
   background-color: aliceblue;
   color: black;
   cursor: pointer;
+}
+
+.player-row {
+  opacity: 0;
 }
 
 .fade-in {
