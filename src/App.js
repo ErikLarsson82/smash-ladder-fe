@@ -6,6 +6,8 @@ import Ladder from './Ladder'
 import Challonge from './Challonge'
 import Resolve from './Resolve'
 
+const api = 'https://hiqombo-ladder.herokuapp.com'
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -18,7 +20,7 @@ class App extends React.Component {
       resolveCandidate: null,
       saving: false,
       error: null,
-      highlight: document.cookie
+      highlight: [null, 'null', ''].indexOf(document.cookie) ? null : document.cookie
     }
 
     this.updatePlayers = this.updatePlayers.bind(this)
@@ -26,6 +28,7 @@ class App extends React.Component {
     this.updateSchedule = this.updateSchedule.bind(this)
     this.newplayer = this.newplayer.bind(this)
     this.resolvefight = this.resolvefight.bind(this)
+    this.scheduleFight = this.scheduleFight.bind(this)
     this.setscreen = this.setscreen.bind(this)
     this.highlightPlayer = this.highlightPlayer.bind(this)
     this.setError = this.setError.bind(this)
@@ -44,7 +47,7 @@ class App extends React.Component {
   }
 
   updatePlayers() {
-    fetch('http://localhost:3500/players')
+    fetch(`${api}/players`)
       .then(res => res.json())
       .then(res => this.setState({players: res}))
       .catch(() => this.setState({error: true}))
@@ -55,14 +58,14 @@ class App extends React.Component {
   }
 
   updateMatches() {
-    fetch('http://localhost:3500/matches')
+    fetch(`${api}/matches`)
       .then(res => res.json())
       .then(res => this.setState({matches: res}))
       .catch(() => this.setState({error: true}))
   }
 
   updateSchedule() {
-    fetch('http://localhost:3500/schedule')
+    fetch(`${api}/schedule`)
       .then(res => res.json())
       .then(res => this.setState({ schedule: res}))
       .catch(() => this.setState({error: true}))
@@ -77,7 +80,7 @@ class App extends React.Component {
     }
     this.setState({ saving: true })
 
-    fetch('http://localhost:3500/newplayer', params)
+    fetch(`${api}/newplayer`, params)
       .then(this.updatePlayers)
       .then(
         () => setTimeout(() => this.setState({ saving: false }), 1000)
@@ -95,13 +98,26 @@ class App extends React.Component {
     }
     this.setState({ saving: true, resolveCandidate: null })
 
-    fetch('http://localhost:3500/resolvefight', params)
+    fetch(`${api}/resolvefight`, params)
       .then(this.updateMatches)
       .then(this.updateSchedule)
       .then(this.updatePlayers)
       .then(
         () => setTimeout(() => this.setState({ saving: false }), 1000)
       )
+  }
+
+  scheduleFight(p1slug, p2slug) {
+    const json = JSON.stringify({ p1slug: p1slug, p2slug: p2slug, date: new Date().toISOString() })
+    const params = {
+      method: 'post',
+      body: json,
+      headers: { 'Content-Type': 'application/json' }
+    }
+    fetch(`${api}/schedulefight`, params)
+      .then(this.updateMatches)
+      .then(this.updateSchedule)
+      .then(() => this.setscreen('LADDER')) 
   }
 
   highlightPlayer(playerslug) {
@@ -144,8 +160,7 @@ class App extends React.Component {
         <Challonge
           players={players}
           setscreen={this.setscreen}
-          updateMatches={this.updateMatches}
-          updateSchedule={this.updateSchedule}
+          scheduleFight={this.scheduleFight}
           highlight={highlight} />
       )
     }

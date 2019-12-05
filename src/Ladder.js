@@ -4,6 +4,7 @@ import { Icon } from './helpers'
 import Delay from './Delay'
 
 export default function Ladder(props) {
+
   const { schedule, matches, players, setscreen, error, highlight, highlightPlayer } = props
 
   return (

@@ -7,13 +7,9 @@ export default class Challonge extends React.Component {
 
     const { highlight, players } = props
 
-    const p1slug = highlight === "null" || highlight === null
-      ? null
-      : slug(highlight)
+    const p1slug = highlight && slug(highlight)
 
-    const p2slug = highlight === "null" || highlight === null
-      ? null
-      : slug(players[getPlayerAbove(players, slug(highlight))].name)
+    const p2slug = highlight && slug(players[getPlayerAbove(players, slug(highlight))].name)
 
     this.state = {
       p1slug: p1slug,
@@ -31,22 +27,8 @@ export default class Challonge extends React.Component {
   }
 
   render() {
-    const { players, setscreen, updateMatches, updateSchedule } = this.props
+    const { players, setscreen, scheduleFight } = this.props
     const { p1slug, p2slug } = this.state
-
-    const fightButton = () => {
-
-      const json = JSON.stringify({ p1slug: p1slug, p2slug: p2slug, date: new Date().toISOString() })
-      const params = {
-        method: 'post',
-        body: json,
-        headers: { 'Content-Type': 'application/json' }
-      }
-      fetch('http://localhost:3500/schedulefight', params)
-        .then(updateMatches)
-        .then(updateSchedule)
-        .then(() => setscreen('LADDER'))
-    }
 
     return (
       <div className="challonge">
@@ -95,7 +77,7 @@ export default class Challonge extends React.Component {
             src="fight.png"
             alt="Slåss"
             className={ [p1slug && p2slug && (p1slug !== p2slug) ? '' : 'invisible', 'button'].join(' ') }
-            onClick={fightButton} />
+            onClick={ () => scheduleFight(p1slug, p2slug) } />
         </div>
       </div>
     )
