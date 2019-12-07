@@ -1,5 +1,6 @@
 import React from 'react'
 import { slug, getPlayerAbove, leftpad, Icon } from './helpers'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 export default class Challonge extends React.Component {
   constructor(props) {
@@ -27,8 +28,10 @@ export default class Challonge extends React.Component {
   }
 
   render() {
-    const { players, setscreen, scheduleFight } = this.props
+    const { players, setscreen, scheduleFight, network } = this.props
     const { p1slug, p2slug } = this.state
+
+    const showFight = p1slug && p2slug && (p1slug !== p2slug)
 
     return (
       <div className="challonge">
@@ -67,17 +70,22 @@ export default class Challonge extends React.Component {
             }
           </div>
         </div>
-        <div className="centered fixed">
+        <div className="centered fixed relative">
           {
             (p1slug) && (p2slug) && (p1slug === p2slug) && (
               <img className="derp" src="spicy-memelord.png" alt="Till dig batsis ;)" />
             )
           }
+          {
+            network === true && showFight && (
+              <CircularProgress className="loader-position" color="secondary" />
+            )
+          }
           <img
             src="fight.png"
             alt="Slåss"
-            className={ [p1slug && p2slug && (p1slug !== p2slug) ? '' : 'invisible', 'button'].join(' ') }
-            onClick={ () => scheduleFight(p1slug, p2slug) } />
+            className={ [showFight ? '' : 'invisible', 'button'].join(' ') }
+            onClick={ () => { network === false && scheduleFight(p1slug, p2slug) } } />
         </div>
       </div>
     )

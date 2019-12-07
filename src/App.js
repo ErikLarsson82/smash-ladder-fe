@@ -19,26 +19,24 @@ class App extends React.Component {
       schedule: [],
       screen: 'LADDER',
       resolveCandidate: null,
-      saving: false,
       error: null,
-      highlight: [null, 'null', ''].indexOf(document.cookie) ? null : document.cookie
+      highlight: [null, 'null', ''].indexOf(document.cookie) ? null : document.cookie,
+      network: false
     }
 
-    this.updatePlayers = this.updatePlayers.bind(this)
-    this.updateMatches = this.updateMatches.bind(this)
-    this.updateSchedule = this.updateSchedule.bind(this)
     this.newplayer = this.newplayer.bind(this)
     this.resolvefight = this.resolvefight.bind(this)
     this.scheduleFight = this.scheduleFight.bind(this)
     this.setscreen = this.setscreen.bind(this)
     this.highlightPlayer = this.highlightPlayer.bind(this)
     this.setError = this.setError.bind(this)
+    this.useApi = this.useApi.bind(this)
   }
 
   componentDidMount() {
-    this.updatePlayers()
-    this.updateMatches()
-    this.updateSchedule()
+    this.useApi('matches')
+    this.useApi('schedule')
+    this.useApi('players')
   }
 
   setscreen(screen, p1slug, p2slug) {
@@ -47,29 +45,20 @@ class App extends React.Component {
       this.setState({ resolveCandidate: { p1slug: p1slug, p2slug: p2slug } })
   }
 
-  updatePlayers() {
-    fetch(`${api}/players`)
-      .then(res => res.json())
-      .then(res => this.setState({players: res}))
-      .catch(() => this.setState({error: true}))
+  useApi(resource) {
+    this.setState({network: true}, () => {
+
+      fetch(`${api}/${resource}`)
+        .then(res => res.json())
+        .then(res => this.setState({[resource]: res}))
+        .then(res => this.setState({network: false}))
+        .catch(() => this.setState({error: true}))
+
+    })
   }
 
   setError() {
     this.setState({error: true})
-  }
-
-  updateMatches() {
-    fetch(`${api}/matches`)
-      .then(res => res.json())
-      .then(res => this.setState({matches: res}))
-      .catch(() => this.setState({error: true}))
-  }
-
-  updateSchedule() {
-    fetch(`${api}/schedule`)
-      .then(res => res.json())
-      .then(res => this.setState({ schedule: res}))
-      .catch(() => this.setState({error: true}))
   }
 
   newplayer() {
@@ -79,13 +68,11 @@ class App extends React.Component {
       body: JSON.stringify({ name: player, main: '?'}),
       headers: { 'Content-Type': 'application/json' }
     }
-    this.setState({ saving: true })
+    this.setState({ network: true })
 
     fetch(`${api}/newplayer`, params)
       .then(this.updatePlayers)
-      .then(
-        () => setTimeout(() => this.setState({ saving: false }), 1000)
-      )
+      .then(() => this.setState({ network: false }))
   }
 
   resolvefight(data) {
@@ -97,15 +84,14 @@ class App extends React.Component {
       body: json,
       headers: { 'Content-Type': 'application/json' }
     }
-    this.setState({ saving: true, resolveCandidate: null })
+    this.setState({ network: true, resolveCandidate: null })
 
     fetch(`${api}/resolvefight`, params)
-      .then(this.updateMatches)
-      .then(this.updateSchedule)
-      .then(this.updatePlayers)
-      .then(
-        () => setTimeout(() => this.setState({ saving: false }), 1000)
-      )
+      .then(() => this.useApi('matches'))
+      .then(() => this.useApi('schedule'))
+      .then(() => this.useApi('players'))
+      .then(() => this.setState({ network: false }))
+
   }
 
   scheduleFight(p1slug, p2slug) {
@@ -115,10 +101,13 @@ class App extends React.Component {
       body: json,
       headers: { 'Content-Type': 'application/json' }
     }
+    this.setState({ network: true })
+
     fetch(`${api}/schedulefight`, params)
-      .then(this.updateMatches)
-      .then(this.updateSchedule)
+      .then(() => this.useApi('matches'))
+      .then(() => this.useApi('schedule'))
       .then(() => this.setscreen('LADDER'))
+      .then(() => this.setState({ network: false }))
   }
 
   highlightPlayer(playerslug) {
@@ -134,7 +123,7 @@ class App extends React.Component {
       schedule,
       matches,
       players,
-      saving,
+      network,
       screen,
       resolveCandidate,
       error,
@@ -147,7 +136,7 @@ class App extends React.Component {
           schedule={schedule}
           matches={matches}
           players={players}
-          saving={saving}
+          network={network}
           matchplayed={this.matchplayed}
           newplayer={this.newplayer}
           setscreen={this.setscreen}
@@ -162,6 +151,7 @@ class App extends React.Component {
           players={players}
           setscreen={this.setscreen}
           scheduleFight={this.scheduleFight}
+          network={network}
           highlight={highlight} />
       )
     }

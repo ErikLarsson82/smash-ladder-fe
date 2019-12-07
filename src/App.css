@@ -44,6 +44,18 @@ thead {
   font-style: italic;
 }
 
+.relative {
+  position: relative;
+}
+
+.loader-position {
+  position: absolute;
+  top: 25px;
+  left: 201px;
+  pointer-events: none;
+}
+
+
 .players {
   max-width: 850px;
   min-width: 850px;

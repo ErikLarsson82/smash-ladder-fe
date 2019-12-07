@@ -41,7 +41,7 @@ export default function Ladder(props) {
             players.length > 0 &&
             players.map((player, idx) => {
               return (
-                <Delay delayDuration={ idx * 1000 } key={ player.playerslug }>
+                <Delay delayDuration={ idx * 100 } key={ player.playerslug }>
                   <PlayerRow
                     {...player}
                     key={player.playerslug}
