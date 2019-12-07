@@ -6,6 +6,14 @@ body {
   overflow-x: hidden;
   font-family: 'Bebas Neue', cursive;
   font-size: larger;
+  background-image: url(images/wallpaper-2.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-blend-mode: luminosity;
+}
+
+#root {
+  background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0.8) 0px, rgba(34,34,34,1) 300px, rgba(34,34,34) 80%, rgba(255, 0, 0, 0.2));
 }
 
 h1 {
