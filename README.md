@@ -3,6 +3,8 @@ Clone repository<br />
 npm install<br />
 npm start<br />
 
+Deployed to http://smash.schweinstudios.se/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
