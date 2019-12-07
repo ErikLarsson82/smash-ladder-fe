@@ -1,8 +1,8 @@
 import React from 'react'
 
-export function Mugshot({name}) {
+export function Mugshot({playerslug}) {
   return (
-    <img src={`mugshots/mug.png`} width="25" height="25" className="mugshot" alt="Mugshot" />
+    <img src={`mugshots/${playerslug}.jpg`} width="25" height="25" className="mugshot" alt="Mugshot" />
   )
 }
 
@@ -49,8 +49,8 @@ export function leftpad(str) {
 }
 
 
-export function getPlayerAbove(players, player_slug) {
-  const current = players.findIndex(({name}) => slug(name) === player_slug)
+export function getPlayerAbove(players, playerslug) {
+  const current = players.findIndex(({name}) => slug(name) === playerslug)
   const result = current-1
   return result === -1 ? 1 : result
 }

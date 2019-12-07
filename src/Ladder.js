@@ -41,7 +41,7 @@ export default function Ladder(props) {
             players.length > 0 &&
             players.map((player, idx) => {
               return (
-                <Delay delayDuration={ idx * 100 } key={ player.playerslug }>
+                <Delay delayDuration={ idx * 1000 } key={ player.playerslug }>
                   <PlayerRow
                     {...player}
                     key={player.playerslug}
@@ -78,7 +78,6 @@ export default function Ladder(props) {
             const find2 = x => x.playerslug === p2slug
             const name1 = players.find(find1) && players.find(find1).main
             const name2 = players.find(find2) && players.find(find2).main
-            //console.log(players, name1, name2)
             return (
               <div className="resolved-container" key={`${p1slug}-${p2slug}-${date}`}>
                 <div>

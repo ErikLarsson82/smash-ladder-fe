@@ -13,7 +13,7 @@ export default function PlayerRow(props) {
       className={[fadeIn, hide, highlightClass, odd].join(' ')}
       onClick={() => highlightPlayer(playerslug)}>
       <td><div className="placement">{idx+1}</div></td>
-      <td><Mugshot name={name} />{name}{ qcIcons.length > 0 && qcIcons}</td>
+      <td><Mugshot playerslug={playerslug} />{name}{ qcIcons.length > 0 && qcIcons}</td>
       <td><Icon name={main} />{main}</td>
       <td>{secondary && <Icon name={secondary} />}{secondary}</td>
     </tr>

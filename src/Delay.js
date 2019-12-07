@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 /*
 -- Takes prop 'delayDuration' that specifies in milisecons when
@@ -7,8 +7,21 @@ import React, { useState } from 'react'
 
 export default function Delay(props) {
   const [inProp, setInProp] = useState(false)
+  const [stateTimeout, setStateTimeout] = useState(null)
 
-  setTimeout( () => setInProp(true), props.delayDuration)
+  if (!stateTimeout) {
+    setStateTimeout(
+      setTimeout( () => {
+        setInProp(true)
+      }, props.delayDuration)
+    )
+  }
+
+  useEffect(() => {
+    return function cleanup() {
+      clearTimeout(stateTimeout)
+    }
+  }, [stateTimeout])
 
   return React.Children.map(props.children, child => {
     return React.cloneElement(

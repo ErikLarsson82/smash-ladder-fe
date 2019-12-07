@@ -6,7 +6,8 @@ import Ladder from './Ladder'
 import Challonge from './Challonge'
 import Resolve from './Resolve'
 
-const api = 'https://hiqombo-ladder.herokuapp.com'
+//const api = 'https://hiqombo-ladder.herokuapp.com'
+const api = 'http://localhost:3500'
 
 class App extends React.Component {
   constructor(props) {
@@ -117,7 +118,7 @@ class App extends React.Component {
     fetch(`${api}/schedulefight`, params)
       .then(this.updateMatches)
       .then(this.updateSchedule)
-      .then(() => this.setscreen('LADDER')) 
+      .then(() => this.setscreen('LADDER'))
   }
 
   highlightPlayer(playerslug) {
