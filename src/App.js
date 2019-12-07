@@ -6,8 +6,8 @@ import Ladder from './Ladder'
 import Challonge from './Challonge'
 import Resolve from './Resolve'
 
-//const api = 'https://hiqombo-ladder.herokuapp.com'
-const api = 'http://localhost:3500'
+const api = 'https://hiqombo-ladder.herokuapp.com'
+//const api = 'http://localhost:3500'
 
 class App extends React.Component {
   constructor(props) {
