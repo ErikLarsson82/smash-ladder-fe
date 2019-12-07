@@ -1,13 +1,7 @@
 ## HiQombo Smash Ultimate Ladder - Frontend application
-Clone repository
-npm install
-npm start
-
-
-
-
-
-
+Clone repository<br />
+npm install<br />
+npm start<br />
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
