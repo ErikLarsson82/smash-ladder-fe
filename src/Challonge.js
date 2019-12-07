@@ -1,6 +1,7 @@
 import React from 'react'
 import { slug, getPlayerAbove, leftpad, Icon } from './helpers'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Back from './Back'
 
 export default class Challonge extends React.Component {
   constructor(props) {
@@ -34,12 +35,12 @@ export default class Challonge extends React.Component {
     const showFight = p1slug && p2slug && (p1slug !== p2slug)
 
     return (
-      <div className="challonge">
-        <div onClick={() => setscreen('LADDER')} className="back">X</div>
-        <div className="centered">
+      <div className="challonge vertical-spacer">
+        <Back setscreen={setscreen} />
+        <div className="centered small">
           <img src="utmaning.png" width="238" height="65" alt="Utmaning" />
         </div>
-        <div className="challonge-container">
+        <div className="challonge-container large">
           <div className="spacer">
             <h2 className="player-heading">Challanger</h2>
             {
@@ -70,7 +71,7 @@ export default class Challonge extends React.Component {
             }
           </div>
         </div>
-        <div className="centered fixed relative">
+        <div className="centered fixed relative small">
           {
             (p1slug) && (p2slug) && (p1slug === p2slug) && (
               <img className="derp" src="spicy-memelord.png" alt="Till dig batsis ;)" />

@@ -12,10 +12,6 @@ body {
   background-blend-mode: luminosity;
 }
 
-#root {
-  background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0.8) 0px, rgba(34,34,34,1) 300px, rgba(34,34,34) 80%, rgba(255, 0, 0, 0.2));
-}
-
 h1 {
   padding: 0;
   margin: 0;
@@ -50,6 +46,10 @@ th:last-child, td:last-child {
 
 thead {
   font-style: italic;
+}
+
+#root {
+  background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0.8) 0px, rgba(34,34,34,1) 300px, rgba(34,34,34) 80%, rgba(255, 0, 0, 0.2));
 }
 
 .relative {
@@ -270,14 +270,52 @@ thead {
   background-color: red;
 }
 
-.challonge {
-  background-color: #002F3E;
-  width: 100%;
-  height: 100vh;
+.vertical-spacer {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.small {
+  flex-basis: 20%;
+}
+
+.large {
+  flex-basis: 60%;
+}
+
+.matchup-large-portraits {
+  display: flex;
+  min-width: 850px;
+  justify-content: space-between;
+}
+
+.matchup-icons {
+  flex-basis: 70px;
+}
+
+.winner-text {
+  flex-basis: 60px;
+}
+
+.matchup-large-portraits > img {
+  width: 400px;
+  height: 400px;
+}
+
+.scoreset {
+
+}
+
+.scoreset > h1 {
+  font-size: 100px;
+}
+
+.challonge {
+  background-color: #002F3E;
+  width: 100%;
+  height: 100vh;
 }
 
 .challonge-container {
@@ -324,6 +362,7 @@ thead {
 
 .centered {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 

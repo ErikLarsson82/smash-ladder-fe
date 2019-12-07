@@ -6,7 +6,7 @@ import Ladder from './Ladder'
 import Challonge from './Challonge'
 import Resolve from './Resolve'
 
-const api = 'https://hiqombo-ladder.herokuapp.com'
+const api = 'https://hiqombo-ladder-be.herokuapp.com'
 //const api = 'http://localhost:3500'
 
 class App extends React.Component {
@@ -158,6 +158,7 @@ class App extends React.Component {
     if (screen === 'RESOLVE') {
       return (
         <Resolve
+          players={players}
           setscreen={this.setscreen}
           resolvefight={this.resolvefight}
           resolveCandidate={resolveCandidate} />
