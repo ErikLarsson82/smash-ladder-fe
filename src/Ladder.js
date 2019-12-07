@@ -97,9 +97,9 @@ export default function Ladder(props) {
       <div className="footer">Powered by Cargo and Bonko</div>
       <div className="icon-row">
         <div className="menu-icon-container">
-          <img className="menu-icon" onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
-          <img className="menu-icon" onClick={() => {}}  src="scoreboard.png" alt="Registrera resultat" />
-          <img className="menu-icon" src="gear.png" alt="Inställningar" />
+          <img className="menu-icon smash-green" onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
+          <img className="menu-icon smash-blue" onClick={() => {}}  src="scoreboard.png" alt="Registrera resultat" />
+          <img className="menu-icon smash-red" src="gear.png" alt="Inställningar" />
         </div>
       </div>
     </div>

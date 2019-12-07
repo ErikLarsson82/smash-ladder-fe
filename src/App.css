@@ -1,5 +1,5 @@
 body {
-  background: #000000;
+  background: #222222;
   color: #FFFFFF;
   margin: 0;
   padding: 0;
@@ -88,6 +88,22 @@ thead {
   background-color: steelblue;
   padding: 10px;
   border-radius: 10px;
+}
+
+.smash-red:hover {
+  background-color: #e31b25;
+}
+
+.smash-blue:hover {
+  background-color: #0f6eee;
+}
+
+.smash-green:hover {
+  background-color: #24c565;
+}
+
+.smash-yellow:hover {
+  background-color: #eebc0f;
 }
 
 .icon-row {
@@ -187,11 +203,11 @@ thead {
 }
 
 .selected {
-  background-color: green;
+  background-color: chocolate;
 }
 
 .selected.player-list:hover {
-  background-color: darkgray;
+  background-color: #ff7f24;
   color: black;
 }
 
@@ -286,7 +302,7 @@ thead {
 }
 
 .player-row.highlight:hover {
-  background-color: aqua;
+  background-color: #7cd3d6;
 }
 
 .dim {
