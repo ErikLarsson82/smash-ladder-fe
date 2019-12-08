@@ -125,10 +125,6 @@ thead {
   justify-content: space-around;
 }
 
-.odd {
-  background: #383838;
-}
-
 .matches {
   padding-top: 30px;
   padding-bottom: 20px;
@@ -332,11 +328,24 @@ thead {
 }
 
 .player-row {
+  background-color: rgba(120, 15, 70, 0);
+  opacity: 0;
+}
+
+.odd {
+  background-color: rgba(120, 15, 70, 0);
   opacity: 0;
 }
 
 .fade-in {
-  animation: fadein 2s;
+  animation: playerRowFadeEven 2s;
+  background-color: rgba(120, 15, 70, 0.3);
+  opacity: 1;
+}
+
+.odd.fade-in {
+  animation: playerRowFadeOdd 2s;
+  background-color: rgba(120, 15, 70, 0.8);
   opacity: 1;
 }
 
