@@ -450,3 +450,15 @@ thead {
   margin-top: 50px;
   font-size: xx-small;
 }
+
+
+@media only screen and (max-width: 1300px) {
+  .content-separator {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .players {
+    max-width: 500px;
+  }
+}
