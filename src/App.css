@@ -450,10 +450,13 @@ thead {
   .content-separator {
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    font-size: xx-large;
   }
 
   .players {
-    max-width: 500px;
+    max-width: 100%;
+    width: 100%;
   }
 
   #root {
