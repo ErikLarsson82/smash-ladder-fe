@@ -9,7 +9,7 @@ export default function Ladder(props) {
 
   return (
     <div className="App">
-      <img src="logo.png" width="355" height="221" alt="logo" />
+      <img src="hiqombo-logo.png" width="500" height="455" alt="logo" />
       <hr />
       {
         schedule.map(({p1slug, p2slug, date}, idx, list) => {
