@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Back from './Back'
+import { slug } from './helpers'
 
 export default function Resolve(props) {
   const { resolvefight, setscreen, resolveCandidate, players } = props
@@ -32,8 +33,8 @@ export default function Resolve(props) {
 
   const { name, main } = players.find(x => x.playerslug === (winner === 'p1' ? p1slug : p2slug))
 
-  const imgLeft = `battle-stance/rightfacing/${players.find(x => x.playerslug === p1slug).main}.png`
-  const imgRight = `battle-stance/leftfacing/${players.find(x => x.playerslug === p2slug).main}.png`
+  const imgLeft = `battle-stance/rightfacing/${slug(players.find(x => x.playerslug === p1slug).main)}.png`
+  const imgRight = `battle-stance/leftfacing/${slug(players.find(x => x.playerslug === p2slug).main)}.png`
 
   return (
     <div className="resolvefight vertical-spacer">
