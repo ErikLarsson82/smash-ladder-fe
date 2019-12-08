@@ -5,9 +5,9 @@ import './animations.css'
 import Ladder from './Ladder'
 import Challonge from './Challonge'
 import Resolve from './Resolve'
+import animation from './animation'
 
 const api = 'https://hiqombo-ladder-be.herokuapp.com'
-//const api = 'http://localhost:3500'
 
 class App extends React.Component {
   constructor(props) {
@@ -40,6 +40,10 @@ class App extends React.Component {
   }
 
   setscreen(screen, p1slug, p2slug) {
+
+    animation()
+
+    return
     this.setState({ screen: screen })
     if (p1slug && p2slug)
       this.setState({ resolveCandidate: { p1slug: p1slug, p2slug: p2slug } })
