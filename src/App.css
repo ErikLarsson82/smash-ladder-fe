@@ -68,12 +68,6 @@ thead {
   pointer-events: none;
 }
 
-
-.players {
-  max-width: 850px;
-  min-width: 850px;
-}
-
 .App {
   display: flex;
   flex-direction: column;
@@ -140,6 +134,7 @@ thead {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 26px;
 }
 
 .banner-container {
@@ -325,6 +320,26 @@ thead {
   font-size: medium;
 }
 
+.content-separator {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 80%;
+  max-width: 1300px;
+}
+
+.players {
+  min-width: 520px;
+  flex-basis: 40%;
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 60%;
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
 .odd, .even {
   background-color: rgba(120, 15, 70, 0);
   opacity: 0;
@@ -391,11 +406,11 @@ thead {
 }
 
 .main {
-  width: 185px;
+  width: 40px;
 }
 
 .secondary {
-  width: 236px;
+  width: 40px;
 }
 
 
@@ -413,7 +428,7 @@ thead {
   padding-left: 40px;
   padding-right: 40px;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .score-box {
@@ -421,6 +436,13 @@ thead {
   flex-direction: column;
   align-items: center;
   font-size: x-large;
+}
+
+.icon-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer {

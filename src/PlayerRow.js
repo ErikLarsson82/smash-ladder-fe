@@ -28,8 +28,8 @@ export default function PlayerRow(props) {
       onClick={() => highlightPlayer(playerslug)}>
       <td><div className="placement">{idx+1}</div></td>
       <td><Mugshot playerslug={playerslug} />{name}{ qcIcons.length > 0 && qcIcons}</td>
-      <td><Icon name={main} />{main}</td>
-      <td>{secondary && <Icon name={secondary} />}{secondary}</td>
+      <td><Icon name={main} /></td>
+      <td>{secondary && <Icon name={secondary} />}</td>
     </tr>
   )
 }
