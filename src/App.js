@@ -13,6 +13,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
 
+    console.log(document.cookie, [null, 'null', ''].indexOf(document.cookie))
     this.state = {
       players: [],
       matches: [],
@@ -20,7 +21,7 @@ class App extends React.Component {
       screen: 'LADDER',
       resolveCandidate: null,
       error: null,
-      highlight: [null, 'null', ''].indexOf(document.cookie) ? null : document.cookie,
+      highlight: [null, 'null', ''].indexOf(document.cookie) !== -1 ? null : document.cookie,
       network: false
     }
 

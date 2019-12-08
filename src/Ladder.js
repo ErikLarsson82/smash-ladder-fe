@@ -46,7 +46,6 @@ export default function Ladder(props) {
                     {...player}
                     key={player.playerslug}
                     idx={idx}
-                    startHidden
                     highlight={highlight}
                     highlightPlayer={highlightPlayer} />
                 </Delay>

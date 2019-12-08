@@ -27,6 +27,10 @@ hr {
   display: none;
 }
 
+tr {
+  /*background-color: rgba(95, 158, 160, 1);*/
+}
+
 th {
   text-align: left;
 }
@@ -321,44 +325,46 @@ thead {
   font-size: medium;
 }
 
-.player-row:hover {
+.odd, .even {
+  background-color: rgba(120, 15, 70, 0);
+  opacity: 0;
+}
+
+.odd:hover, .even:hover, .fade-in-highlight:hover {
   background-color: aliceblue;
   color: black;
   cursor: pointer;
 }
 
-.player-row {
-  background-color: rgba(120, 15, 70, 0);
+.fade-in-highlight:hover {
+  background-color: rgb(124, 211, 214);
+}
+
+.highlight {
+  background-color: rgba(95, 158, 160, 0);
   opacity: 0;
 }
 
-.odd {
-  background-color: rgba(120, 15, 70, 0);
-  opacity: 0;
-}
-
-.fade-in {
-  animation: playerRowFadeEven 2s;
-  background-color: rgba(120, 15, 70, 0.3);
+.fade-in-highlight {
+  animation: fadeRowHighlight 0.5s;
+  background-color: rgba(95, 158, 160, 1);
   opacity: 1;
 }
 
-.odd.fade-in {
-  animation: playerRowFadeOdd 2s;
+.fade-in-odd {
+  animation: fadeRowOdd 0.5s;
   background-color: rgba(120, 15, 70, 0.8);
+  opacity: 1;
+}
+
+.fade-in-even {
+  animation: fadeRowEven 0.5s;
+  background-color: rgba(120, 15, 70, 0.3);
   opacity: 1;
 }
 
 .shake {
   animation: shake 0.32s cubic-bezier(.20,.07,.19,.70) both;
-}
-
-.highlight {
-  background-color: cadetblue;
-}
-
-.player-row.highlight:hover {
-  background-color: #7cd3d6;
 }
 
 .dim {

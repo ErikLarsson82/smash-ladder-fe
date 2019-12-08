@@ -2,15 +2,29 @@ import React from 'react'
 import { QcIcon, Mugshot, Icon } from './helpers'
 
 export default function PlayerRow(props) {
-  const { startHidden, delay, playerslug, name, main, secondary, qc, idx, highlight, highlightPlayer } = props
-  const odd = idx % 2 === 0 ? 'odd' : ''
-  const highlightClass = playerslug === highlight ? 'highlight' : ''
+  const { delay, playerslug, name, main, secondary, qc, idx, highlight, highlightPlayer } = props
+  const hasHighlight = playerslug === highlight
   const qcIcons = qc.map(x => <QcIcon key={`${name}-${x}`} place={x} />)
-  const fadeIn = delay ? 'fade-in' : ''
-  const hide = startHidden ? 'player-row' : ''
+  const odd = idx % 2 === 0
+  const alternate = odd ? 'odd' : 'even'
+  const fadeIn = odd ? 'fade-in-odd' : 'fade-in-even'
+
+  const startClass = hasHighlight
+    ? 'highlight'
+    : alternate
+
+  const delayedClass = hasHighlight
+    ? 'fade-in-highlight'
+    : fadeIn
+
+  /*const delayedClasses = [
+    delay && !highlight && 'fade-in' || '',
+    delay && !highlight && alternate || '',
+    delay && highlight && `highlight-${alternate}` || '',
+  ]*/
   return (
     <tr
-      className={[fadeIn, hide, highlightClass, odd].join(' ')}
+      className={[startClass].concat(delay && delayedClass || []).join(' ')}
       onClick={() => highlightPlayer(playerslug)}>
       <td><div className="placement">{idx+1}</div></td>
       <td><Mugshot playerslug={playerslug} />{name}{ qcIcons.length > 0 && qcIcons}</td>
