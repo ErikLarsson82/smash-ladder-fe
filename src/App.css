@@ -127,7 +127,7 @@ thead {
   padding-bottom: 20px;
 }
 
-.match-box {
+.match-boxmatch-box {
   width: 100%;
   padding: 12px;
   display: flex;
@@ -207,11 +207,6 @@ thead {
 
 .selected {
   background-color: chocolate;
-}
-
-.selected.player-list:hover {
-  background-color: #ff7f24;
-  color: black;
 }
 
 .qc-icon {
