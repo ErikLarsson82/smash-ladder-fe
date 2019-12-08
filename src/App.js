@@ -7,13 +7,11 @@ import Challonge from './Challonge'
 import Resolve from './Resolve'
 
 const api = 'https://hiqombo-ladder-be.herokuapp.com'
-//const api = 'http://localhost:3500'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
 
-    console.log(document.cookie, [null, 'null', ''].indexOf(document.cookie))
     this.state = {
       players: [],
       matches: [],

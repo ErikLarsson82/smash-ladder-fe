@@ -17,14 +17,9 @@ export default function PlayerRow(props) {
     ? 'fade-in-highlight'
     : fadeIn
 
-  /*const delayedClasses = [
-    delay && !highlight && 'fade-in' || '',
-    delay && !highlight && alternate || '',
-    delay && highlight && `highlight-${alternate}` || '',
-  ]*/
   return (
     <tr
-      className={[startClass].concat(delay && delayedClass || []).join(' ')}
+      className={[startClass].concat(delay ? delayedClass : []).join(' ')}
       onClick={() => highlightPlayer(playerslug)}>
       <td><div className="placement">{idx+1}</div></td>
       <td><Mugshot playerslug={playerslug} />{name}{ qcIcons.length > 0 && qcIcons}</td>
