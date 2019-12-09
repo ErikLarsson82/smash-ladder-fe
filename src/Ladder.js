@@ -94,7 +94,7 @@ export default function Ladder(props) {
           </div>
         </div>
       </div>
-      <div className="footer">Powered by Cargo and Bonko</div>
+      <div className="footer">Powered by Cargo, Bonko and Kamden</div>
       <div className="icon-row">
         <div className="menu-icon-container">
           <img className="menu-icon smash-green" onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
