@@ -148,6 +148,17 @@ class App extends React.Component {
       return (
         <Challonge
           players={players}
+          fight
+          setscreen={this.setscreen}
+          scheduleFight={this.scheduleFight}
+          network={network}
+          highlight={highlight} />
+      )
+    }
+    if (screen === 'SCHEDULE') {
+      return (
+        <Challonge
+          players={players}
           setscreen={this.setscreen}
           scheduleFight={this.scheduleFight}
           network={network}
