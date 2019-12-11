@@ -4,12 +4,11 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  font-family: 'Bebas Neue', cursive;
-  font-size: larger;
+  font-family: 'Montserrat', sans-serif;
+  font-size: medium;
   background-image: url(images/background.png);
   background-size: contain;
   background-repeat: no-repeat;
-  /*background-blend-mode: luminosity;*/
 }
 
 h1 {
