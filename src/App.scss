@@ -46,6 +46,10 @@ th {
 }
 
 .challange-player-list {
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,1);
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,1);
+  width: 330px;
   border-collapse: collapse;
 
   th {
@@ -114,7 +118,7 @@ th {
   position: sticky;
   bottom: 0;
   width: 100%;
-  padding: 20px;
+  padding: 5px;
   background-color: cadetblue;
   display: flex;
   justify-content: space-around;
@@ -321,6 +325,10 @@ th {
 }
 
 .players {
+  -webkit-box-shadow: 0px 0px 12px 0px rgba(0,157,214,1);
+  -moz-box-shadow: 0px 0px 12px 0px rgba(0,157,214,1);
+  box-shadow: 0px 0px 12px 0px rgba(0,157,214,1);
+
   min-width: 520px;
   flex-basis: 40%;
 
@@ -482,6 +490,16 @@ th {
 @media only screen and (max-width: 800px) {
   .players {
     width: 100%;
+  }
+
+
+  .challange-player-list {
+    width: unset;
+  }
+
+  .spacer {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   #root {
