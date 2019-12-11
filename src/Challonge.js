@@ -29,7 +29,7 @@ export default class Challonge extends React.Component {
   }
 
   render() {
-    const { fight, players, setscreen, scheduleFight, network } = this.props
+    const { fight, players, setscreen, scheduleFight, createCandidate, network } = this.props
     const { p1slug, p2slug } = this.state
 
     const showFight = p1slug && p2slug && (p1slug !== p2slug)
@@ -38,13 +38,12 @@ export default class Challonge extends React.Component {
       if (network) return
 
       if (fight) {
-        console.log('nu visas anim')
         setTimeout(() => {
-          console.log('sätter screen')
-          setscreen('RESOLVE', p1slug, p2slug)
-        }, 2000)
+          createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
+        }, 500)
       } else {
         scheduleFight(p1slug, p2slug)
+          .then(() => setscreen('LADDER'))
       }
     }
 

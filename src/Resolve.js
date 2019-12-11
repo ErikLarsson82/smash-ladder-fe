@@ -4,9 +4,12 @@ import { slug } from './helpers'
 
 export default function Resolve(props) {
   const { resolvefight, setscreen, resolveCandidate, players } = props
-  const { p1slug, p2slug } = resolveCandidate
 
   const [result, setResult] = useState([])
+
+  if (!resolveCandidate) return null
+
+  const { p1slug, p2slug } = resolveCandidate
 
   const p1count = result.filter(x => x === 'p1').length
   const p2count = result.filter(x => x === 'p2').length
@@ -28,7 +31,7 @@ export default function Resolve(props) {
       date: new Date().toISOString()
     }
     resolvefight(fight)
-    setscreen('LADDER')
+      .then(() => setscreen('LADDER'))
   }
 
   const { name, main } = players.find(x => x.playerslug === (winner === 'p1' ? p1slug : p2slug))

@@ -5,7 +5,7 @@ import Delay from './Delay'
 
 export default function Ladder(props) {
 
-  const { schedule, matches, players, setscreen, error, highlight, highlightPlayer } = props
+  const { schedule, matches, players, setscreen, error, highlight, highlightPlayer, createCandidate } = props
 
   return (
     <div className="App">
@@ -43,10 +43,12 @@ export default function Ladder(props) {
             schedule.map(({p1slug, p2slug, date}, idx, list) => {
               const now = new Date().getTime()
               const fadeIn = now - new Date(date).getTime() < 5000 ? 'fade-in shake' : ''
+              const callback = () => createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
+
               return (
                 <div className="match-box" key={`${p1slug}-${p2slug}-${date}`}>
                   <div className={ ['banner-container'].concat(fadeIn).join(' ') }>
-                    <img onClick={() => setscreen('RESOLVE', p1slug, p2slug)} className="banner" src="banner.png" alt="schedule-banner" />
+                    <img onClick={callback} className="banner" src="banner.png" alt="schedule-banner" />
                     <div className="banner-p1">{p1slug}</div>
                     <div className="banner-p2">{p2slug}</div>
                   </div>
