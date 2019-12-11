@@ -9,7 +9,7 @@ export default function Ladder(props) {
 
   return (
     <div className="App">
-      <img src="hiqombo-logo.png" width="500" height="455" alt="logo" />
+      <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
       <div className="content-separator">
         <table className="players" border="0" cellSpacing="0">
           <thead>
