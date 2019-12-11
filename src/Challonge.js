@@ -38,9 +38,7 @@ export default class Challonge extends React.Component {
       if (network) return
 
       if (fight) {
-        setTimeout(() => {
-          createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
-        }, 500)
+        createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
       } else {
         scheduleFight(p1slug, p2slug)
           .then(() => setscreen('LADDER'))
