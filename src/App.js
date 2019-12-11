@@ -1,6 +1,6 @@
 import React from 'react'
 import fetch from 'node-fetch'
-import './App.css'
+import './App.scss'
 import './animations.css'
 import Ladder from './Ladder'
 import Challonge from './Challonge'

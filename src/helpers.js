@@ -40,15 +40,6 @@ export function QcIcon({place}) {
   return <img src={`qc-${place}.png`} className="qc-icon" width="10" height="10" alt="Plats" />
 }
 
-
-export function leftpad(str) {
-  if (str.length === 1) {
-    return `0${str}`
-  }
-  return str
-}
-
-
 export function getPlayerAbove(players, playerslug) {
   const current = players.findIndex(({name}) => slug(name) === playerslug)
   const result = current-1

@@ -1,5 +1,5 @@
 import React from 'react'
-import { slug, getPlayerAbove, leftpad, Icon } from './helpers'
+import { slug, getPlayerAbove, Icon } from './helpers'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Back from './Back'
 
@@ -41,35 +41,63 @@ export default class Challonge extends React.Component {
           <img src="utmaning.png" width="238" height="65" alt="Utmaning" />
         </div>
         <div className="challonge-container large">
-          <div className="spacer">
-            <h2 className="player-heading">Challanger</h2>
-            {
-              players.map(({playerslug, name, main}, idx) => {
-                const selected = p1slug === playerslug ? 'selected' : ''
-                return (
-                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1slug: playerslug})}>
-                    {`${leftpad((idx+1).toString())}. `}<Icon small name={main} />{name}
-                  </div>
-                )
-              })
-            }
-          </div>
+          <table className="challange-player-list">
+            <tbody>
+              <tr>
+                <th className="right">#</th>
+                <th></th>
+                <th>Challanger</th>
+              </tr>
+              {
+                players.map(({playerslug, name, main}, idx) => {
+                  const selected = p1slug === playerslug ? 'selected' : ''
+                  return (
+                    <tr key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1slug: playerslug})}>
+                      <td className="right mono">
+                        {`${(idx+1).toString()}.`}
+                      </td>
+                      <td className="icon">
+                        <Icon small name={main} />
+                      </td>
+                      <td>
+                        {name}
+                      </td>
+                    </tr>
+                  )
+                })
+              }
+            </tbody>
+          </table>
           <div className="spacer">
             <img className="vs-logo" src="player-versus-player.png" alt="VS" />
           </div>
-          <div className="spacer">
-            <h2 className="player-heading">Challangee</h2>
-            {
-              players.map(({playerslug, name, main}, idx) => {
-                const selected = p2slug === playerslug ? 'selected' : ''
-                return (
-                  <div key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2slug: playerslug})}>
-                    {`${leftpad((idx+1).toString())}. `}<Icon small name={main} />{name}
-                  </div>
-                )
-              })
-            }
-          </div>
+          <table className="challange-player-list">
+            <tbody>
+              <tr>
+                <th className="right">#</th>
+                <th></th>
+                <th>Challanger</th>
+              </tr>
+              {
+                players.map(({playerslug, name, main}, idx) => {
+                  const selected = p2slug === playerslug ? 'selected' : ''
+                  return (
+                    <tr key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2slug: playerslug})}>
+                      <td className="right mono">
+                        {`${(idx+1).toString()}.`}
+                      </td>
+                      <td className="icon">
+                        <Icon small name={main} />
+                      </td>
+                      <td>
+                        {name}
+                      </td>
+                    </tr>
+                  )
+                })
+              }
+            </tbody>
+          </table>
         </div>
         <div className="centered fixed relative small">
           {
