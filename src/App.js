@@ -30,6 +30,7 @@ class App extends React.Component {
     this.highlightPlayer = this.highlightPlayer.bind(this)
     this.setError = this.setError.bind(this)
     this.useApi = this.useApi.bind(this)
+    this.createCandidate = this.createCandidate.bind(this)
   }
 
   componentDidMount() {
@@ -38,10 +39,13 @@ class App extends React.Component {
     this.useApi('players')
   }
 
-  setscreen(screen, p1slug, p2slug) {
+  setscreen(screen) {
     this.setState({ screen: screen })
+  }
+
+  createCandidate(p1slug, p2slug, callback) {
     if (p1slug && p2slug)
-      this.setState({ resolveCandidate: { p1slug: p1slug, p2slug: p2slug } })
+      this.setState({ resolveCandidate: { p1slug: p1slug, p2slug: p2slug } }, () => callback && callback())
   }
 
   useApi(resource) {
@@ -85,7 +89,7 @@ class App extends React.Component {
     }
     this.setState({ network: true, resolveCandidate: null })
 
-    fetch(`${api}/resolvefight`, params)
+    return fetch(`${api}/resolvefight`, params)
       .then(() => this.useApi('matches'))
       .then(() => this.useApi('schedule'))
       .then(() => this.useApi('players'))
@@ -102,10 +106,9 @@ class App extends React.Component {
     }
     this.setState({ network: true })
 
-    fetch(`${api}/schedulefight`, params)
+    return fetch(`${api}/schedulefight`, params)
       .then(() => this.useApi('matches'))
       .then(() => this.useApi('schedule'))
-      .then(() => this.setscreen('LADDER'))
       .then(() => this.setState({ network: false }))
   }
 
@@ -140,11 +143,24 @@ class App extends React.Component {
           newplayer={this.newplayer}
           setscreen={this.setscreen}
           highlightPlayer={this.highlightPlayer}
+          createCandidate={this.createCandidate}
           error={error}
           highlight={highlight} />
         )
     }
     if (screen === 'CHALLONGE') {
+      return (
+        <Challonge
+          players={players}
+          fight
+          setscreen={this.setscreen}
+          scheduleFight={this.scheduleFight}
+          createCandidate={this.createCandidate}
+          network={network}
+          highlight={highlight} />
+      )
+    }
+    if (screen === 'SCHEDULE') {
       return (
         <Challonge
           players={players}

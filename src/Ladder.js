@@ -5,7 +5,7 @@ import Delay from './Delay'
 
 export default function Ladder(props) {
 
-  const { schedule, matches, players, setscreen, error, highlight, highlightPlayer } = props
+  const { schedule, matches, players, setscreen, error, highlight, highlightPlayer, createCandidate } = props
 
   return (
     <div className="App">
@@ -43,10 +43,12 @@ export default function Ladder(props) {
             schedule.map(({p1slug, p2slug, date}, idx, list) => {
               const now = new Date().getTime()
               const fadeIn = now - new Date(date).getTime() < 5000 ? 'fade-in shake' : ''
+              const callback = () => createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
+
               return (
                 <div className="match-box" key={`${p1slug}-${p2slug}-${date}`}>
                   <div className={ ['banner-container'].concat(fadeIn).join(' ') }>
-                    <img onClick={() => setscreen('RESOLVE', p1slug, p2slug)} className="banner" src="banner.png" alt="schedule-banner" />
+                    <img onClick={callback} className="banner" src="banner.png" alt="schedule-banner" />
                     <div className="banner-p1">{p1slug}</div>
                     <div className="banner-p2">{p2slug}</div>
                   </div>
@@ -97,8 +99,8 @@ export default function Ladder(props) {
       <div className="footer">Powered by Cargo, Bonko, Kamden and Beibei</div>
       <div className="icon-row">
         <div className="menu-icon-container">
-          <img className="menu-icon smash-green" onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Schemalägg match" />
-          <img className="menu-icon smash-blue" onClick={() => {}}  src="scoreboard.png" alt="Registrera resultat" />
+          <img className="menu-icon smash-green" onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Spela match direkt" />
+          <img className="menu-icon smash-blue" onClick={() => setscreen('SCHEDULE')}  src="scoreboard.png" alt="Schemalägg match" />
           <img className="menu-icon smash-red" src="gear.png" alt="Inställningar" />
         </div>
       </div>

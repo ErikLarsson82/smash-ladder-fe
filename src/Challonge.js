@@ -29,16 +29,34 @@ export default class Challonge extends React.Component {
   }
 
   render() {
-    const { players, setscreen, scheduleFight, network } = this.props
+    const { fight, players, setscreen, scheduleFight, createCandidate, network } = this.props
     const { p1slug, p2slug } = this.state
 
     const showFight = p1slug && p2slug && (p1slug !== p2slug)
 
+    const done = () => {
+      if (network) return
+
+      if (fight) {
+        setTimeout(() => {
+          createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
+        }, 500)
+      } else {
+        scheduleFight(p1slug, p2slug)
+          .then(() => setscreen('LADDER'))
+      }
+    }
+
+    //<img src="utmaning.png" width="238" height="65" alt="Utmaning" />
     return (
       <div className="challonge vertical-spacer">
         <Back setscreen={setscreen} />
         <div className="centered small">
-          <img src="utmaning.png" width="238" height="65" alt="Utmaning" />
+          {
+            fight
+              ? 'Slåss'
+              : 'Schemalägg'
+          }
         </div>
         <div className="challonge-container large">
           <table className="challange-player-list">
@@ -114,7 +132,7 @@ export default class Challonge extends React.Component {
             src="fight.png"
             alt="Slåss"
             className={ [showFight ? '' : 'invisible', 'button'].join(' ') }
-            onClick={ () => { network === false && scheduleFight(p1slug, p2slug) } } />
+            onClick={ done } />
         </div>
       </div>
     )
