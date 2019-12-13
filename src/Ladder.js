@@ -9,7 +9,6 @@ export default function Ladder(props) {
 
   return (
     <div className="App">
-      <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
       <div className="content-separator">
         <table className="players" border="0" cellSpacing="0">
           <thead>
@@ -70,30 +69,18 @@ export default function Ladder(props) {
               </div>
             )
           }
-          <h2 className="matches">Matcher</h2>
-          <div>
-            {
-              matches.map(({p1slug, p2slug, result, date}) => {
-                const find1 = x => x.playerslug === p1slug
-                const find2 = x => x.playerslug === p2slug
-                const name1 = players.find(find1) && players.find(find1).main
-                const name2 = players.find(find2) && players.find(find2).main
-                return (
-                  <div className="resolved-container" key={`${p1slug}-${p2slug}-${date}`}>
-                    <div className="icon-box">
-                      <Icon large name={name1} /> vs. <Icon large name={name2} /><br />
-                    </div>
-                    <div className="score-box">
-                      2-1
-                    </div>
-                  </div>
-                )
-              })
-            }
-            {
-              matches.length === 0 && <div>Inga matcher spelade än...</div>
-            }
-          </div>
+          <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
+          <h2 className="matches">VÄLKOMNA BUTTON MASHERS!</h2>
+          <p>Vill du öva på dina 1 frame links, wiff punishes, short jump bair combos, okizeme eller bara ha de kul å spela lite smash?
+            <br />Då kan denna grupp vara för dig!
+          </p>
+          <p>Vi kör Smash Ultimate på HiQ's Switch så ofta vi kan, joina vår slack-kanal (HiQombo) så får du snart reda på när nästa tillfälle ges!
+            <br />Vi spelar gärna alla sorters fighting games men just nu är de SSBU som vi nöter, det är helt fritt att ta med egen konsol/spel och arcade stick om man vill!
+            <br />På kontoret har vi ett Switch och pro-controllers, om du föredrar Gamecube-kontroller så får du ta med den själv eller låna av någon annan som har med.
+          </p>
+          <p>Vi har en stege för de mer kompetitiva av oss, men bli inte avskräckt av den, alla nybörjare är välkomna!
+            <br />Den här gruppen är lika mycket till för folk som vill spela lite mer avslappnat.
+          </p>
         </div>
       </div>
       <div className="footer">Powered by Cargo, Bonko, Kamden and Beibei</div>
