@@ -2,6 +2,7 @@ import React from 'react'
 import { slug, getPlayerAbove, Icon } from './helpers'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Back from './Back'
+import startAnimation from './startAnimation'
 
 export default class Challonge extends React.Component {
   constructor(props) {
@@ -38,7 +39,13 @@ export default class Challonge extends React.Component {
       if (network) return
 
       if (fight) {
-        createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
+
+        startAnimation()
+
+        setTimeout(() => {
+          createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
+        }, 2000)
+
       } else {
         scheduleFight(p1slug, p2slug)
           .then(() => setscreen('LADDER'))
