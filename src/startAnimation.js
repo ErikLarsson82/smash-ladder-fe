@@ -4,9 +4,6 @@ import * as TWEEN from 'tween.js'
 const centerX = Math.round(window.innerWidth / 2)
 const centerY = Math.round(window.innerHeight / 2)
 
-const markI = 700
-const markII = 1200
-
 let app
 
 function setupAnimation() {
@@ -23,13 +20,6 @@ function gameLoop(time) {
 function cleanup() {
   gameLoop = () => {}
   app.view.remove()
-}
-
-function startPlayers() {
-  //p1()
-  //p2()
-  //pvp()
-  //animStop()
 }
 
 function p1() {
