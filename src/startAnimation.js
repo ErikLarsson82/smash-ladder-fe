@@ -4,56 +4,15 @@ import * as TWEEN from 'tween.js'
 const centerX = Math.round(window.innerWidth / 2)
 const centerY = Math.round(window.innerHeight / 2)
 
+const markI = 700
+const markII = 1200
+
 let app
-/*
-function shakeAnimation(element){
-  TweenMax.to(element, .1, {
-    x: -7,
-    ease: Quad.easeInOut
-  });
-  TweenMax.to(element, .1, {
-    repeat: 4,
-    x: 7,
-    yoyo: true,
-    delay: .1,
-    ease: Quad.easeInOut
-  });
-  TweenMax.to(element, .1, {
-    x: 0,
-    delay: .1 * 4
-  });
-}
-*/
+
 function setupAnimation() {
   
   blackrect()
   gameLoop()
-}
-
-function shake(dir) {
-
-  /*const start = new TWEEN.Tween(app.stage)
-    .easing(TWEEN.Quad.Ease.In)
-    .to({ y: 14 }, 60)
-    .repeat(2)
-    .start()
-    .chain(goBack)*/
-
-  /*const goBack = new TWEEN.Tween(app.stage)
-    .to({ x: 10, y: 10 }, 10)
-    
-  new TWEEN.Tween(app.stage)
-    .easing(TWEEN.Easing.Bounce.In)
-    .to({ y: 14 }, 60)
-    .repeat(2)
-    .start()
-    .chain(goBack)
-
-  new TWEEN.Tween(app.stage)
-    .easing(TWEEN.Easing.Bounce.Out)
-    .to({ x: dir ? 20 : 0 }, 120)
-    .repeat(1)
-    .start()*/
 }
 
 function gameLoop(time) {
@@ -67,10 +26,10 @@ function cleanup() {
 }
 
 function startPlayers() {
-  p1()
-  p2()
-  pvp()
-  animStop()
+  //p1()
+  //p2()
+  //pvp()
+  //animStop()
 }
 
 function p1() {
@@ -79,14 +38,48 @@ function p1() {
   p1.y = 0
   app.stage.addChild(p1)
 
+  const player = new PIXI.Text('Baran', { fontSize: '100px', font: 'Montserrat', fill: '#ffffff', align: 'left' })
+  player.x = centerX - 400
+  player.y = centerY + 200
+  player.alpha = 0
+  app.stage.addChild(player)
+
+  const ass = new PIXI.Text('som', { fontSize: '30px', font: 'Montserrat', fill: '#ffffff', align: 'left' })
+  ass.x = centerX - 420
+  ass.y = centerY + 304
+  ass.alpha = 0
+  app.stage.addChild(ass)
+
+  const char = new PIXI.Text('Bowser', { fontStyle: 'italic', fontSize: '60px', font: 'Montserrat', fill: '#ff0000', align: 'left' })
+  char.x = centerX - 400
+  char.y = centerY + 340
+  char.alpha = 0
+  app.stage.addChild(char)
+
   new TWEEN.Tween(p1)
     .to({ x: centerX - 750 }, 700)
     .easing(TWEEN.Easing.Elastic.Out)
     .start()
+    .onComplete(pvp)
+
+  const playerAnim = new TWEEN.Tween(player)
+    .to({ alpha: 1 }, 300)
+    .delay(500)
+    .start()
+
+  const assAnim = new TWEEN.Tween(ass)
+    .to({ alpha: 1 }, 300)
+    .delay(500)
+    .start()
+
+  const charAnim = new TWEEN.Tween(char)
+    .to({ alpha: 1 }, 300)
+    .delay(500)
+    .start()
 }
 
 function p2() {
-  const p2 = new PIXI.Sprite.from('battle-stance/rightfacing/yoshi.png')
+  const p2 = new PIXI.Sprite.from('battle-stance/rightfacing/ridly.png')
   p2.x = -850
   p2.y = 0
   app.stage.addChild(p2)
@@ -94,15 +87,24 @@ function p2() {
   new TWEEN.Tween(p2)
     .to({ x: centerX }, 500)
     .easing(TWEEN.Easing.Elastic.Out)
-    .delay(700)
     .start()
+    .onComplete(delayThree)
 }
 
 function pvp() {
   const pvp = new PIXI.Sprite.from('player-versus-player.png')
-  pvp.x = centerX - 82
-  pvp.y = centerY - 82
+  pvp.x = centerX
+  pvp.y = centerY + 250
+  pvp.anchor.set(0.5, 0.5)
+  pvp.width = 0
+  pvp.height = 0
   app.stage.addChild(pvp)
+
+  new TWEEN.Tween(pvp)
+    .to({ width: 82, height: 82 }, 300)
+    .easing(TWEEN.Easing.Bounce.Out)
+    .start()
+    .onComplete(p2) 
 }
 
 function blackrect() {
@@ -120,7 +122,7 @@ function blackrect() {
 
   const fadeToBlack = new TWEEN.Tween(black)
     .to({ alpha: 1 }, 200)
-    .onComplete(startPlayers)
+    .onComplete(p1)
 
   const fadeToWhite = new TWEEN.Tween(white)
     .to({ alpha: 1 }, 200)
@@ -128,7 +130,7 @@ function blackrect() {
     .chain(fadeToBlack)
 }
 
-function animStop() {
+function delayThree() {
   new TWEEN.Tween(0)
     .to(1, 3000)
     .start()
