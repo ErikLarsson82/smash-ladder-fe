@@ -7,7 +7,6 @@ const centerY = Math.round(window.innerHeight / 2)
 let app
 
 function setupAnimation() {
-  
   blackrect()
   gameLoop()
 }
@@ -114,7 +113,74 @@ function pvp() {
     .to({ width: 82, height: 82 }, 300)
     .easing(TWEEN.Easing.Bounce.Out)
     .start()
-    .onComplete(p2) 
+    .onComplete(() => {
+      p2()
+      embers()
+    }) 
+}
+
+function embers() {
+  new Array(20).fill().forEach(ember)
+}
+
+function ember() {
+  const _ember = new PIXI.Sprite.from('ember.png')
+  _ember.x = centerX
+  _ember.y = centerY + 250
+  _ember.anchor.set(0.5, 0.5)
+  _ember.width = 0
+  _ember.height = 0
+  _ember.alpha = 0
+  app.stage.addChild(_ember)
+
+  const destination = -300 + Math.random() * 600
+  const d = Math.random() * 1000
+
+  if (Math.random() > 0.5) {
+    new TWEEN.Tween(_ember)
+      .to({ x: centerX + destination }, 500 + (Math.random() * 400))
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .delay(d)
+      .start()
+
+    const up = 
+      new TWEEN.Tween(_ember)
+        .to({ y: -100 }, 4500)
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        
+    new TWEEN.Tween(_ember)
+      .to({ y: centerY + (Math.random() * 200) + 250 }, 900)
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .start()
+      .delay(d)
+      .chain(up)
+    
+  } else {
+    new TWEEN.Tween(_ember)
+        .to({ x: centerX + destination}, 500 + (Math.random() * 400))
+        .easing(TWEEN.Easing.Quadratic.Out)
+        .delay(d)
+        .start()
+
+    new TWEEN.Tween(_ember)
+        .to({ y: -100 - (Math.random() * 500) }, 3500 + (Math.random() * 4000))
+        .delay(d)
+        .start()
+  }
+
+  new TWEEN.Tween(_ember)
+    .to({ width: 8, height: 8 }, 100)
+    .start()
+
+  const fadeOut = new TWEEN.Tween(_ember)
+    .to({ alpha: 0 }, 1500 + (Math.random() * 1500))
+    .start()
+
+  new TWEEN.Tween(_ember)
+    .to({ alpha: 1 }, 1)
+    .delay(d)
+    .start()
+    .chain(fadeOut)
 }
 
 function blackrect() {
@@ -166,5 +232,6 @@ export default function startAnimation() {
     .add('battle-stance/leftfacing/bowser.png')
     .add('battle-stance/rightfacing/yoshi.png')
     .add('player-versus-player.png')
+    .add('ember.png')
     .load(setupAnimation)  
 }
