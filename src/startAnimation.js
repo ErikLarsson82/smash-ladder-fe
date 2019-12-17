@@ -22,35 +22,24 @@ function cleanup() {
   app.view.remove()
 }
 
-function p1() {
-  const p1 = new PIXI.Sprite.from('battle-stance/leftfacing/bowser.png')
-  p1.x = window.innerWidth
-  p1.y = 0
-  app.stage.addChild(p1)
-
-  const player = new PIXI.Text('Baran', { fontSize: '100px', font: 'Montserrat', fill: '#ffffff', align: 'left' })
-  player.x = centerX - 400
-  player.y = centerY + 200
+function text(name, character, color, positions) {
+  const player = new PIXI.Text(name, { fontSize: '100px', font: 'Montserrat', fill: '#ffffff', align: 'left' })
+  player.x = positions.playerX
+  player.y = positions.playerY
   player.alpha = 0
   app.stage.addChild(player)
 
   const ass = new PIXI.Text('som', { fontSize: '30px', font: 'Montserrat', fill: '#ffffff', align: 'left' })
-  ass.x = centerX - 420
-  ass.y = centerY + 304
+  ass.x = positions.assX
+  ass.y = positions.assY
   ass.alpha = 0
   app.stage.addChild(ass)
 
-  const char = new PIXI.Text('Bowser', { fontStyle: 'italic', fontSize: '60px', font: 'Montserrat', fill: '#ff0000', align: 'left' })
-  char.x = centerX - 400
-  char.y = centerY + 340
+  const char = new PIXI.Text(character, { fontStyle: 'italic', fontSize: '60px', font: 'Montserrat', fill: color, align: 'left' })
+  char.x = positions.charX
+  char.y = positions.charY
   char.alpha = 0
   app.stage.addChild(char)
-
-  new TWEEN.Tween(p1)
-    .to({ x: centerX - 750 }, 700)
-    .easing(TWEEN.Easing.Elastic.Out)
-    .start()
-    .onComplete(pvp)
 
   const playerAnim = new TWEEN.Tween(player)
     .to({ alpha: 1 }, 300)
@@ -68,7 +57,38 @@ function p1() {
     .start()
 }
 
+function p1() {
+  const positions = {
+    playerX: centerX - 400,
+    playerY: centerY + 200,
+    assX: centerX - 420,
+    assY: centerY + 304,
+    charX: centerX - 400,
+    charY: centerY + 340
+  }
+  text('Jonas', 'Bowser', '#ff0000', positions)
+  const p1 = new PIXI.Sprite.from('battle-stance/leftfacing/bowser.png')
+  p1.x = window.innerWidth
+  p1.y = 0
+  app.stage.addChild(p1)
+
+  new TWEEN.Tween(p1)
+    .to({ x: centerX - 750 }, 700)
+    .easing(TWEEN.Easing.Elastic.Out)
+    .start()
+    .onComplete(pvp)
+}
+
 function p2() {
+  const positions = {
+    playerX: centerX + 160,
+    playerY: centerY + 200,
+    assX: centerX + 140,
+    assY: centerY + 304,
+    charX: centerX + 160,
+    charY: centerY + 340
+  }
+  text('Baran', 'Bowser', '#0000ff', positions)
   const p2 = new PIXI.Sprite.from('battle-stance/rightfacing/ridly.png')
   p2.x = -850
   p2.y = 0
