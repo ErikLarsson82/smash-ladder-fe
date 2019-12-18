@@ -187,7 +187,6 @@ class App extends React.Component {
         screenContent
       ]
     )
-    return <div>Nothing here</div>
   }
 }
 
