@@ -1,12 +1,11 @@
 import * as PIXI from 'pixi.js'
 import * as TWEEN from 'tween.js'
 
-const centerX = Math.round(window.innerWidth / 2)
-const centerY = Math.round(window.innerHeight / 2)
-
-let app
+let app, centerX, centerY
 
 function setupAnimation() {
+  centerX = Math.round(window.innerWidth / 2)
+  centerY = Math.round(window.innerHeight / 2)
   blackrect()
   gameLoop()
 }
