@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Back from './Back'
-import { slug } from './helpers'
+import { slug, Icon } from './helpers'
 
 export default function Resolve(props) {
   const { resolvefight, setscreen, resolveCandidate, players } = props
@@ -43,7 +43,7 @@ export default function Resolve(props) {
     <div className="resolvefight vertical-spacer">
       <Back setscreen={setscreen} />
       <div className="centered small">
-        <h1>Resultat</h1>
+        <h1>Registrera matchresultat</h1>
       </div>
       <div className="large">
         <input type="button" value="Reset" onClick={reset} />
@@ -54,22 +54,15 @@ export default function Resolve(props) {
       </div>
       <div className="matchup-icons">
         {
-          result.map((player, idx) => {
-            return (
-              <div key={`${player}${idx}`}>
-                {
-                  player === 'p1' ? <div>{'<-'}</div> : <div>{'->'}</div>
-                }
-               {
-                idx >= result.length && <hr />
-               }
-              </div>
-            )
-          })
+          result.map((player, idx) => 
+              player === 'p1'
+                ? <div key={`${player}-${idx}`} className="left-icon"><Icon name={players.find(x => x.playerslug === p1slug).main} /></div>
+                : <div key={`${player}-${idx}`} className="right-icon"><Icon name={players.find(x => x.playerslug === p2slug).main} /></div>
+          )
         }
       </div>
       <div className="winner-text">
-        <h1>{ valid && winner && `Vinnare: ${name} med ${main}`}</h1>
+        <h1>{ valid && winner && `Vinnare: ${name} med ${main}` || `Klicka på den som vann`}</h1>
       </div>
       <div className="scoreset">
         <h1>{ scoreSet }</h1>

@@ -277,11 +277,11 @@ p {
 }
 
 .small {
-  flex-basis: 20%;
+  flex-basis: 12%;
 }
 
 .large {
-  flex-basis: 60%;
+  flex-basis: 50%;
 }
 
 .matchup-large-portraits {
@@ -291,7 +291,9 @@ p {
 }
 
 .matchup-icons {
-  flex-basis: 70px;
+  flex-basis: 200px;
+  min-width: 1000px;
+  max-width: 1000px;
 }
 
 .winner-text {
@@ -467,13 +469,13 @@ p {
 }
 
 .character-portrait {
-  border: 1px solid blue;
+  border: 2px solid #be0dea;
   background: rgba(0, 0, 0, 0.4);
   border-radius: 500px;
 }
 
 .character-portrait:hover {
-  border: 1px solid aqua;
+  border: 2px solid #d776ef;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 500px;
   position: relative;
@@ -483,6 +485,18 @@ p {
   margin-bottom: 80px;
   margin-top: 50px;
   font-size: xx-small;
+}
+
+.left-icon {
+  height: 45px;
+  width: 100%;
+  padding-left: 250px;
+}
+
+.right-icon {
+  height: 45px;
+  text-align: right;
+  padding-right: 250px;
 }
 
 
