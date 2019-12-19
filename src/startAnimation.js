@@ -16,6 +16,7 @@ function gameLoop(time) {
 }
 
 function cleanup() {
+  // eslint-disable-next-line
   gameLoop = () => {}
   app.view.remove()
 }
@@ -39,17 +40,17 @@ function text(name, character, color, positions) {
   char.alpha = 0
   app.stage.addChild(char)
 
-  const playerAnim = new TWEEN.Tween(player)
+  new TWEEN.Tween(player)
     .to({ alpha: 1 }, 300)
     .delay(500)
     .start()
 
-  const assAnim = new TWEEN.Tween(ass)
+  new TWEEN.Tween(ass)
     .to({ alpha: 1 }, 300)
     .delay(500)
     .start()
 
-  const charAnim = new TWEEN.Tween(char)
+  new TWEEN.Tween(char)
     .to({ alpha: 1 }, 300)
     .delay(500)
     .start()
@@ -199,7 +200,7 @@ function blackrect() {
     .to({ alpha: 1 }, 200)
     .onComplete(p1)
 
-  const fadeToWhite = new TWEEN.Tween(white)
+  new TWEEN.Tween(white)
     .to({ alpha: 1 }, 200)
     .start()
     .chain(fadeToBlack)

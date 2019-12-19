@@ -7,7 +7,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-size: large;
   font-weight: bold;
-  background-image: url(images/background.png);
+  background-image: url(images/background-red.png);
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -443,20 +443,13 @@ p {
 
 
 .resolvefight {
-  background-color: darkslategray;
   width: 100%;
   height: 100vh;
-}
-
-.resolved-container {
   flex-direction: column;
-  background-color: #383838;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 40px;
-  padding-right: 40px;
-  margin-top: 20px;
-  margin-bottom: 50px;
+  background: #0a0200;
+  background-image: url(images/background-green.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .score-box {
@@ -471,6 +464,19 @@ p {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.character-portrait {
+  border: 1px solid blue;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 500px;
+}
+
+.character-portrait:hover {
+  border: 1px solid aqua;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 500px;
+  position: relative;
 }
 
 .footer {

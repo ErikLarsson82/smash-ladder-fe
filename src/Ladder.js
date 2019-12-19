@@ -1,11 +1,10 @@
 import React from 'react'
 import PlayerRow from './PlayerRow'
-import { Icon } from './helpers'
 import Delay from './Delay'
 
 export default function Ladder(props) {
 
-  const { schedule, matches, players, setscreen, error, highlight, highlightPlayer, createCandidate } = props
+  const { schedule, /* matches, */ players, setscreen, error, highlight, highlightPlayer, createCandidate } = props
 
   return (
     <div className="App">

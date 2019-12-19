@@ -48,8 +48,8 @@ export default function Resolve(props) {
       <div className="large">
         <input type="button" value="Reset" onClick={reset} />
         <div className="matchup-large-portraits">
-          <img alt="p1" onClick={() => set('p1')} src={ imgLeft } className={ valid && winner === 'p2' ? 'dim' : ''} />
-          <img alt="p2" onClick={() => set('p2')} src={ imgRight } className={ valid && winner === 'p1' ? 'dim' : ''} />
+          <img alt="p1" onClick={() => set('p1')} src={ imgLeft } className={ ['character-portrait', valid && winner === 'p2' ? 'dim' : ''].join(' ')} />
+          <img alt="p2" onClick={() => set('p2')} src={ imgRight } className={ ['character-portrait', valid && winner === 'p1' ? 'dim' : ''].join(' ')} />
         </div>
       </div>
       <div className="matchup-icons">
