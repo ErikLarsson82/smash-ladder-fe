@@ -54,7 +54,7 @@ export default function Resolve(props) {
       </div>
       <div className="matchup-icons">
         {
-          result.map((player, idx) => 
+          result.map((player, idx) =>
               player === 'p1'
                 ? <div key={`${player}-${idx}`} className="left-icon"><Icon name={players.find(x => x.playerslug === p1slug).main} /></div>
                 : <div key={`${player}-${idx}`} className="right-icon"><Icon name={players.find(x => x.playerslug === p2slug).main} /></div>
@@ -62,7 +62,7 @@ export default function Resolve(props) {
         }
       </div>
       <div className="winner-text">
-        <h1>{ valid && winner && `Vinnare: ${name} med ${main}` || `Klicka på den som vann`}</h1>
+        <h1>{ (valid && winner && `Vinnare: ${name} med ${main}`) || `Vem vann?`}</h1>
       </div>
       <div className="scoreset">
         <h1>{ scoreSet }</h1>

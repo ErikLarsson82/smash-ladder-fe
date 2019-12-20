@@ -84,7 +84,7 @@ export default function Ladder(props) {
                       <Icon large name={name1} /> vs. <Icon large name={name2} /><br />
                     </div>
                     <div className="score-box">
-                      2-1
+                      {`${result.filter(x=>x==='p1').length}-${result.filter(x=>x==='p2').length}`}
                     </div>
                   </div>
                 )

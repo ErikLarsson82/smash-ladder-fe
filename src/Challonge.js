@@ -40,11 +40,11 @@ export default class Challonge extends React.Component {
 
       if (fight) {
 
-        //startAnimation()
+        startAnimation()
 
-        //setTimeout(() => {
+        setTimeout(() => {
           createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
-        //}, 2000)
+        }, 2000)
 
       } else {
         scheduleFight(p1slug, p2slug)
@@ -52,7 +52,6 @@ export default class Challonge extends React.Component {
       }
     }
 
-    //<img src="utmaning.png" width="238" height="65" alt="Utmaning" />
     return (
       <div className="challonge vertical-spacer">
         <Back setscreen={setscreen} />
