@@ -1,10 +1,11 @@
 import React from 'react'
 import PlayerRow from './PlayerRow'
 import Delay from './Delay'
+import { Icon } from './helpers'
 
 export default function Ladder(props) {
 
-  const { schedule, /* matches, */ players, setscreen, error, highlight, highlightPlayer, createCandidate } = props
+  const { schedule, matches, players, setscreen, error, highlight, highlightPlayer, createCandidate } = props
 
   return (
     <div className="App">
@@ -39,7 +40,7 @@ export default function Ladder(props) {
         <div className="feed">
           <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
           {
-            schedule.map(({p1slug, p2slug, date}, idx, list) => {
+            schedule.map(x => x).reverse().map(({p1slug, p2slug, date}, idx, list) => {
               const now = new Date().getTime()
               const fadeIn = now - new Date(date).getTime() < 5000 ? 'fade-in shake' : ''
               const callback = () => createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
@@ -72,7 +73,7 @@ export default function Ladder(props) {
           <h2 className="matches">Matcher</h2>
           <div>
             {
-              matches.map(({p1slug, p2slug, result, date}) => {
+              matches.map(x => x).reverse().map(({p1slug, p2slug, result, date}) => {
                 const find1 = x => x.playerslug === p1slug
                 const find2 = x => x.playerslug === p2slug
                 const name1 = players.find(find1) && players.find(find1).main
