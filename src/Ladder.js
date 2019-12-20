@@ -36,8 +36,8 @@ export default function Ladder(props) {
             }
           </tbody>
         </table>
-        <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
         <div className="feed">
+          <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
           {
             schedule.map(({p1slug, p2slug, date}, idx, list) => {
               const now = new Date().getTime()
