@@ -36,6 +36,7 @@ export default function Ladder(props) {
             }
           </tbody>
         </table>
+        <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
         <div className="feed">
           {
             schedule.map(({p1slug, p2slug, date}, idx, list) => {
@@ -68,7 +69,30 @@ export default function Ladder(props) {
               </div>
             )
           }
-          <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
+          <h2 className="matches">Matcher</h2>
+          <div>
+            {
+              matches.map(({p1slug, p2slug, result, date}) => {
+                const find1 = x => x.playerslug === p1slug
+                const find2 = x => x.playerslug === p2slug
+                const name1 = players.find(find1) && players.find(find1).main
+                const name2 = players.find(find2) && players.find(find2).main
+                return (
+                  <div className="resolved-container" key={`${p1slug}-${p2slug}-${date}`}>
+                    <div className="icon-box">
+                      <Icon large name={name1} /> vs. <Icon large name={name2} /><br />
+                    </div>
+                    <div className="score-box">
+                      2-1
+                    </div>
+                  </div>
+                )
+              })
+            }
+            {
+              matches.length === 0 && <div>Inga matcher spelade än...</div>
+            }
+          </div>
           <h2 className="matches">VÄLKOMNA BUTTON MASHERS!</h2>
           <p>Vill du öva på dina 1 frame links, wiff punishes, short jump bair combos, okizeme eller bara ha de kul å spela lite smash?
             <br />Då kan denna grupp vara för dig!
