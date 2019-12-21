@@ -137,6 +137,7 @@ export default class Challonge extends React.Component {
             )
           }
           {
+            //This code doesnt run
             network === true && showFight && (
               <CircularProgress className="loader-position" color="secondary" />
             )
