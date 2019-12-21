@@ -1,5 +1,5 @@
 import React from 'react'
-import PlayerRow from './PlayerRow'
+import Player from './Player'
 import Delay from './Delay'
 import { Icon } from './helpers'
 
@@ -25,7 +25,7 @@ export default function Ladder(props) {
               players.map((player, idx) => {
                 return (
                   <Delay delayDuration={ idx * 100 } key={ player.playerslug }>
-                    <PlayerRow
+                    <Player
                       {...player}
                       key={player.playerslug}
                       idx={idx}
