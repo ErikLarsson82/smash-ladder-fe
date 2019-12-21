@@ -53,7 +53,7 @@ export default function Resolve(props) {
       {
         new Array(3).fill().map((_, idx) => {
           const player = result[idx]
-          if (!player) return <div className="icon-placeholder" />
+          if (!player) return <div key={`${player}-${idx}`} className="icon-placeholder" />
           const classNames = ["resolve-icon"].concat(idx !== 0 ? 'middle' : '')
           return player === 'p1'
               ? <div key={`${player}-${idx}`} className={classNames.concat('left').join(' ')}><Icon large name={players.find(x => x.playerslug === p1slug).main} /></div>
