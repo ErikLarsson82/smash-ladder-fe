@@ -65,7 +65,7 @@ export default function Resolve(props) {
           }
         )
       }
-      <h2>{ (valid && winner && `${name} med ${main}`) || `Vem vann?`}</h2>
+      <h2 className="no-border-dim">{ (valid && winner && `${name} med ${main}`) || `Vem vann?`}</h2>
       <h1>{ scoreSet }</h1>
       <StylesProvider injectFirst>
         <Button className="button last" variant="contained" color="primary" disabled={!(valid && winner)} onClick={ done }>

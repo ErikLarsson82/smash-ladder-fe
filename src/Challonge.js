@@ -64,14 +64,14 @@ export default class Challonge extends React.Component {
     return (
       <div className="challonge fit-to-screen-height">
         <Back setscreen={setscreen} />
-        <h1 className="centered small">
+        <h1>
           {
             fight
               ? 'Utmaning'
               : 'Schemalägg'
           }
         </h1>
-        <div className="challonge-container large">
+        <div className="challonge-container">
           <table className="challange-player-list">
             <tbody>
               <tr>
@@ -130,7 +130,7 @@ export default class Challonge extends React.Component {
             </tbody>
           </table>
         </div>
-        <div className="centered fixed relative small">
+        <div>
           {
             derp && (
               <img className="derp" src="spicy-memelord.png" alt="Till dig batsis ;)" />

@@ -70,7 +70,7 @@ export default function Ladder(props) {
               </div>
             )
           }
-          <h2 className="matches">Matcher</h2>
+          <h2 className="matches no-border-dim">Matcher</h2>
           <div>
             {
               matches.map(x => x).reverse().map(({p1slug, p2slug, result, date}) => {
