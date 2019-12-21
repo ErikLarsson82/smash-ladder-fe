@@ -3,6 +3,8 @@ import Player from './Player'
 import Delay from './Delay'
 import { Icon } from './helpers'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Button from '@material-ui/core/Button'
+import { StylesProvider } from '@material-ui/core/styles'
 
 export default function Ladder(props) {
 
@@ -73,9 +75,9 @@ export default function Ladder(props) {
             )
           }
           <h2 className="matches no-border-dim">Matcher</h2>
-          <div>
+          <div className="matches-insert">
             {
-              matches.map(x => x).reverse().map(({p1slug, p2slug, result, date}) => {
+              matches.map(x => x).reverse().slice(0, 4).map(({p1slug, p2slug, result, date}) => {
                 const find1 = x => x.playerslug === p1slug
                 const find2 = x => x.playerslug === p2slug
                 const name1 = players.find(find1) && players.find(find1).main
@@ -95,6 +97,11 @@ export default function Ladder(props) {
             {
               matches.length === 0 && <div>Inga matcher spelade än...</div>
             }
+            <StylesProvider injectFirst>
+              <Button className="button tiny" variant="contained" color="primary" onClick={ () => { console.log('nej') } }>
+                Mer ...
+              </Button>
+            </StylesProvider>
           </div>
           <h2 className="matches">VÄLKOMNA BUTTON MASHERS!</h2>
           <p>Vill du öva på dina 1 frame links, wiff punishes, short jump bair combos, okizeme eller bara ha de kul å spela lite smash?

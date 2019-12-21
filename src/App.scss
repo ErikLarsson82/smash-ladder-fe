@@ -380,6 +380,14 @@ p {
   background-repeat: no-repeat;
 }
 
+.matches-insert {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 700px;
+  align-items: baseline;
+}
+
 .challonge-container {
   display: flex;
   justify-content: space-between;
