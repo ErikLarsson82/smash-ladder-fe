@@ -49,11 +49,13 @@ export default class Challonge extends React.Component {
 
       if (fight) {
 
-        //startAnimation()
+        setTimeout(() => {
+          startAnimation()        
+        }, 250)
 
         setTimeout(() => {
           createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
-        }, 250)
+        }, 2250)
 
       } else {
         scheduleFight(p1slug, p2slug)

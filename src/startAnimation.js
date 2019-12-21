@@ -1,23 +1,24 @@
 import * as PIXI from 'pixi.js'
 import * as TWEEN from 'tween.js'
 
-let app, centerX, centerY
+let app, stop, centerX, centerY
 
 function setupAnimation() {
   centerX = Math.round(window.innerWidth / 2)
   centerY = Math.round(window.innerHeight / 2)
+  stop = false
   blackrect()
   gameLoop()
 }
 
 function gameLoop(time) {
+  if (stop) return
   requestAnimationFrame(gameLoop)
   TWEEN.update(time)
 }
 
 function cleanup() {
-  // eslint-disable-next-line
-  gameLoop = () => {}
+  stop = true
   app.view.remove()
 }
 
