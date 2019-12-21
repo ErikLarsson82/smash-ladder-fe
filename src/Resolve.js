@@ -70,7 +70,7 @@ export default function Resolve(props) {
         <h2>{ scoreSet }</h2>
       </div>
       <StylesProvider injectFirst>
-        <Button className="button" variant="contained" color="primary" onClick={ done }>
+        <Button className="button" variant="contained" color="primary" disabled={!(valid && winner)} onClick={ done }>
           Ok
         </Button>
       </StylesProvider>
