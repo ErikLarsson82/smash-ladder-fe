@@ -46,6 +46,7 @@ export default function Ladder(props) {
           {
             schedule.map(x => x).reverse().map(x => (
               <ScheduledMatchCard
+                key={`${x.p1slug}-${x.p2slug}-${x.date}`}
                 {...x}
                 createCandidate={createCandidate}
                 setscreen={setscreen}
