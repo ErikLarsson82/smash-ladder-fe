@@ -1,6 +1,7 @@
 import React from 'react'
 import Player from './Player'
 import Delay from './Delay'
+import ScheduledMatchCard from './ScheduledMatchCard'
 import { Icon } from './helpers'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
@@ -43,7 +44,17 @@ export default function Ladder(props) {
         <div className="feed">
           <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
           {
-            schedule.map(x => x).reverse().map(({p1slug, p2slug, date}, idx, list) => {
+            schedule.map(x => x).reverse().map(x => (
+              <ScheduledMatchCard
+                {...x}
+                createCandidate={createCandidate}
+                setscreen={setscreen}
+                players={players} />
+            ))
+          }
+          {
+            /*
+            schedule.map(x => x).reverse().map(({p1slug, p2slug, date}) => {
               const now = new Date().getTime()
               const fadeIn = now - new Date(date).getTime() < 5000 ? 'fade-in shake' : ''
               const callback = () => createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
@@ -58,6 +69,7 @@ export default function Ladder(props) {
                 </div>
               )
             })
+            */
           }
           {
             players.length === 0 && !error && (

@@ -194,13 +194,57 @@ p {
   margin-bottom: 10px;
 }
 
-.match-boxmatch-box {
-  width: 100%;
-  padding: 12px;
+.match-card {
+  cursor: pointer;
+  position: relative;
+  width: 490px;
+  height: 100px;
+  margin: 8px;
+  box-shadow: 0px 0px 12px 0px #c500d6;
+  background: rgba(70, 0, 59, 0.5);
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-top: 26px;
+}
+
+.match-card-character {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.match-card-character.left {
+  top: -19px;
+  left: 5px;
+}
+
+.match-card-character.right {
+  bottom: -10px;
+  right: 3px;
+}
+
+.match-card-name {
+  position: absolute;
+  font-size: 17px;
+  background: rgba(0,0,0, 0.5);
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 18px;
+}
+
+.match-card-name.p1 {
+  bottom: 7px;
+  left: 10px;
+}
+
+.match-card-name.p2 {
+  top: 5px;
+  right: 5px;
+}
+
+.match-card-vs-logo {
+  width: 60px;
+  height: 60px;
 }
 
 .banner-container {
