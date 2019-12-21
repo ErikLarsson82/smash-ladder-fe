@@ -89,6 +89,10 @@ p {
   font-size: 12px;
 }
 
+.button.tight {
+  margin: 0;
+}
+
 #root {
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 19, 1) 800px, rgba(0, 0, 19, 1) 70%, rgba(222, 56, 107, 1) 100%);
 }
@@ -473,6 +477,7 @@ p {
 }
 
 .feed {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -480,6 +485,23 @@ p {
   font-size: x-large;
   margin-left: 80px;
   margin-right: 80px;
+}
+
+.add {
+  cursor: pointer;
+  position: absolute;
+  top: 236px;
+  right: 46px;
+  font-size: 60px;
+  fill: white;
+  /*
+  background: #360340;
+  border-radius: 60px;
+  */
+}
+
+.add:hover {
+  fill: #99f0ff;
 }
 
 .odd, .even {

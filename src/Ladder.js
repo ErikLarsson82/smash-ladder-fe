@@ -3,8 +3,10 @@ import Player from './Player'
 import Delay from './Delay'
 import ScheduledMatchCard from './ScheduledMatchCard'
 import { Icon } from './helpers'
+
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { StylesProvider } from '@material-ui/core/styles'
 
 export default function Ladder(props) {
@@ -42,6 +44,9 @@ export default function Ladder(props) {
           </tbody>
         </table>
         <div className="feed">
+          <StylesProvider injectFirst>
+            <AddCircleIcon className="add" boxShadow={3} />
+          </StylesProvider>
           <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
           {
             schedule.map(x => x).reverse().map(x => (

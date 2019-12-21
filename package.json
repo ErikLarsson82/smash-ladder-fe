@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.7.1",
+    "@material-ui/icons": "^4.5.1",
     "fetch": "^1.1.0",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.13.0",

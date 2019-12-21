@@ -16,7 +16,7 @@ export default function ScheduledMatchCard(props) {
   const classNames = ['match-card'].concat(fadeIn).join(' ')
 
   return (
-    <div onClick={callback} className={classNames} key={`${p1slug}-${p2slug}-${date}`}>
+    <div onClick={callback} className={classNames}>
       <div className="match-card-name p1">{name1}</div>
       <div className="match-card-name p2">{name2}</div>
       <img alt="p1" src="battle-stance/rightfacing/ike.png" className="match-card-character left" />
