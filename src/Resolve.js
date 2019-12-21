@@ -44,31 +44,25 @@ export default function Resolve(props) {
   return (
     <div className="resolvefight vertical-spacer">
       <Back setscreen={setscreen} />
-      <div className="centered small">
-        <h1>Rapportera</h1>
+      <h1>Rapportera</h1>
+      <div className="matchup-large-portraits">
+        <img alt="p1" onClick={() => set('p1')} src={ imgLeft } className={ ['character-portrait', valid && winner === 'p2' ? 'dim' : ''].join(' ')} />
+        <img alt="p2" onClick={() => set('p2')} src={ imgRight } className={ ['character-portrait', valid && winner === 'p1' ? 'dim' : ''].join(' ')} />
       </div>
-      <div className="large">
-        <input type="button" value="Reset" onClick={reset} />
-        <div className="matchup-large-portraits">
-          <img alt="p1" onClick={() => set('p1')} src={ imgLeft } className={ ['character-portrait', valid && winner === 'p2' ? 'dim' : ''].join(' ')} />
-          <img alt="p2" onClick={() => set('p2')} src={ imgRight } className={ ['character-portrait', valid && winner === 'p1' ? 'dim' : ''].join(' ')} />
-        </div>
-      </div>
-      <div className="matchup-icons">
-        {
-          result.map((player, idx) =>
-              player === 'p1'
-                ? <div key={`${player}-${idx}`} className="left-icon"><Icon name={players.find(x => x.playerslug === p1slug).main} /></div>
-                : <div key={`${player}-${idx}`} className="right-icon"><Icon name={players.find(x => x.playerslug === p2slug).main} /></div>
-          )
-        }
-      </div>
-      <div className="winner-text">
-        <h2>{ (valid && winner && `Vinnare: ${name} med ${main}`) || `Vem vann?`}</h2>
-      </div>
-      <div className="scoreset">
-        <h2>{ scoreSet }</h2>
-      </div>
+      <input type="button" value="Reset" onClick={reset} />
+      {
+        new Array(3).fill().map((_, idx) => {
+          const player = result[idx]
+          if (!player) return <div className="icon-placeholder" />
+          const classNames = ["resolve-icon"].concat(idx !== 0 ? 'middle' : '')
+          return player === 'p1'
+              ? <div key={`${player}-${idx}`} className={classNames.concat('left').join(' ')}><Icon large name={players.find(x => x.playerslug === p1slug).main} /></div>
+              : <div key={`${player}-${idx}`} className={classNames.concat('right').join(' ')}><Icon large name={players.find(x => x.playerslug === p2slug).main} /></div>
+          }
+        )
+      }
+      <h2>{ (valid && winner && `Vinnare: ${name} med ${main}`) || `Vem vann?`}</h2>
+      <h1>{ scoreSet }</h1>
       <StylesProvider injectFirst>
         <Button className="button" variant="contained" color="primary" disabled={!(valid && winner)} onClick={ done }>
           Ok
