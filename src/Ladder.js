@@ -45,7 +45,7 @@ export default function Ladder(props) {
         </table>
         <div className="feed">
           <StylesProvider injectFirst>
-            <AddCircleIcon className="add" boxShadow={3} />
+            <AddCircleIcon className="add" />
           </StylesProvider>
           <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
           {
