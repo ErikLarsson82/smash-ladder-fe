@@ -33,7 +33,7 @@ export default function Resolve(props) {
       date: new Date().toISOString()
     }
     resolvefight(fight)
-      .then(() => setscreen('LADDER'))
+      .then(() => setscreen('DASHBOARD'))
   }
 
   const { name, main } = players.find(x => x.playerslug === (winner === 'p1' ? p1slug : p2slug))

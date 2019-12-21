@@ -59,7 +59,7 @@ export default class Challonge extends React.Component {
 
       } else {
         scheduleFight(p1slug, p2slug)
-          .then(() => setscreen('LADDER'))
+          .then(() => setscreen('DASHBOARD'))
       }
     }
 
@@ -148,6 +148,14 @@ export default class Challonge extends React.Component {
               <StylesProvider injectFirst>
                 <Button className="button" variant="contained" color="primary" disabled={ !showFight } onClick={ done }>
                   Slåss
+                </Button>
+              </StylesProvider>
+            )
+          }
+          { !derp && (
+              <StylesProvider injectFirst>
+                <Button className="button" variant="contained" color="primary" disabled={ !showFight } onClick={ done }>
+                  Boka
                 </Button>
               </StylesProvider>
             )

@@ -2,7 +2,7 @@ import React from 'react'
 import fetch from 'node-fetch'
 import './App.scss'
 import './animations.css'
-import Ladder from './Ladder'
+import Dashboard from './Dashboard'
 import Challonge from './Challonge'
 import Resolve from './Resolve'
 
@@ -16,7 +16,7 @@ class App extends React.Component {
       players: [],
       matches: [],
       schedule: [],
-      screen: 'LADDER',
+      screen: 'DASHBOARD',
       resolveCandidate: null,
       error: null,
       highlight: [null, 'null', ''].indexOf(document.cookie) !== -1 ? null : document.cookie,
@@ -132,9 +132,9 @@ class App extends React.Component {
       highlight
     } = this.state
 
-    if (screen === 'LADDER') {
+    if (screen === 'DASHBOARD') {
       return (
-        <Ladder
+        <Dashboard
           schedule={schedule}
           matches={matches}
           players={players}

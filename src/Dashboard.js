@@ -6,10 +6,10 @@ import { Icon } from './helpers'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import AddCircleIcon from '@material-ui/icons/AddCircle'
 import { StylesProvider } from '@material-ui/core/styles'
 
-export default function Ladder(props) {
+export default function Dashboard(props) {
 
   const { schedule, matches, players, setscreen, error, highlight, highlightPlayer, createCandidate } = props
 
@@ -45,7 +45,7 @@ export default function Ladder(props) {
         </table>
         <div className="feed">
           <StylesProvider injectFirst>
-            <AddCircleIcon className="add" />
+            <AddCircleIcon onClick={ () => setscreen('CHALLONGE') } className="add" />
           </StylesProvider>
           <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
           {
