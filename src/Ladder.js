@@ -2,6 +2,7 @@ import React from 'react'
 import Player from './Player'
 import Delay from './Delay'
 import { Icon } from './helpers'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 export default function Ladder(props) {
 
@@ -59,7 +60,8 @@ export default function Ladder(props) {
           {
             players.length === 0 && !error && (
               <div className="loading">
-                Laddar spelare...... undrar vart Mega Man är på listan?
+                Laddar spelare...<CircularProgress className="main-loader" color="secondary" /><br /><br />
+                ...undrar vart Mega Man är på listan?
               </div>
             )
           }
