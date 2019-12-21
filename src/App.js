@@ -132,10 +132,8 @@ class App extends React.Component {
       highlight
     } = this.state
 
-    let screenContent
-
     if (screen === 'LADDER') {
-      screenContent = (
+      return (
         <Ladder
           schedule={schedule}
           matches={matches}
@@ -151,7 +149,7 @@ class App extends React.Component {
         )
     }
     if (screen === 'CHALLONGE') {
-      screenContent = (
+      return (
         <Challonge
           players={players}
           fight
@@ -163,7 +161,7 @@ class App extends React.Component {
       )
     }
     if (screen === 'SCHEDULE') {
-      screenContent = (
+      return (
         <Challonge
           players={players}
           setscreen={this.setscreen}
@@ -173,7 +171,7 @@ class App extends React.Component {
       )
     }
     if (screen === 'RESOLVE') {
-      screenContent = (
+      return (
         <Resolve
           players={players}
           setscreen={this.setscreen}
@@ -181,12 +179,6 @@ class App extends React.Component {
           resolveCandidate={resolveCandidate} />
       )
     }
-
-    return (
-      [
-        screenContent
-      ]
-    )
   }
 }
 

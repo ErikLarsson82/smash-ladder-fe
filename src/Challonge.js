@@ -2,6 +2,10 @@ import React from 'react'
 import { slug, getPlayerAbove, Icon } from './helpers'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Back from './Back'
+import Button from '@material-ui/core/Button'
+import { StylesProvider } from '@material-ui/core/styles'
+
+// eslint-disable-next-line
 import startAnimation from './startAnimation'
 
 export default class Challonge extends React.Component {
@@ -16,7 +20,8 @@ export default class Challonge extends React.Component {
 
     this.state = {
       p1slug: p1slug,
-      p2slug: p2slug
+      p2slug: p2slug,
+      spam: false
     }
   }
 
@@ -31,20 +36,22 @@ export default class Challonge extends React.Component {
 
   render() {
     const { fight, players, setscreen, scheduleFight, createCandidate, network } = this.props
-    const { p1slug, p2slug } = this.state
+    const { p1slug, p2slug, spam } = this.state
 
     const showFight = p1slug && p2slug && (p1slug !== p2slug)
 
     const done = () => {
-      if (network) return
+      if (network || spam) return
+
+      this.setState({spam: true})
 
       if (fight) {
 
         //startAnimation()
 
-        //setTimeout(() => {
+        setTimeout(() => {
           createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
-        //}, 2000)
+        }, 250)
 
       } else {
         scheduleFight(p1slug, p2slug)
@@ -132,11 +139,11 @@ export default class Challonge extends React.Component {
               <CircularProgress className="loader-position" color="secondary" />
             )
           }
-          <img
-            src="fight.png"
-            alt="Slåss"
-            className={ [showFight ? '' : 'invisible', 'button'].join(' ') }
-            onClick={ done } />
+          <StylesProvider injectFirst>
+            <Button className="button" variant="contained" color="primary" onClick={ done }>
+              Slåss
+            </Button>
+          </StylesProvider>
         </div>
       </div>
     )
