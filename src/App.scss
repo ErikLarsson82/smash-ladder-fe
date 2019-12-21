@@ -71,6 +71,11 @@ p {
   color: #ff0076;
 }
 
+.button.tiny {
+  margin: 3px;
+  font-size: 12px;
+}
+
 #root {
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 19, 1) 800px, rgba(0, 0, 19, 1) 70%, rgba(222, 56, 107, 1) 100%);
 }
@@ -315,11 +320,17 @@ p {
   margin-bottom: 17px;
 }
 
-.vertical-spacer {
+.fit-to-screen-height {
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.last {
+  margin-bottom: 70px;
 }
 
 .small {
@@ -336,6 +347,11 @@ p {
   justify-content: space-between;
 }
 
+.matchup-large-portraits > img {
+  width: 375px;
+  height: 375px;
+}
+
 .matchup-icons {
   flex-basis: 200px;
   min-width: 1000px;
@@ -346,11 +362,6 @@ p {
   flex-basis: 60px;
 }
 
-.matchup-large-portraits > img {
-  width: 400px;
-  height: 400px;
-}
-
 .scoreset {
   h1 {
     font-size: 100px;
@@ -359,8 +370,6 @@ p {
 
 .challonge {
   background-color: #000900;
-  width: 100%;
-  height: 100vh;
   background-image: url(images/background-blue.png);
   background-size: cover;
   background-repeat: no-repeat;
@@ -491,8 +500,6 @@ p {
 
 
 .resolvefight {
-  width: 100%;
-  height: 100vh;
   background: #0a0200;
   background-image: url(images/background-green.jpg);
   background-size: contain;
@@ -533,8 +540,9 @@ p {
 }
 
 .resolve-icon {
-  height: 70px;
-  margin: 5px;
+  background: rgba(0, 0, 0, 0.6);
+  height: 80px;
+  margin: 0px;
   display: flex;
   flex-direction: column;    
   justify-content: center;
@@ -545,18 +553,18 @@ p {
 }
 
 .resolve-icon.left {
-  padding-right: 33%;
+  padding-right: 490px;
   padding-left: 30px;
 }
 
 .resolve-icon.right {
-  padding-left: 33%;
+  padding-left: 490px;
   padding-right: 30px;
 }
 
 .icon-placeholder {
-  height: 70px;
-  margin: 5px;
+  height: 80px;
+  margin: 0px;
 }
 
 @media only screen and (max-width: 1300px) {

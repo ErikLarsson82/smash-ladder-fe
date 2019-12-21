@@ -62,7 +62,7 @@ export default class Challonge extends React.Component {
     }
 
     return (
-      <div className="challonge vertical-spacer">
+      <div className="challonge fit-to-screen-height">
         <Back setscreen={setscreen} />
         <h1 className="centered small">
           {

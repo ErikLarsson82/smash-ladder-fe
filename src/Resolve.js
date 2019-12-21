@@ -42,14 +42,18 @@ export default function Resolve(props) {
   const imgRight = `battle-stance/leftfacing/${slug(players.find(x => x.playerslug === p2slug).main)}.png`
 
   return (
-    <div className="resolvefight vertical-spacer">
+    <div className="resolvefight fit-to-screen-height">
       <Back setscreen={setscreen} />
       <h1>Rapportera</h1>
       <div className="matchup-large-portraits">
         <img alt="p1" onClick={() => set('p1')} src={ imgLeft } className={ ['character-portrait', valid && winner === 'p2' ? 'dim' : ''].join(' ')} />
         <img alt="p2" onClick={() => set('p2')} src={ imgRight } className={ ['character-portrait', valid && winner === 'p1' ? 'dim' : ''].join(' ')} />
       </div>
-      <input type="button" value="Reset" onClick={reset} />
+      <StylesProvider injectFirst>
+        <Button className="button tiny" variant="contained" color="primary" disabled={result.length === 0} onClick={ reset }>
+          Nollställ
+        </Button>
+      </StylesProvider>
       {
         new Array(3).fill().map((_, idx) => {
           const player = result[idx]
@@ -61,10 +65,10 @@ export default function Resolve(props) {
           }
         )
       }
-      <h2>{ (valid && winner && `Vinnare: ${name} med ${main}`) || `Vem vann?`}</h2>
+      <h2>{ (valid && winner && `${name} med ${main}`) || `Vem vann?`}</h2>
       <h1>{ scoreSet }</h1>
       <StylesProvider injectFirst>
-        <Button className="button" variant="contained" color="primary" disabled={!(valid && winner)} onClick={ done }>
+        <Button className="button last" variant="contained" color="primary" disabled={!(valid && winner)} onClick={ done }>
           Ok
         </Button>
       </StylesProvider>
