@@ -26,6 +26,10 @@ h1 {
   margin: 0;
 }
 
+.MuiButton-contained.Mui-disabled {
+  opacity: 0.1;
+}
+
 .button {
   margin: 10px;
   font-size: 50px;
@@ -45,6 +49,15 @@ h1 {
 }
 
 h2 {
+  text-transform: uppercase;
+  background: linear-gradient(to bottom, #000000 0%, #03b3e4 25%, #FFFFFF 49%, #000000 50%, #e51f80 75%, #FFFFFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 50px;
+  font-family: 'Audiowide', cursive;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: #bafcff;
+  font-weight: normal;
   padding: 0;
   margin: 0;
 }

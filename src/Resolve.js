@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Back from './Back'
 import { slug, Icon } from './helpers'
+import Button from '@material-ui/core/Button'
+import { StylesProvider } from '@material-ui/core/styles'
 
 export default function Resolve(props) {
   const { resolvefight, setscreen, resolveCandidate, players } = props
@@ -43,7 +45,7 @@ export default function Resolve(props) {
     <div className="resolvefight vertical-spacer">
       <Back setscreen={setscreen} />
       <div className="centered small">
-        <h1>Registrera matchresultat</h1>
+        <h1>Rapportera</h1>
       </div>
       <div className="large">
         <input type="button" value="Reset" onClick={reset} />
@@ -62,18 +64,16 @@ export default function Resolve(props) {
         }
       </div>
       <div className="winner-text">
-        <h1>{ (valid && winner && `Vinnare: ${name} med ${main}`) || `Vem vann?`}</h1>
+        <h2>{ (valid && winner && `Vinnare: ${name} med ${main}`) || `Vem vann?`}</h2>
       </div>
       <div className="scoreset">
-        <h1>{ scoreSet }</h1>
+        <h2>{ scoreSet }</h2>
       </div>
-      <div className="centered small">
-        {
-          valid && winner && (
-            <img alt="resolve" onClick={done} key="resolve" src="resolve.png" />
-          )
-        }
-      </div>
+      <StylesProvider injectFirst>
+        <Button className="button" variant="contained" color="primary" onClick={ done }>
+          Ok
+        </Button>
+      </StylesProvider>
     </div>
   )
 }

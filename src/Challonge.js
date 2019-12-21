@@ -40,6 +40,8 @@ export default class Challonge extends React.Component {
 
     const showFight = p1slug && p2slug && (p1slug !== p2slug)
 
+    const derp = (p1slug) && (p2slug) && (p1slug === p2slug)
+
     const done = () => {
       if (network || spam) return
 
@@ -130,7 +132,7 @@ export default class Challonge extends React.Component {
         </div>
         <div className="centered fixed relative small">
           {
-            (p1slug) && (p2slug) && (p1slug === p2slug) && (
+            derp && (
               <img className="derp" src="spicy-memelord.png" alt="Till dig batsis ;)" />
             )
           }
@@ -139,15 +141,17 @@ export default class Challonge extends React.Component {
               <CircularProgress className="loader-position" color="secondary" />
             )
           }
-          <StylesProvider injectFirst>
-            <Button className="button" variant="contained" color="primary" onClick={ done }>
-              Slåss
-            </Button>
-          </StylesProvider>
+          { !derp && (
+              <StylesProvider injectFirst>
+                <Button className="button" variant="contained" color="primary" disabled={ !showFight } onClick={ done }>
+                  Slåss
+                </Button>
+              </StylesProvider>
+            )
+          }
         </div>
       </div>
     )
   }
-
 }
 
