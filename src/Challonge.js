@@ -40,11 +40,11 @@ export default class Challonge extends React.Component {
 
       if (fight) {
 
-        startAnimation()
+        //startAnimation()
 
-        setTimeout(() => {
+        //setTimeout(() => {
           createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
-        }, 2000)
+        //}, 2000)
 
       } else {
         scheduleFight(p1slug, p2slug)
@@ -55,13 +55,13 @@ export default class Challonge extends React.Component {
     return (
       <div className="challonge vertical-spacer">
         <Back setscreen={setscreen} />
-        <div className="centered small">
+        <h1 className="centered small">
           {
             fight
-              ? 'Slåss'
+              ? 'Utmaning'
               : 'Schemalägg'
           }
-        </div>
+        </h1>
         <div className="challonge-container large">
           <table className="challange-player-list">
             <tbody>
