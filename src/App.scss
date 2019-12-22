@@ -422,8 +422,7 @@ p {
 .content-separator {
   display: flex;
   flex-direction: row-reverse;
-  width: 80%;
-  max-width: 1300px;
+  justify-content: space-evenly;
   padding-top: 20px;
 }
 
@@ -433,7 +432,7 @@ p {
   box-shadow: 0px 0px 12px 0px rgba(0,157,214,1);
 
   min-width: 530px;
-  flex-basis: 40%;
+  max-width: 40%;
 
   td, th {
     padding: 10px;
@@ -458,10 +457,8 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-basis: 60%;
+  flex-basis: 600px;
   font-size: x-large;
-  margin-left: 80px;
-  margin-right: 80px;
 }
 
 .add {
@@ -612,24 +609,19 @@ p {
   margin: 0px;
 }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1400px) {
   .content-separator {
     flex-direction: column;
     align-items: center;
-    width: 100%;
     font-size: larger;
   }
 
   .players {
-    width: 70%;
-  }
-
-  #root {
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 19, 1) 500px, rgba(0, 0, 19, 1) 70%, rgba(222, 56, 107, 1) 100%);
+    max-width: unset;
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
   .players {
     width: 100%;
   }
@@ -643,8 +635,18 @@ p {
     padding-left: 0px;
     padding-right: 0px;
   }
+}
 
-  #root {
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 19, 1) 350px, rgba(0, 0, 19, 1) 70%, rgba(222, 56, 107, 1) 100%);
+@media only screen and (max-width: 690px) {
+  .players td {
+    font-size: 14px;
+    width: auto;
+    padding: 0;
+    margin: 0;
+  }
+  .players {
+    max-width: initial;
+    min-width: initial;
+    width: initial;
   }
 }
