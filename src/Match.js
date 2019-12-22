@@ -18,7 +18,7 @@ export default function Match(props) {
       </div>
       <div className="score-box">
         <Trend amount={p1trend} />
-        {`${result.filter(x=>x==='p1').length}-${result.filter(x=>x==='p2').length}`}
+        {`${result.filter(x=>x==='p1').length} - ${result.filter(x=>x==='p2').length}`}
         <Trend amount={p2trend} />
       </div>
     </div>
