@@ -344,6 +344,27 @@ p {
   height: 84px;
 }
 
+.unchanged {
+  opacity: 0.4;
+  font-size: 18px;
+}
+
+.trend-up {
+  fill: #00ff00;
+}
+
+.double-up {
+  transform: rotate(-90deg);
+}
+
+.double-down {
+  transform: rotate(90deg);
+}
+
+.trend-down {
+  fill: red;
+}
+
 .back {
   position: absolute;
   top: 20px;
@@ -403,6 +424,10 @@ p {
   h1 {
     font-size: 100px;
   }
+}
+
+.center {
+  text-align: center;
 }
 
 .matches-insert {
