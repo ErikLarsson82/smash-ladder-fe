@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 import * as TWEEN from 'tween.js'
 
-let app, stop, centerX, centerY
+let app, player1, player2, stop, centerX, centerY
 
 function setupAnimation() {
   centerX = Math.round(window.innerWidth / 2)
@@ -214,7 +214,10 @@ function delayThree() {
     .onComplete(cleanup)
 }
 
-export default function startAnimation() {
+export default function startAnimation(_p1, _p2) {
+
+  player1 = _p1
+  player2 = _p2
 
   const config = {
     width: window.innerWidth + 20,

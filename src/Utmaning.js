@@ -57,7 +57,9 @@ export default class Utmaning extends React.Component {
       this.setState({spam: true})
 
       setTimeout(() => {
-        startAnimation()        
+        const p1 = players.find(x => x.playerslug === p1slug) || {}
+        const p2 = players.find(x => x.playerslug === p2slug) || {}
+        startAnimation(p1, p2)
       }, 250)
 
       setTimeout(() => {
