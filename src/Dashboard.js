@@ -2,7 +2,7 @@ import React from 'react'
 import Player from './Player'
 import Delay from './Delay'
 import ScheduledMatchCard from './ScheduledMatchCard'
-import { Icon } from './helpers'
+import Match from './Match'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
@@ -79,22 +79,12 @@ export default function Dashboard(props) {
           <h2 className="matches no-border-dim">Matcher</h2>
           <div className="matches-insert">
             {
-              matches.map(x => x).reverse().slice(0, 4).map(({p1slug, p2slug, result, date}) => {
-                const find1 = x => x.playerslug === p1slug
-                const find2 = x => x.playerslug === p2slug
-                const name1 = players.find(find1) && players.find(find1).main
-                const name2 = players.find(find2) && players.find(find2).main
-                return (
-                  <div className="resolved-container" key={`${p1slug}-${p2slug}-${date}`}>
-                    <div className="icon-box">
-                      <Icon large name={name1} /> vs. <Icon large name={name2} /><br />
-                    </div>
-                    <div className="score-box">
-                      {`${result.filter(x=>x==='p1').length}-${result.filter(x=>x==='p2').length}`}
-                    </div>
-                  </div>
-                )
-              })
+              matches.map(x => x).reverse().slice(0, 4).map(matchData => 
+                <Match
+                  key={`${matchData.p1slug}-${matchData.p2slug}-${matchData.date}`}
+                  matchData={matchData}
+                  players={players} />
+              )
             }
             {
               matches.length === 0 && <div>Inga matcher spelade än...</div>

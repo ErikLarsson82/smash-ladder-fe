@@ -6,7 +6,8 @@ import Dashboard from './Dashboard'
 import Utmaning from './Utmaning'
 import Rapportera from './Rapportera'
 
-const api = 'https://hiqombo-ladder-be.herokuapp.com'
+//const api = 'https://hiqombo-ladder-be.herokuapp.com'
+const api = 'http://localhost'
 
 class App extends React.Component {
   constructor(props) {
