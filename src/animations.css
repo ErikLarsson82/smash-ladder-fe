@@ -45,11 +45,11 @@
 
 @keyframes fadeRowHighlight {
   from {
-    background-color: rgba(95, 158, 160, 0);
-    opacity: 1;
+    background-color: rgba(14, 188, 255, 0);
+    opacity: 0;
   }
   to {
-    background-color: rgba(95, 158, 160, 1);
+    background-color: rgba(14, 188, 255, 1);
     opacity: 1;
   }
 }

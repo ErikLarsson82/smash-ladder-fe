@@ -471,17 +471,19 @@ p {
 }
 
 .fade-in-highlight:hover {
-  background-color: rgb(124, 211, 214);
+  background-color: rgb(6, 86, 117);
+  color: white;
 }
 
 .highlight {
-  background-color: rgba(95, 158, 160, 0);
+  background-color: rgba(14, 188, 255, 0);
   opacity: 0;
 }
 
 .fade-in-highlight {
   animation: fadeRowHighlight 0.5s;
-  background-color: rgba(95, 158, 160, 1);
+  background-color: rgba(14, 188, 255, 1);
+  color: #222222;
   opacity: 1;
 }
 
