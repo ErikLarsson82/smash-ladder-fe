@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js'
 import * as TWEEN from 'tween.js'
+import { slug } from './helpers'
 
 let app, player1, player2, stop, centerX, centerY
 
@@ -66,8 +67,8 @@ function p1() {
     charX: centerX - 400,
     charY: centerY + 340
   }
-  text('Jonas', 'Bowser', '#ff0000', positions)
-  const p1 = new PIXI.Sprite.from('battle-stance/leftfacing/bowser.png')
+  text(player1.name.split(' ')[0], player1.main, '#ff0000', positions)
+  const p1 = new PIXI.Sprite.from(`battle-stance/rightfacing/${slug(player1.main)}.png`)
   p1.x = window.innerWidth
   p1.y = 0
   app.stage.addChild(p1)
@@ -88,8 +89,8 @@ function p2() {
     charX: centerX + 160,
     charY: centerY + 340
   }
-  text('Baran', 'Bowser', '#0000ff', positions)
-  const p2 = new PIXI.Sprite.from('battle-stance/rightfacing/ridly.png')
+  text(player2.name.split(' ')[0], player2.main, '#0000ff', positions)
+  const p2 = new PIXI.Sprite.from(`battle-stance/leftfacing/${slug(player2.main)}.png`)
   p2.x = -850
   p2.y = 0
   app.stage.addChild(p2)
@@ -233,8 +234,8 @@ export default function startAnimation(_p1, _p2) {
   document.body.appendChild(app.view)
 
   app.loader
-    .add('battle-stance/leftfacing/bowser.png')
-    .add('battle-stance/rightfacing/yoshi.png')
+    .add(`battle-stance/rightfacing/${slug(player1.main)}.png`)
+    .add(`battle-stance/leftfacing/${slug(player2.main)}.png`)
     .add('player-versus-player.png')
     .add('ember.png')
     .load(setupAnimation)  
