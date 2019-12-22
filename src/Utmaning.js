@@ -105,7 +105,7 @@ export default class Utmaning extends React.Component {
               <tr>
                 <th className="right">#</th>
                 <th></th>
-                <th>Challanger</th>
+                <th>Challangee</th>
               </tr>
               {
                 players.map(({playerslug, name, main}, idx) => {
