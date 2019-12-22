@@ -16,7 +16,7 @@ export default function Dashboard(props) {
   const circleClasses = ['add'].concat(schedule.length === 0 ? 'lower' : '')
 
   return (
-    <div className="App">
+    <div className="background red">
       <div className="content-separator">
         <table className="players" border="0" cellSpacing="0">
           <thead>

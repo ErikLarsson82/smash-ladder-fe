@@ -68,7 +68,7 @@ export default class Utmaning extends React.Component {
     }
 
     return (
-      <div className="challonge fit-to-screen-height">
+      <div className="fit-to-screen-height background blue">
         <Back setscreen={setscreen} />
         <h1>Utmaning</h1>
         <div className="challonge-container">

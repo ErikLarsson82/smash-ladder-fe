@@ -1,15 +1,12 @@
 body {
   color: #FFFFFF;
-  background-color: black;
+  background: #000019;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   font-family: 'Montserrat', sans-serif;
   font-size: large;
   font-weight: bold;
-  background-image: url(images/background-red.png);
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 h1 {
@@ -60,6 +57,30 @@ p {
   margin-block-end: 0.4em;
 }
 
+.background.red {
+  background: url(images/background-red.png) no-repeat top center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.background.green {
+  background: url(images/background-green.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.background.blue {
+  background: url(images/background-blue.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .main-loader {
   vertical-align: middle;
   margin-left: 50px;
@@ -97,10 +118,6 @@ p {
   margin: 0;
 }
 
-#root {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 19, 1) 800px, rgba(0, 0, 19, 1) 70%, rgba(222, 56, 107, 1) 100%);
-}
-
 .relative {
   position: relative;
 }
@@ -110,12 +127,6 @@ p {
   top: 25px;
   left: 201px;
   pointer-events: none;
-}
-
-.App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .challange-player-list {
@@ -388,13 +399,6 @@ p {
   }
 }
 
-.challonge {
-  background-color: #000900;
-  background-image: url(images/background-blue.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 .matches-insert {
   display: flex;
   flex-direction: row;
@@ -538,14 +542,6 @@ p {
 
 .secondary {
   width: 40px;
-}
-
-
-.resolvefight {
-  background: #0a0200;
-  background-image: url(images/background-green.jpg);
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 .score-box {

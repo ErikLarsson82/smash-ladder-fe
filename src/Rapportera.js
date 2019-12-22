@@ -42,7 +42,7 @@ export default function Rapportera(props) {
   const imgRight = `battle-stance/leftfacing/${slug(players.find(x => x.playerslug === p2slug).main)}.png`
 
   return (
-    <div className="resolvefight fit-to-screen-height">
+    <div className="fit-to-screen-height background green">
       <Back setscreen={setscreen} />
       <h1>Rapportera</h1>
       <div className="matchup-large-portraits">
