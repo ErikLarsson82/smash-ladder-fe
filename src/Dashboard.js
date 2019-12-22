@@ -105,6 +105,8 @@ export default function Dashboard(props) {
             </StylesProvider>
           </div>
           <h2 className="matches">VÄLKOMNA BUTTON MASHERS!</h2>
+          <p>Välkomna till betan av nya stegen. Än så länge testar vi bara sidan så prova att mata in matcher, schemalägg utmaningar och försök att hitta konstiga corner-cases där saker inte fungerar som det är tänkt.</p>
+          <hr />
           <p>Vill du öva på dina 1 frame links, wiff punishes, short jump bair combos, okizeme eller bara ha de kul å spela lite smash?
             <br />Då kan denna grupp vara för dig!
           </p>
