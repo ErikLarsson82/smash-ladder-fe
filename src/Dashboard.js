@@ -13,6 +13,8 @@ export default function Dashboard(props) {
 
   const { schedule, matches, players, setscreen, error, highlight, highlightPlayer, createCandidate } = props
 
+  const circleClasses = ['add'].concat(schedule.length === 0 ? 'lower' : '')
+
   return (
     <div className="App">
       <div className="content-separator">
@@ -45,7 +47,7 @@ export default function Dashboard(props) {
         </table>
         <div className="feed">
           <StylesProvider injectFirst>
-            <AddCircleIcon onClick={ () => setscreen('UTMANING') } className="add" />
+            <AddCircleIcon onClick={ () => setscreen('UTMANING') } className={circleClasses.join(' ')} />
           </StylesProvider>
           <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
           {
