@@ -116,13 +116,6 @@ export default function Dashboard(props) {
         </div>
       </div>
       <div className="footer">Powered by Cargo, Bonko, Kamden and Beibei</div>
-      <div className="icon-row">
-        <div className="menu-icon-container">
-          <img className="menu-icon smash-green" onClick={() => setscreen('UTMANING')} src="boxing-glove.png" alt="Spela match direkt" />
-          <img className="menu-icon smash-blue" onClick={() => setscreen('UTMANING')}  src="scoreboard.png" alt="Schemalägg match" />
-          <img className="menu-icon smash-red" src="gear.png" alt="Inställningar" />
-        </div>
-      </div>
     </div>
   );
 }

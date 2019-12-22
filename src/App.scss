@@ -144,55 +144,6 @@ p {
   }
 }
 
-.menu-icon-container {
-  max-width: 850px;
-  min-width: 850px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.menu-icon {
-  padding: 10px;
-}
-
-.menu-icon:hover {
-  animation: shake 0.32s cubic-bezier(.20,.07,.19,.70) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-  cursor: pointer;
-  background-color: steelblue;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.smash-red:hover {
-  background-color: #e31b25;
-}
-
-.smash-blue:hover {
-  background-color: #0f6eee;
-}
-
-.smash-green:hover {
-  background-color: #24c565;
-}
-
-.smash-yellow:hover {
-  background-color: #eebc0f;
-}
-
-.icon-row {
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  padding: 5px;
-  background-color: cadetblue;
-  display: flex;
-  justify-content: space-around;
-}
-
 .matches {
   margin-top: 20px;
   margin-bottom: 10px;
