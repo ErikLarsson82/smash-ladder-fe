@@ -128,10 +128,10 @@ export default class Utmaning extends React.Component {
             </tbody>
           </table>
         </div>
-        <div>
+        <div className="button-holder">
           {
             derp && (
-              <img className="derp" src="spicy-memelord.png" alt="Till dig batsis ;)" />
+              <img className="derp" src="spicy-memelord.png" alt="Till dig batsis ;)" title="Erumenubatsis!?" />
             )
           }
           {
