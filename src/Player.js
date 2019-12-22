@@ -1,10 +1,6 @@
 import React from 'react'
 import { QcIcon, Mugshot, Icon } from './helpers'
-import KeyboardArrowUpTwoToneIcon from '@material-ui/icons/KeyboardArrowUpTwoTone'
-import KeyboardArrowDownTwoToneIcon from '@material-ui/icons/KeyboardArrowDownTwoTone'
-import ArrowRightAltTwoToneIcon from '@material-ui/icons/ArrowRightAltTwoTone'
-import DoubleArrowIcon from '@material-ui/icons/DoubleArrow'
-import { StylesProvider } from '@material-ui/core/styles'
+import Trend from './Trend'
 
 export default function PlayerRow(props) {
   const { delay, playerslug, name, main, secondary, trend, qc, idx, highlight, highlightPlayer } = props
@@ -27,9 +23,7 @@ export default function PlayerRow(props) {
       className={[startClass].concat(delay ? delayedClass : []).join(' ')}
       onClick={() => highlightPlayer(playerslug)}>
       <td className="center">
-        <StylesProvider injectFirst>
-          {trendIcon(trend)}
-        </StylesProvider>
+        <Trend amount={trend} />
       </td>
       <td><div className="placement">{idx+1}.</div></td>
       <td><Mugshot playerslug={playerslug} />{name}{ qcIcons.length > 0 && qcIcons}</td>
@@ -37,20 +31,4 @@ export default function PlayerRow(props) {
       <td>{secondary && <Icon name={secondary} />}</td>
     </tr>
   )
-}
-
-function trendIcon(trend) {
-  if (trend > 1)
-    return <DoubleArrowIcon className="trend-up double-up" />
-
-  if (trend > 0)
-    return <KeyboardArrowUpTwoToneIcon className="trend-up" />
-
-  if (trend < -1)
-    return <DoubleArrowIcon className="trend-down double-down" />
-
-  if (trend < 0)
-    return <KeyboardArrowDownTwoToneIcon className="trend-down" />
-
-  return <ArrowRightAltTwoToneIcon className="unchanged" />
 }
