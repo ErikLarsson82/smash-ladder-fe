@@ -45,7 +45,7 @@ export default function Dashboard(props) {
         </table>
         <div className="feed">
           <StylesProvider injectFirst>
-            <AddCircleIcon onClick={ () => setscreen('CHALLONGE') } className="add" />
+            <AddCircleIcon onClick={ () => setscreen('UTMANING') } className="add" />
           </StylesProvider>
           <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
           {
@@ -57,25 +57,6 @@ export default function Dashboard(props) {
                 setscreen={setscreen}
                 players={players} />
             ))
-          }
-          {
-            /*
-            schedule.map(x => x).reverse().map(({p1slug, p2slug, date}) => {
-              const now = new Date().getTime()
-              const fadeIn = now - new Date(date).getTime() < 5000 ? 'fade-in shake' : ''
-              const callback = () => createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
-
-              return (
-                <div className="match-box" key={`${p1slug}-${p2slug}-${date}`}>
-                  <div className={ ['banner-container'].concat(fadeIn).join(' ') }>
-                    <img onClick={callback} className="banner" src="banner.png" alt="schedule-banner" />
-                    <div className="banner-p1">{p1slug}</div>
-                    <div className="banner-p2">{p2slug}</div>
-                  </div>
-                </div>
-              )
-            })
-            */
           }
           {
             players.length === 0 && !error && (
@@ -137,8 +118,8 @@ export default function Dashboard(props) {
       <div className="footer">Powered by Cargo, Bonko, Kamden and Beibei</div>
       <div className="icon-row">
         <div className="menu-icon-container">
-          <img className="menu-icon smash-green" onClick={() => setscreen('CHALLONGE')} src="boxing-glove.png" alt="Spela match direkt" />
-          <img className="menu-icon smash-blue" onClick={() => setscreen('SCHEDULE')}  src="scoreboard.png" alt="Schemalägg match" />
+          <img className="menu-icon smash-green" onClick={() => setscreen('UTMANING')} src="boxing-glove.png" alt="Spela match direkt" />
+          <img className="menu-icon smash-blue" onClick={() => setscreen('UTMANING')}  src="scoreboard.png" alt="Schemalägg match" />
           <img className="menu-icon smash-red" src="gear.png" alt="Inställningar" />
         </div>
       </div>

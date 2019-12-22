@@ -8,7 +8,7 @@ import { StylesProvider } from '@material-ui/core/styles'
 // eslint-disable-next-line
 import startAnimation from './startAnimation'
 
-export default class Challonge extends React.Component {
+export default class Utmaning extends React.Component {
   constructor(props) {
     super(props)
 
@@ -35,44 +35,40 @@ export default class Challonge extends React.Component {
   }
 
   render() {
-    const { fight, players, setscreen, scheduleFight, createCandidate, network } = this.props
+    const { players, setscreen, scheduleFight, createCandidate, network } = this.props
     const { p1slug, p2slug, spam } = this.state
 
     const showFight = p1slug && p2slug && (p1slug !== p2slug)
 
     const derp = (p1slug) && (p2slug) && (p1slug === p2slug)
 
-    const done = () => {
+    const book = () => {
+      if (network || spam) return
+
+      this.setState({spam: true})
+      
+      scheduleFight(p1slug, p2slug)
+        .then(() => setscreen('DASHBOARD'))
+    }
+
+    const fight = () => {
       if (network || spam) return
 
       this.setState({spam: true})
 
-      if (fight) {
+      setTimeout(() => {
+        startAnimation()        
+      }, 250)
 
-        setTimeout(() => {
-          startAnimation()        
-        }, 250)
-
-        setTimeout(() => {
-          createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
-        }, 2250)
-
-      } else {
-        scheduleFight(p1slug, p2slug)
-          .then(() => setscreen('DASHBOARD'))
-      }
+      setTimeout(() => {
+        createCandidate(p1slug, p2slug, () => setscreen('RAPPORTERA'))
+      }, 2250)
     }
 
     return (
       <div className="challonge fit-to-screen-height">
         <Back setscreen={setscreen} />
-        <h1>
-          {
-            fight
-              ? 'Utmaning'
-              : 'Schemalägg'
-          }
-        </h1>
+        <h1>Utmaning</h1>
         <div className="challonge-container">
           <table className="challange-player-list">
             <tbody>
@@ -146,7 +142,7 @@ export default class Challonge extends React.Component {
           }
           { !derp && (
               <StylesProvider injectFirst>
-                <Button className="button" variant="contained" color="primary" disabled={ !showFight } onClick={ done }>
+                <Button className="button" variant="contained" color="primary" disabled={ !showFight } onClick={ fight }>
                   Slåss
                 </Button>
               </StylesProvider>
@@ -154,7 +150,7 @@ export default class Challonge extends React.Component {
           }
           { !derp && (
               <StylesProvider injectFirst>
-                <Button className="button" variant="contained" color="primary" disabled={ !showFight } onClick={ done }>
+                <Button className="button" variant="contained" color="primary" disabled={ !showFight } onClick={ book }>
                   Boka
                 </Button>
               </StylesProvider>

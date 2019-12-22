@@ -4,7 +4,7 @@ import { slug, Icon } from './helpers'
 import Button from '@material-ui/core/Button'
 import { StylesProvider } from '@material-ui/core/styles'
 
-export default function Resolve(props) {
+export default function Rapportera(props) {
   const { resolvefight, setscreen, resolveCandidate, players } = props
 
   const [result, setResult] = useState([])

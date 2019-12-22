@@ -5,7 +5,7 @@ export default function ScheduledMatchCard(props) {
 
   const now = new Date().getTime()
   const fadeIn = now - new Date(date).getTime() < 5000 ? 'fade-in shake' : ''
-  const callback = () => createCandidate(p1slug, p2slug, () => setscreen('RESOLVE'))
+  const callback = () => createCandidate(p1slug, p2slug, () => setscreen('RAPPORTERA'))
 
   const find1 = x => x.playerslug === p1slug
   const find2 = x => x.playerslug === p2slug

@@ -3,8 +3,8 @@ import fetch from 'node-fetch'
 import './App.scss'
 import './animations.css'
 import Dashboard from './Dashboard'
-import Challonge from './Challonge'
-import Resolve from './Resolve'
+import Utmaning from './Utmaning'
+import Rapportera from './Rapportera'
 
 const api = 'https://hiqombo-ladder-be.herokuapp.com'
 
@@ -148,9 +148,9 @@ class App extends React.Component {
           highlight={highlight} />
         )
     }
-    if (screen === 'CHALLONGE') {
+    if (screen === 'UTMANING') {
       return (
-        <Challonge
+        <Utmaning
           players={players}
           fight
           setscreen={this.setscreen}
@@ -160,19 +160,9 @@ class App extends React.Component {
           highlight={highlight} />
       )
     }
-    if (screen === 'SCHEDULE') {
+    if (screen === 'RAPPORTERA') {
       return (
-        <Challonge
-          players={players}
-          setscreen={this.setscreen}
-          scheduleFight={this.scheduleFight}
-          network={network}
-          highlight={highlight} />
-      )
-    }
-    if (screen === 'RESOLVE') {
-      return (
-        <Resolve
+        <Rapportera
           players={players}
           setscreen={this.setscreen}
           resolvefight={this.resolvefight}
