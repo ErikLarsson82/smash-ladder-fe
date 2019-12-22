@@ -2,7 +2,7 @@ import React from 'react'
 import { QcIcon, Mugshot, Icon } from './helpers'
 
 export default function PlayerRow(props) {
-  const { delay, playerslug, name, main, secondary, qc, idx, highlight, highlightPlayer } = props
+  const { delay, playerslug, name, main, secondary, trend, qc, idx, highlight, highlightPlayer } = props
   const hasHighlight = playerslug === highlight
   const qcIcons = qc.map(x => <QcIcon key={`${name}-${x}`} place={x} />)
   const odd = idx % 2 === 0
@@ -21,6 +21,7 @@ export default function PlayerRow(props) {
     <tr
       className={[startClass].concat(delay ? delayedClass : []).join(' ')}
       onClick={() => highlightPlayer(playerslug)}>
+      <td>{trend}</td>
       <td><div className="placement">{idx+1}.</div></td>
       <td><Mugshot playerslug={playerslug} />{name}{ qcIcons.length > 0 && qcIcons}</td>
       <td><Icon name={main} /></td>

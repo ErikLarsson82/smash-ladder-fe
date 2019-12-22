@@ -21,6 +21,7 @@ export default function Dashboard(props) {
         <table className="players" border="0" cellSpacing="0">
           <thead>
           <tr>
+            <th className="trend">Trend</th>
             <th className="place"><div className="placement">#</div></th>
             <th className="player">Spelare</th>
             <th className="main">Main</th>
