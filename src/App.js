@@ -35,6 +35,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    window.addEventListener('keydown', e => {
+      e.keyCode === 13
+        ? this.setState({ schedule: [{p1slug: "alexander-batsis", p2slug: "mattias-backstrom", date: new Date().toISOString()}]})
+        : this.setState({ schedule: [] })
+    })
     this.useApi('matches')
     this.useApi('schedule')
     this.useApi('players')

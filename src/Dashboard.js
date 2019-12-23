@@ -3,6 +3,7 @@ import Player from './Player'
 import Delay from './Delay'
 import ScheduledMatchCard from './ScheduledMatchCard'
 import Match from './Match'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
@@ -11,9 +12,23 @@ import { StylesProvider } from '@material-ui/core/styles'
 
 export default function Dashboard(props) {
 
-  const { schedule, matches, players, setscreen, error, highlight, highlightPlayer, createCandidate } = props
+  const { 
+    schedule,
+    matches,
+    players,
+    setscreen,
+    error,
+    highlight,
+    highlightPlayer,
+    createCandidate
+  } = props
 
   const circleClasses = ['add'].concat(schedule.length === 0 ? 'lower' : '')
+
+  const fresh = matchData => {
+    const now = new Date().getTime()
+    return now - new Date(matchData.date).getTime() < 1000
+  }
 
   return (
     <div className="dashboard background red">
@@ -51,16 +66,19 @@ export default function Dashboard(props) {
             <AddCircleIcon onClick={ () => setscreen('UTMANING') } className={circleClasses.join(' ')} />
           </StylesProvider>
           <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
-          {
-            schedule.map(x => x).reverse().map(x => (
-              <ScheduledMatchCard
-                key={`${x.p1slug}-${x.p2slug}-${x.date}`}
-                {...x}
-                createCandidate={createCandidate}
-                setscreen={setscreen}
-                players={players} />
-            ))
-          }
+          <TransitionGroup component={null}>
+            {
+              schedule.map(x => x).reverse().map(matchData => (
+                <CSSTransition classNames={fresh(matchData) ? 'fader-new' : 'fader-old' } timeout={700} key={`${matchData.p1slug}-${matchData.p2slug}-${matchData.date}-schedule`}>
+                    <ScheduledMatchCard
+                      {...matchData}
+                      createCandidate={createCandidate}
+                      setscreen={setscreen}
+                      players={players} />
+                </CSSTransition>
+              ))
+            }
+          </TransitionGroup>
           {
             players.length === 0 && !error && (
               <div className="loading">
@@ -78,23 +96,26 @@ export default function Dashboard(props) {
           }
           <h2 className="matches no-border-dim">Matcher</h2>
           <div className="matches-insert">
+            <TransitionGroup component={null}>
             {
-              matches.map(x => x).reverse().slice(0, 4).map(matchData => 
-                <Match
-                  key={`${matchData.p1slug}-${matchData.p2slug}-${matchData.date}`}
-                  matchData={matchData}
-                  players={players} />
+              matches.map(x => x).reverse().slice(0, 5).map(matchData => 
+                <CSSTransition classNames={fresh(matchData) ? 'fader-new-delayed' : '' } timeout={1400} key={`${matchData.p1slug}-${matchData.p2slug}-${matchData.date}-match`}>
+                  <Match
+                    matchData={matchData}
+                    players={players} />
+                </CSSTransition>
               )
             }
+            </TransitionGroup>
             {
               matches.length === 0 && <div>Inga matcher spelade än...</div>
             }
-            <StylesProvider injectFirst>
-              <Button className="button tiny" variant="contained" color="primary" onClick={ () => { console.log('nej') } }>
-                Mer ...
-              </Button>
-            </StylesProvider>
           </div>
+          <StylesProvider injectFirst>
+            <Button className="button tiny" variant="contained" color="primary" onClick={ () => { console.log('nej') } }>
+              Mer ...
+            </Button>
+          </StylesProvider>
           <h2 className="matches">VÄLKOMNA BUTTON MASHERS!</h2>
           <p>Välkomna till betan av nya stegen. Än så länge testar vi bara sidan så prova att mata in matcher, schemalägg utmaningar och försök att hitta konstiga corner-cases där saker inte fungerar som det är tänkt.</p>
           <hr />
