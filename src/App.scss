@@ -320,6 +320,14 @@ p {
   padding-right: 6px;
   vertical-align: middle;
   margin-top: -2px;
+  position: absolute;
+}
+
+.character-icon.shadow {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  filter: blur(5px);
 }
 
 .mugshot {

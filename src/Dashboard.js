@@ -101,6 +101,7 @@ export default function Dashboard(props) {
               matches.map(x => x).reverse().slice(0, 4).map(matchData => 
                 <CSSTransition classNames={fresh(matchData) ? 'fader-new-delayed' : '' } timeout={1400} key={`${matchData.p1slug}-${matchData.p2slug}-${matchData.date}-match`}>
                   <Match
+                    highlight={highlight}
                     matchData={matchData}
                     players={players} />
                 </CSSTransition>
