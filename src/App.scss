@@ -434,12 +434,12 @@ p {
 .matches-insert {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  width: 700px;
+  justify-content: space-between;
+  width: 600px;
   align-items: baseline;
 }
 
-.matches-insert > div:nth-child(6) { 
+.matches-insert > div:nth-child(5) { 
   display: none;
 }
 

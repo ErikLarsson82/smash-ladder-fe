@@ -98,7 +98,7 @@ export default function Dashboard(props) {
           <div className="matches-insert">
             <TransitionGroup component={null}>
             {
-              matches.map(x => x).reverse().slice(0, 5).map(matchData => 
+              matches.map(x => x).reverse().slice(0, 4).map(matchData => 
                 <CSSTransition classNames={fresh(matchData) ? 'fader-new-delayed' : '' } timeout={1400} key={`${matchData.p1slug}-${matchData.p2slug}-${matchData.date}-match`}>
                   <Match
                     matchData={matchData}
