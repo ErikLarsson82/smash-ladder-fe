@@ -6,8 +6,8 @@ import Dashboard from './Dashboard'
 import Utmaning from './Utmaning'
 import Rapportera from './Rapportera'
 
-const api = 'https://hiqombo-ladder-be.herokuapp.com'
-//const api = 'http://localhost'
+//const api = 'https://hiqombo-ladder-be.herokuapp.com'
+const api = 'http://localhost:1337'
 
 class App extends React.Component {
   constructor(props) {
@@ -35,11 +35,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    /*
     window.addEventListener('keydown', e => {
       e.keyCode === 13
         ? this.setState({ schedule: [{p1slug: "alexander-batsis", p2slug: "mattias-backstrom", date: new Date().toISOString()}]})
         : this.setState({ schedule: [] })
     })
+    */
     this.useApi('matches')
     this.useApi('schedule')
     this.useApi('players')
@@ -49,9 +51,9 @@ class App extends React.Component {
     this.setState({ screen: screen })
   }
 
-  createCandidate(p1slug, p2slug, callback) {
+  createCandidate(id, p1slug, p2slug, callback) {
     if (p1slug && p2slug)
-      this.setState({ resolveCandidate: { p1slug: p1slug, p2slug: p2slug } }, () => callback && callback())
+      this.setState({ resolveCandidate: { id: id, p1slug: p1slug, p2slug: p2slug } }, () => callback && callback())
   }
 
   useApi(resource) {
@@ -86,8 +88,8 @@ class App extends React.Component {
 
   resolvefight(data) {
     const { p1slug, p2slug } = this.state.resolveCandidate
-    const { winner, score, date, result } = data
-    const json = JSON.stringify({ p1slug: p1slug, p2slug: p2slug, winner: winner, score: score, date: date, result: result })
+    const { winner, score, date, result, id } = data
+    const json = JSON.stringify({ id: id, p1slug: p1slug, p2slug: p2slug, winner: winner, score: score, date: date, result: result })
     const params = {
       method: 'post',
       body: json,

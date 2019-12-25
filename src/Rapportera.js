@@ -11,7 +11,7 @@ export default function Rapportera(props) {
 
   if (!resolveCandidate) return null
 
-  const { p1slug, p2slug } = resolveCandidate
+  const { p1slug, p2slug, id } = resolveCandidate
 
   const p1count = result.filter(x => x === 'p1').length
   const p2count = result.filter(x => x === 'p2').length
@@ -30,6 +30,7 @@ export default function Rapportera(props) {
       p1slug: p1slug,
       p2slug: p2slug,
       result: result,
+      id: id,
       date: new Date().toISOString()
     }
     resolvefight(fight)
@@ -38,8 +39,12 @@ export default function Rapportera(props) {
 
   const { name, main } = players.find(x => x.playerslug === (winner === 'p1' ? p1slug : p2slug))
 
-  const imgLeft = `battle-stance/rightfacing/${slug(players.find(x => x.playerslug === p1slug).main)}.png`
-  const imgRight = `battle-stance/leftfacing/${slug(players.find(x => x.playerslug === p2slug).main)}.png`
+  const p1 = players.find(x => x.playerslug === p1slug) || {}
+  const p2 = players.find(x => x.playerslug === p2slug) || {}
+  console.log(players, p1slug, p2slug, p1, p2)
+
+  const imgLeft = `battle-stance/rightfacing/${slug(p1.main)}.png`
+  const imgRight = `battle-stance/leftfacing/${slug(p2.main)}.png`
 
   return (
     <div className="fit-to-screen-height background green">

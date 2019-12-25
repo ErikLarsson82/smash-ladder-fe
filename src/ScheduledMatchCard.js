@@ -2,9 +2,9 @@ import React from 'react'
 import { slug } from './helpers'
 
 export default function ScheduledMatchCard(props) {
-  const {p1slug, p2slug, createCandidate, setscreen, players } = props
+  const {p1slug, p2slug, id, createCandidate, setscreen, players } = props
 
-  const callback = () => createCandidate(p1slug, p2slug, () => setscreen('RAPPORTERA'))
+  const callback = () => createCandidate(id, p1slug, p2slug, () => setscreen('RAPPORTERA'))
 
   const find1 = x => x.playerslug === p1slug
   const find2 = x => x.playerslug === p2slug
