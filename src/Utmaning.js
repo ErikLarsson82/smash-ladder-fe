@@ -46,7 +46,7 @@ export default class Utmaning extends React.Component {
       if (network || spam) return
 
       this.setState({spam: true})
-      
+
       scheduleFight(p1slug, p2slug)
         .then(() => setscreen('DASHBOARD'))
     }
@@ -80,7 +80,7 @@ export default class Utmaning extends React.Component {
                 <th>Challanger</th>
               </tr>
               {
-                players.map(({playerslug, name, main}, idx) => {
+                players.map(x=>x).sort((a, b) => a.rank > b.rank ? 1 : -1).map(({playerslug, name, main}, idx) => {
                   const selected = p1slug === playerslug ? 'selected' : ''
                   return (
                     <tr key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p1slug: playerslug})}>
@@ -110,7 +110,7 @@ export default class Utmaning extends React.Component {
                 <th>Challangee</th>
               </tr>
               {
-                players.map(({playerslug, name, main}, idx) => {
+                players.map(x=>x).sort((a, b) => a.rank > b.rank ? 1 : -1).map(({playerslug, name, main}, idx) => {
                   const selected = p2slug === playerslug ? 'selected' : ''
                   return (
                     <tr key={`${name}-left`} className={[selected].concat('player-list').join(' ')} onClick={() => this.setState({p2slug: playerslug})}>

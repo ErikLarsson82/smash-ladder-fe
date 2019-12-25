@@ -12,7 +12,7 @@ import { StylesProvider } from '@material-ui/core/styles'
 
 export default function Dashboard(props) {
 
-  const { 
+  const {
     schedule,
     matches,
     players,
@@ -46,7 +46,7 @@ export default function Dashboard(props) {
           <tbody>
             {
               players.length > 0 &&
-              players.map((player, idx) => {
+              players.map(x=>x).sort((a, b) => a.rank > b.rank ? 1 : -1).map((player, idx) => {
                 return (
                   <Delay delayDuration={ idx * 100 } key={ player.playerslug }>
                     <Player
@@ -98,7 +98,7 @@ export default function Dashboard(props) {
           <div className="matches-insert">
             <TransitionGroup component={null}>
             {
-              matches.map(x => x).reverse().slice(0, 4).map(matchData => 
+              matches.map(x => x).reverse().slice(0, 4).map(matchData =>
                 <CSSTransition classNames={fresh(matchData) ? 'fader-new-delayed' : '' } timeout={1400} key={`${matchData.p1slug}-${matchData.p2slug}-${matchData.date}-match`}>
                   <Match
                     highlight={highlight}
