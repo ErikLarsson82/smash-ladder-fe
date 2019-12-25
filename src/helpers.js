@@ -51,9 +51,3 @@ export function slug(str) {
 export function QcIcon({place}) {
   return <img src={`qc-${place}.png`} className="qc-icon" width="10" height="10" alt="Plats" />
 }
-
-export function getPlayerAbove(players, playerslug) {
-  const current = players.map(x=>x).sort((a, b) => a.rank > b.rank ? 1 : -1).findIndex(({name}) => slug(name) === playerslug)
-  const result = current-1
-  return result === -1 ? 1 : result
-}

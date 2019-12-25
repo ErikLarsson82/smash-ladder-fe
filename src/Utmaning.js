@@ -1,5 +1,5 @@
 import React from 'react'
-import { slug, getPlayerAbove, Icon } from './helpers'
+import { slug, Icon } from './helpers'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Back from './Back'
 import Button from '@material-ui/core/Button'
@@ -16,7 +16,12 @@ export default class Utmaning extends React.Component {
 
     const p1slug = highlight && slug(highlight)
 
-    const p2slug = highlight && slug(players[getPlayerAbove(players, slug(highlight))].name)
+    let p2slug = null
+
+    if (highlight) {
+      const highlightRank = players.find(player => player.playerslug === slug(highlight)).rank
+      p2slug = players.find(player => player.rank === (highlightRank === 1 ? 2 : highlightRank - 1)).playerslug
+    }
 
     this.state = {
       p1slug: p1slug,
@@ -30,7 +35,10 @@ export default class Utmaning extends React.Component {
     const { players } = this.props
 
     if (prevState.p1slug === null && p1slug !== null && p2slug === null) {
-      this.setState({ p2slug: slug(players[getPlayerAbove(players, p1slug)].name) })
+      const player = players.find(player => player.playerslug === p1slug)
+      const highlightRank = player && player.rank
+      const next = players.find(player => player.rank === (highlightRank === 1 ? 2 : highlightRank - 1))
+      this.setState({ p2slug: next.playerslug })
     }
   }
 
