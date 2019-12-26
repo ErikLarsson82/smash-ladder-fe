@@ -3,7 +3,9 @@ Clone repository<br />
 npm install<br />
 npm start<br />
 
-Deployed to http://smash.schweinstudios.se/
+Deployed to https://hiqombo.herokuapp.com/
+
+<br /><br /><br /><br /><br /><br />
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
