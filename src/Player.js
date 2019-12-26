@@ -22,13 +22,24 @@ export default function PlayerRow(props) {
     <tr
       className={[startClass].concat(delay ? delayedClass : []).join(' ')}
       onClick={() => highlightPlayer(playerslug)}>
-      <td className="center">
+      <td style={ { textAlign: 'center' } }>
         <Trend amount={trend} />
       </td>
-      <td><div className="placement">{idx+1}.</div></td>
-      <td><Mugshot playerslug={playerslug} />{name}{ qcIcons.length > 0 && qcIcons}</td>
-      <td><Icon name={main} /></td>
-      <td>{secondary && <Icon name={secondary} />}</td>
+      <td style={ { paddingLeft: '0', textAlign: 'right' } }>
+        {idx+1}.
+      </td>
+      <td>
+        <Mugshot playerslug={playerslug} />
+      </td>
+      <td>
+        {name}{ qcIcons.length > 0 && qcIcons}
+      </td>
+      <td>
+        <Icon name={main} />
+      </td>
+      <td>
+        {secondary && <Icon name={secondary} />}
+      </td>
     </tr>
   )
 }

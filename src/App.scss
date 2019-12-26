@@ -50,6 +50,7 @@ hr {
 
 th {
   text-align: left;
+  padding: 10px;
 }
 
 p {
@@ -333,12 +334,6 @@ p {
 .mugshot {
   border-radius: 25px;
   vertical-align: middle;
-  margin-right: 12px;
-}
-
-.placement {
-  width: 15px;
-  text-align: right;
 }
 
 .derp {
@@ -469,24 +464,14 @@ p {
   -moz-box-shadow: 0px 0px 12px 0px rgba(0,157,214,1);
   box-shadow: 0px 0px 12px 0px rgba(0,157,214,1);
 
-  min-width: 530px;
-  max-width: 40%;
-
-  td, th {
-    padding: 10px;
-    margin: 0px;
-  }
-
-  th:first-child, td:first-child {
-    padding-left: 50px;
-  }
-
-  th:last-child, td:last-child {
-    padding-right: 20px;
-  }
+  flex-basis: 35%;
 
   thead {
     font-style: italic;
+  }
+
+  td {
+    padding: 8px;
   }
 }
 
@@ -568,22 +553,6 @@ p {
 .loading {
   padding: 100px;
   min-height: 1000px;
-}
-
-.place {
-  width: 16px;
-}
-
-.player {
-  width: 330px;
-}
-
-.main {
-  width: 40px;
-}
-
-.secondary {
-  width: 40px;
 }
 
 .fader-new-enter {

@@ -36,11 +36,12 @@ export default function Dashboard(props) {
         <table className="players" border="0" cellSpacing="0">
           <thead>
           <tr>
-            <th className="trend">Trend</th>
-            <th className="place"><div className="placement">#</div></th>
-            <th className="player">Spelare</th>
-            <th className="main">Main</th>
-            <th className="secondary">Secondary</th>
+            <th style={ { paddingRight: '0' } }>Trend</th>
+            <th style={ { paddingLeft: '0', textAlign: 'right' } }>#</th>
+            <th></th>
+            <th>Spelare</th>
+            <th>Main</th>
+            <th>Secondary</th>
           </tr>
           </thead>
           <tbody>
