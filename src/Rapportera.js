@@ -41,8 +41,7 @@ export default function Rapportera(props) {
 
   const p1 = players.find(x => x.playerslug === p1slug) || {}
   const p2 = players.find(x => x.playerslug === p2slug) || {}
-  console.log(players, p1slug, p2slug, p1, p2)
-
+  
   const imgLeft = `battle-stance/rightfacing/${slug(p1.main)}.png`
   const imgRight = `battle-stance/leftfacing/${slug(p2.main)}.png`
 

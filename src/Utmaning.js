@@ -71,7 +71,7 @@ export default class Utmaning extends React.Component {
       }, 250)
 
       setTimeout(() => {
-        createCandidate(p1slug, p2slug, () => setscreen('RAPPORTERA'))
+        createCandidate(null, p1slug, p2slug, () => setscreen('RAPPORTERA'))
       }, 2250)
     }
 
