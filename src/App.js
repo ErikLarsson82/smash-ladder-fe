@@ -6,8 +6,7 @@ import Dashboard from './Dashboard'
 import Utmaning from './Utmaning'
 import Rapportera from './Rapportera'
 
-//const api = 'https://hiqombo-ladder-be.herokuapp.com'
-const api = 'http://localhost:1337'
+const api = window.location.host.indexOf('localhost') === -1 ? 'https://hiqombo-ladder-be.herokuapp.com' : 'http://localhost:1337'
 
 class App extends React.Component {
   constructor(props) {
