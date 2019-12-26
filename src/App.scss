@@ -661,6 +661,25 @@ p {
 @media only screen and (max-width: 1000px) {
   .players {
     width: 100%;
+    font-size: 37px;
+    
+    td {
+      padding: 20px;
+    }
+
+    th {
+      font-size: 22px;
+    }
+
+    .mugshot {
+      width: 40px;
+      height: 40px;
+    }
+
+    .character-icon {
+      width: 42px;
+      height: 42px;
+    }
   }
 
 
