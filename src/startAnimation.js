@@ -2,11 +2,16 @@ import * as PIXI from 'pixi.js'
 import * as TWEEN from 'tween.js'
 import { slug } from './helpers'
 
-let app, player1, player2, stop, centerX, centerY
+let app, player1, player2, stop, centerX, centerY, characterWidth, characterHeight, fontSizePlayer, fontSizeChar, mobile
 
 function setupAnimation() {
   centerX = Math.round(window.innerWidth / 2)
   centerY = Math.round(window.innerHeight / 2)
+  mobile = window.innerWidth < 1000
+  characterWidth = mobile ? 450 : 750
+  characterHeight = mobile ? 450 : 750
+  fontSizePlayer = mobile ? 40 : 100
+  fontSizeChar = mobile ? 30 : 60
   stop = false
   blackrect()
   gameLoop()
@@ -24,7 +29,9 @@ function cleanup() {
 }
 
 function text(name, character, color, positions) {
-  const player = new PIXI.Text(name, { fontSize: '100px', font: 'Montserrat', fill: '#ffffff', align: 'left' })
+  const isBugChungus = name === 'Alexander'
+  const size = isBugChungus && !mobile ? 70 : fontSizePlayer
+  const player = new PIXI.Text(name, { fontSize: `${size}px`, font: 'Montserrat', fill: '#ffffff', align: 'left' })
   player.x = positions.playerX
   player.y = positions.playerY
   player.alpha = 0
@@ -36,7 +43,7 @@ function text(name, character, color, positions) {
   ass.alpha = 0
   app.stage.addChild(ass)
 
-  const char = new PIXI.Text(character, { fontStyle: 'italic', fontSize: '60px', font: 'Montserrat', fill: color, align: 'left' })
+  const char = new PIXI.Text(character, { fontStyle: 'italic', fontSize: `${fontSizeChar}px`, font: 'Montserrat', fill: color, align: 'left' })
   char.x = positions.charX
   char.y = positions.charY
   char.alpha = 0
@@ -71,10 +78,13 @@ function p1() {
   const p1 = new PIXI.Sprite.from(`battle-stance/rightfacing/${slug(player1.main)}.png`)
   p1.x = window.innerWidth
   p1.y = 0
+  p1.width = characterWidth
+  p1.height = characterHeight
+
   app.stage.addChild(p1)
 
   new TWEEN.Tween(p1)
-    .to({ x: centerX - 750 }, 700)
+    .to({ x: centerX - characterWidth }, 700)
     .easing(TWEEN.Easing.Elastic.Out)
     .start()
     .onComplete(pvp)
@@ -93,6 +103,8 @@ function p2() {
   const p2 = new PIXI.Sprite.from(`battle-stance/leftfacing/${slug(player2.main)}.png`)
   p2.x = -850
   p2.y = 0
+  p2.width = characterWidth
+  p2.height = characterHeight
   app.stage.addChild(p2)
 
   new TWEEN.Tween(p2)
