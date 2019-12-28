@@ -651,6 +651,12 @@ p {
 }
 
 @media only screen and (max-width: 1400px) {
+  .feed {
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
   .content-separator {
     flex-direction: column;
     align-items: center;
@@ -694,19 +700,5 @@ p {
   .spacer {
     padding-left: 0px;
     padding-right: 0px;
-  }
-}
-
-@media only screen and (max-width: 690px) {
-  .players td {
-    font-size: 14px;
-    width: auto;
-    padding: 0;
-    margin: 0;
-  }
-  .players {
-    max-width: initial;
-    min-width: initial;
-    width: initial;
   }
 }
