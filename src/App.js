@@ -5,6 +5,7 @@ import './animations.css'
 import Dashboard from './Dashboard'
 import Utmaning from './Utmaning'
 import Rapportera from './Rapportera'
+import Preloader from './Preloader'
 
 const api = window.location.host.indexOf('localhost') === -1 ? 'https://hiqombo-ladder-be.herokuapp.com' : 'http://localhost:1337'
 
@@ -132,9 +133,12 @@ class App extends React.Component {
       highlight
     } = this.state
 
+    let scene
+
     if (screen === 'DASHBOARD') {
-      return (
+      scene = (
         <Dashboard
+          key="Dashboard"
           schedule={schedule}
           matches={matches}
           players={players}
@@ -149,8 +153,9 @@ class App extends React.Component {
         )
     }
     if (screen === 'UTMANING') {
-      return (
+      scene = (
         <Utmaning
+          key="Utmaning"
           players={players}
           fight
           setscreen={this.setscreen}
@@ -161,14 +166,20 @@ class App extends React.Component {
       )
     }
     if (screen === 'RAPPORTERA') {
-      return (
+      scene = (
         <Rapportera
+          key="Rapportera"
           players={players}
           setscreen={this.setscreen}
           resolvefight={this.resolvefight}
           resolveCandidate={resolveCandidate} />
       )
     }
+
+    return [
+      scene,
+      <Preloader key="Preloader" />
+    ]
   }
 }
 
