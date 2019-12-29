@@ -6,6 +6,7 @@ import Dashboard from './Dashboard'
 import Utmaning from './Utmaning'
 import Rapportera from './Rapportera'
 import Preloader from './Preloader'
+import animation from './animation'
 
 const api = window.location.host.indexOf('localhost') === -1 ? 'https://hiqombo-ladder-be.herokuapp.com' : 'http://localhost:1337'
 
@@ -41,6 +42,10 @@ class App extends React.Component {
   }
 
   setscreen(screen) {
+    animation()
+
+    return 
+    
     this.setState({ screen: screen })
   }
 
