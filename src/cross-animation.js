@@ -1,9 +1,34 @@
 import html2canvas from 'html2canvas'
 
-let ctx
-let snap
-let cord = { x: 0 }
-let last
+let canvas, ctx, snap, last, animating = false, cord = { x: 0 }
+
+function takeScreenshot() {
+  if (animating) return
+
+  const now = new Date().getTime()
+
+  html2canvas(document.querySelector('body'))
+  .then(_snap => {
+      snap = _snap
+      console.log(now, new Date().getTime() - now)
+  })
+}
+
+window.addEventListener('load', takeScreenshot)
+window.addEventListener('react-done', takeScreenshot)
+
+window.addEventListener('keydown', () => {
+  const canvas = document.createElement('canvas')
+  canvas.setAttribute('style', 'border: 1px solid black; position: absolute; top: 0; left: 0')
+  canvas.setAttribute('width', window.innerWidth)
+  canvas.setAttribute('height', window.innerHeight)
+  document.body.appendChild(canvas)
+
+  ctx = canvas.getContext('2d')
+  ctx.drawImage(snap, 0, 0)
+
+  animate()
+})
 
 function isHighDensity(){
   return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 124dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (min-device-pixel-ratio: 1.3)').matches)) || (window.devicePixelRatio && window.devicePixelRatio > 1.3));
@@ -14,12 +39,11 @@ function isRetina(){
 }
 
 function animate(time) {
+  animating = true
   if (last) {
     const diff = time - last
     last = time
-    console.log(time, diff)
     requestAnimationFrame(animate)
-    //TWEEN.update(time)
     cord.x = cord.x + (diff / 4)
     render()
   } else {
@@ -28,13 +52,16 @@ function animate(time) {
   }
 }
 
-export default function animation() {
+export default function crossAnimation() {
   console.log(isRetina(), isHighDensity(), window.devicePixelRatio)
+
+  const now = new Date().getTime()
 
   html2canvas(document.querySelector('body'))
     .then(_snap => {
+        console.log(now, new Date().getTime() - now)
         snap = _snap
-        const canvas = document.createElement('canvas')
+        canvas = document.createElement('canvas')
         canvas.setAttribute('style', 'border: 1px solid black; position: absolute; top: 0; left: 0')
         canvas.setAttribute('width', '1000')
         canvas.setAttribute('height', '739')
@@ -42,7 +69,7 @@ export default function animation() {
 
         ctx = canvas.getContext('2d')
 
-        animate()
+        //animate()
         //ctx.drawImage(snap, 0, 0)
     })
 }
@@ -50,8 +77,10 @@ export default function animation() {
 function render() {
   const zoom = window.devicePixelRatio
 
-  ctx.fillStyle = '#fff'
-  ctx.fillRect(0, 0, 1000, 1000)
+  const width = window.innerWidth
+  const height = window.innerHeight
+
+  ctx.clearRect(0, 0, width, height)
 
   const diff = Math.round(cord.x)
 
@@ -61,7 +90,7 @@ function render() {
   ctx.beginPath()
   ctx.moveTo(0, 0)
   ctx.lineTo(270, 0)
-  ctx.lineTo(350, 540)
+  ctx.lineTo(350, height)
   ctx.lineTo(0, 610)
   ctx.closePath()
   ctx.fill()
@@ -75,9 +104,9 @@ function render() {
   ctx.translate(0 + diff, 0 - diff)
   ctx.beginPath()
   ctx.moveTo(270, 0)
-  ctx.lineTo(1000, 0)
-  ctx.lineTo(1000, 405)
-  ctx.lineTo(350, 540)
+  ctx.lineTo(width, 0)
+  ctx.lineTo(width, 405)
+  ctx.lineTo(350, height)
   ctx.closePath()
   ctx.fill()
   ctx.clip()
@@ -90,9 +119,9 @@ function render() {
   ctx.translate(0 - diff, 0 + diff)
   ctx.beginPath()
   ctx.moveTo(0, 610)
-  ctx.lineTo(350, 540)
-  ctx.lineTo(420, 1000)
-  ctx.lineTo(0, 1000)
+  ctx.lineTo(350, height)
+  ctx.lineTo(420, width)
+  ctx.lineTo(0, width)
   ctx.closePath()
   ctx.fill()
   ctx.clip()
@@ -104,10 +133,10 @@ function render() {
   ctx.save()
   ctx.translate(0 + diff, 0 + diff)
   ctx.beginPath()
-  ctx.moveTo(420, 1000)
-  ctx.lineTo(350, 540)
-  ctx.lineTo(1000, 405)
-  ctx.lineTo(1000, 1000)
+  ctx.moveTo(420, width)
+  ctx.lineTo(350, height)
+  ctx.lineTo(width, 405)
+  ctx.lineTo(width, width)
   ctx.closePath()
   ctx.fill()
   ctx.clip()

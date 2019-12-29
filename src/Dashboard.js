@@ -10,6 +10,8 @@ import Button from '@material-ui/core/Button'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
 import { StylesProvider } from '@material-ui/core/styles'
 
+let initAnimation
+
 export default function Dashboard(props) {
 
   const {
@@ -48,8 +50,13 @@ export default function Dashboard(props) {
             {
               players.length > 0 &&
               players.map(x=>x).sort((a, b) => a.rank > b.rank ? 1 : -1).map((player, idx) => {
+                const callback = () => {
+                  if (!initAnimation) {
+                    initAnimation = setTimeout(() => window.dispatchEvent(new CustomEvent('react-done')), 500)
+                  }
+                }
                 return (
-                  <Delay delayDuration={ idx * 100 } key={ player.playerslug }>
+                  <Delay delayDuration={ idx * 100 } key={ player.playerslug } lastCallback={idx === players.length - 1 && callback}>
                     <Player
                       {...player}
                       key={player.playerslug}

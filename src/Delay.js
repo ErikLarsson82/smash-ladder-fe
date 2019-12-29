@@ -12,6 +12,7 @@ export default function Delay(props) {
   if (!stateTimeout) {
     setStateTimeout(
       setTimeout( () => {
+        props.lastCallback && props.lastCallback()
         setInProp(true)
       }, props.delayDuration)
     )
