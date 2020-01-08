@@ -43,7 +43,7 @@ export default class Utmaning extends React.Component {
   }
 
   render() {
-    const { players, setscreen, scheduleFight, createCandidate, network } = this.props
+    const { players, setscreen, schedulefight, createCandidate, network } = this.props
     const { p1slug, p2slug, spam } = this.state
 
     const showFight = p1slug && p2slug && (p1slug !== p2slug)
@@ -55,7 +55,7 @@ export default class Utmaning extends React.Component {
 
       this.setState({spam: true})
 
-      scheduleFight(p1slug, p2slug)
+      schedulefight(p1slug, p2slug)
         .then(() => setscreen('DASHBOARD'))
     }
 

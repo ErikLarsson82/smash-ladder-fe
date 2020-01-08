@@ -392,7 +392,21 @@ p {
   color: #de1e7b;
 }
 
+.remove-match {
+  position: absolute;
+  top: -11px;
+  right: -14px;
+  cursor: pointer;
+  font-size: 23px;
+  color: white;
+}
+
+.remove-match:hover {
+  color: #de1e7b;
+}
+
 .resolved-container {
+  position: relative;
   box-shadow: 0px 0px 12px 0px #c500d6;
   background: rgba(160, 0, 135, 0.2);
   margin-bottom: 17px;

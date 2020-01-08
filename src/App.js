@@ -26,7 +26,8 @@ class App extends React.Component {
 
     this.newplayer = this.newplayer.bind(this)
     this.resolvefight = this.resolvefight.bind(this)
-    this.scheduleFight = this.scheduleFight.bind(this)
+    this.schedulefight = this.schedulefight.bind(this)
+    this.removefight = this.removefight.bind(this)
     this.setscreen = this.setscreen.bind(this)
     this.highlightPlayer = this.highlightPlayer.bind(this)
     this.setError = this.setError.bind(this)
@@ -98,7 +99,7 @@ class App extends React.Component {
 
   }
 
-  scheduleFight(p1slug, p2slug) {
+  schedulefight(p1slug, p2slug) {
     const json = JSON.stringify({ p1slug: p1slug, p2slug: p2slug, date: new Date().toISOString() })
     const params = {
       method: 'post',
@@ -109,6 +110,20 @@ class App extends React.Component {
 
     return fetch(`${api}/schedulefight`, params)
       .then(() => this.useApi('matches'))
+      .then(() => this.useApi('schedule'))
+      .then(() => this.setState({ network: false }))
+  }
+
+  removefight(id) {
+    const json = JSON.stringify({ id: id })
+    const params = {
+      method: 'post',
+      body: json,
+      headers: { 'Content-Type': 'application/json' }
+    }
+    this.setState({ network: true })
+
+    return fetch(`${api}/removefight`, params)
       .then(() => this.useApi('schedule'))
       .then(() => this.setState({ network: false }))
   }
@@ -148,6 +163,7 @@ class App extends React.Component {
           setscreen={this.setscreen}
           highlightPlayer={this.highlightPlayer}
           createCandidate={this.createCandidate}
+          removefight={this.removefight}
           error={error}
           highlight={highlight} />
         )
@@ -159,7 +175,7 @@ class App extends React.Component {
           players={players}
           fight
           setscreen={this.setscreen}
-          scheduleFight={this.scheduleFight}
+          schedulefight={this.schedulefight}
           createCandidate={this.createCandidate}
           network={network}
           highlight={highlight} />

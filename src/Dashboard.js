@@ -20,7 +20,8 @@ export default function Dashboard(props) {
     error,
     highlight,
     highlightPlayer,
-    createCandidate
+    createCandidate,
+    removefight
   } = props
 
   const circleClasses = ['add'].concat(schedule.length === 0 ? 'lower' : '')
@@ -74,6 +75,7 @@ export default function Dashboard(props) {
                     <ScheduledMatchCard
                       {...matchData}
                       createCandidate={createCandidate}
+                      removefight={removefight}
                       setscreen={setscreen}
                       players={players} />
                 </CSSTransition>
