@@ -135,7 +135,7 @@ export default function Dashboard(props) {
           </p>
         </div>
       </div>
-      <div className="footer">Powered by Cargo, Bonko, Kamden and Beibei</div>
+      <div className="footer">Powered by Cargo, Bonko, Kamden, Beibei and Itayo</div>
     </div>
   );
 }
