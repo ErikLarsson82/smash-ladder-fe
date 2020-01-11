@@ -1,5 +1,6 @@
 import React from 'react'
 import fetch from 'node-fetch'
+import cookie from 'js-cookie'
 import './App.scss'
 import './animations.css'
 import Dashboard from './Dashboard'
@@ -20,7 +21,7 @@ class App extends React.Component {
       screen: 'DASHBOARD',
       resolveCandidate: null,
       error: null,
-      highlight: [null, 'null', ''].indexOf(document.cookie) !== -1 ? null : document.cookie,
+      highlight: cookie.get('selected-player') || null,
       network: false
     }
 
@@ -133,7 +134,7 @@ class App extends React.Component {
     const result = (highlight === playerslug) ? null : playerslug
 
     this.setState({ highlight: result })
-    document.cookie = result
+    cookie.set('selected-player', result, { expires: 1337 })
   }
 
   render() {
