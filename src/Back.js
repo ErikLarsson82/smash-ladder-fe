@@ -5,7 +5,7 @@ import { StylesProvider } from '@material-ui/core/styles'
 export default function Back({ setscreen }) {
 	return (
 		<StylesProvider injectFirst>
-	      <CancelIcon className="remove-match" onClick={() => setscreen('DASHBOARD')} />
+	      <CancelIcon className="back" onClick={() => setscreen('DASHBOARD')} />
 	    </StylesProvider>
 	)
 }
