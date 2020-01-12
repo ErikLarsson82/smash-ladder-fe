@@ -165,6 +165,7 @@ class App extends React.Component {
           highlightPlayer={this.highlightPlayer}
           createCandidate={this.createCandidate}
           removefight={this.removefight}
+          api={api}
           error={error}
           highlight={highlight} />
         )

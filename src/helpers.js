@@ -22,6 +22,7 @@ export function Icon({name, large, small, highlight}) {
             src={`heroes/shadow.png`}
             className="character-icon shadow"
             alt={name}
+            title={name}
             width={size * 1.2}
             height={size * 1.2} />
         )
@@ -30,6 +31,7 @@ export function Icon({name, large, small, highlight}) {
         src={`heroes/${slug(name)}.png`}
         className="character-icon"
         alt={name}
+        title={name}
         width={size}
         height={size} />
     </div>

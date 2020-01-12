@@ -21,7 +21,8 @@ export default function Dashboard(props) {
     highlight,
     highlightPlayer,
     createCandidate,
-    removefight
+    removefight,
+    api
   } = props
 
   const circleClasses = ['add'].concat(schedule.length === 0 ? 'lower' : '')
@@ -93,7 +94,7 @@ export default function Dashboard(props) {
           {
             error && (
               <div className="loading">
-                Kunde inte hämta listan - är servern uppe?
+                { `Kunde inte hämta listan: ${ api }/players` }
               </div>
             )
           }
