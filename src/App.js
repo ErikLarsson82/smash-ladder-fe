@@ -29,6 +29,7 @@ class App extends React.Component {
     this.resolvefight = this.resolvefight.bind(this)
     this.schedulefight = this.schedulefight.bind(this)
     this.removefight = this.removefight.bind(this)
+    this.announcefight = this.announcefight.bind(this)
     this.setscreen = this.setscreen.bind(this)
     this.highlightPlayer = this.highlightPlayer.bind(this)
     this.setError = this.setError.bind(this)
@@ -129,6 +130,16 @@ class App extends React.Component {
       .then(() => this.setState({ network: false }))
   }
 
+  announcefight(player1, player2) {
+    const json = JSON.stringify({ player1: player1, player2: player2 })
+    const params = {
+      method: 'post',
+      body: json,
+      headers: { 'Content-Type': 'application/json' }
+    }
+    return fetch(`${api}/announcefight`, params)
+  }
+
   highlightPlayer(playerslug) {
     const highlight = this.state.highlight
     const result = (highlight === playerslug) ? null : playerslug
@@ -179,6 +190,7 @@ class App extends React.Component {
           setscreen={this.setscreen}
           schedulefight={this.schedulefight}
           createCandidate={this.createCandidate}
+          announcefight={this.announcefight}
           network={network}
           highlight={highlight} />
       )

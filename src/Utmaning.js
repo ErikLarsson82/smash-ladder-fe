@@ -43,7 +43,7 @@ export default class Utmaning extends React.Component {
   }
 
   render() {
-    const { players, setscreen, schedulefight, createCandidate, network } = this.props
+    const { players, setscreen, schedulefight, createCandidate, announcefight, network } = this.props
     const { p1slug, p2slug, spam } = this.state
 
     const showFight = p1slug && p2slug && (p1slug !== p2slug)
@@ -62,11 +62,14 @@ export default class Utmaning extends React.Component {
     const fight = () => {
       if (network || spam) return
 
+      const p1 = players.find(x => x.playerslug === p1slug) || {}
+      const p2 = players.find(x => x.playerslug === p2slug) || {}
+        
+      announcefight(p1.name, p2.name)
+
       this.setState({spam: true})
 
       setTimeout(() => {
-        const p1 = players.find(x => x.playerslug === p1slug) || {}
-        const p2 = players.find(x => x.playerslug === p2slug) || {}
         startAnimation(p1, p2)
       }, 250)
 
