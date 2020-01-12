@@ -70,7 +70,7 @@ export default function Dashboard(props) {
           <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
           <TransitionGroup component={null}>
             {
-              schedule.map(x => x).reverse().map(matchData => (
+              schedule.map(matchData => (
                 <CSSTransition classNames={fresh(matchData) ? 'fader-new' : 'fader-old' } timeout={700} key={`${matchData.p1slug}-${matchData.p2slug}-${matchData.date}-schedule`}>
                     <ScheduledMatchCard
                       {...matchData}
