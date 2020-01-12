@@ -6,7 +6,7 @@ export function Mugshot({playerslug}) {
   )
 }
 
-export function Icon({name, large, small, highlight}) {
+export function Icon({name, player, large, small, highlight}) {
   let size = 32
   if (large) {
     size = 45
@@ -22,7 +22,7 @@ export function Icon({name, large, small, highlight}) {
             src={`heroes/shadow.png`}
             className="character-icon shadow"
             alt={name}
-            title={name}
+            title={player}
             width={size * 1.2}
             height={size * 1.2} />
         )
@@ -31,7 +31,7 @@ export function Icon({name, large, small, highlight}) {
         src={`heroes/${slug(name)}.png`}
         className="character-icon"
         alt={name}
-        title={name}
+        title={player}
         width={size}
         height={size} />
     </div>

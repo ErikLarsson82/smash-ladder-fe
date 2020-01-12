@@ -14,7 +14,7 @@ export default function Match(props) {
   return (
     <div className="resolved-container">
       <div className="icon-box">
-        <Icon large name={p1.main} highlight={p1slug === highlight} /> vs. <Icon large name={p2.main} highlight={p2slug === highlight} /><br />
+        <Icon large player={p1.name} name={p1.main} highlight={p1slug === highlight} /> vs. <Icon large player={p2.name} name={p2.main} highlight={p2slug === highlight} /><br />
       </div>
       <div className="score-box">
         <Trend amount={p1trend} />
