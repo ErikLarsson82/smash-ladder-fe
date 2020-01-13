@@ -97,6 +97,14 @@ p {
   background-size: cover;
 }
 
+.background.orange {
+  background: url(images/background-orange.jpg) no-repeat top center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .main-loader {
   vertical-align: middle;
   margin-left: 50px;
@@ -242,6 +250,12 @@ p {
 .match-card-vs-logo {
   width: 60px;
   height: 60px;
+}
+
+.matches-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
 }
 
 .banner-container {
@@ -422,8 +436,42 @@ p {
   cursor: help;
 }
 
+.spacers {
+  margin: 15px;
+}
+
+.wide {
+  width: 300px;
+}
+
 .resolved-container:hover {
   background: rgba(144, 0, 121, 0.5);
+}
+
+.p1-name {
+  position: absolute;
+  font-size: 14px;
+  top: 5px;
+  left: 10px;
+  width: 90px;
+}
+
+.p2-name {
+  position: absolute;
+  font-size: 14px;
+  top: 5px;
+  right: 10px;
+  text-align: right;
+  width: 90px;
+}
+
+.date {
+  position: absolute;
+  color: grey;
+  font-size: 10px;
+  bottom: 6px;
+  left: 10px;
+  font-weight: bold;
 }
 
 .fit-to-screen-height {
@@ -623,7 +671,7 @@ p {
 .score-box {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   font-size: x-large;
   align-items: center;
 }

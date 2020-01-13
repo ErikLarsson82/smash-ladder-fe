@@ -122,7 +122,7 @@ export default function Dashboard(props) {
             }
           </div>
           <StylesProvider injectFirst>
-            <Button className="button tiny" variant="contained" color="primary" onClick={ () => { console.log('nej') } }>
+            <Button className="button tiny" variant="contained" color="primary" onClick={ () => setscreen('MATCHER') }>
               Mer ...
             </Button>
           </StylesProvider>

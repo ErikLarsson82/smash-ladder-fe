@@ -8,6 +8,7 @@ export default function() {
 			<div>
 				<div className="background green"></div>
 				<div className="background blue"></div>
+				<div className="background orange"></div>
 				<img className="hidden" alt="preloading" src="battle-stance/leftfacing/bowser.png" />
 				<img className="hidden" alt="preloading" src="battle-stance/leftfacing/captain-falcon.png" />
 				<img className="hidden" alt="preloading" src="battle-stance/leftfacing/cloud.png" />
