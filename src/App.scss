@@ -394,6 +394,12 @@ p {
   color: #de1e7b;
 }
 
+.locate-player {
+  position: absolute;
+  left: -34px;
+  color: cyan;
+}
+
 .remove-match {
   position: absolute;
   top: -11px;
@@ -413,6 +419,11 @@ p {
   background: rgba(160, 0, 135, 0.2);
   margin-bottom: 17px;
   transition: all 0.5s ease-out;
+  cursor: help;
+}
+
+.resolved-container:hover {
+  background: rgba(144, 0, 121, 0.5);
 }
 
 .fit-to-screen-height {

@@ -3,7 +3,7 @@ import { Icon } from './helpers'
 import Trend from './Trend'
 
 export default function Match(props) {
-  const { players, matchData, highlight } = props
+  const { players, matchData, highlight, setLocatePlayers } = props
   const { p1slug, p2slug, p1trend, p2trend, result } = matchData
 
   const find1 = x => x.playerslug === p1slug
@@ -12,7 +12,7 @@ export default function Match(props) {
   const p2 = players.find(find2) || {}
 
   return (
-    <div className="resolved-container">
+    <div className="resolved-container" onMouseEnter={() => setLocatePlayers([p1slug, p2slug]) } onMouseLeave={() => setLocatePlayers([]) }>
       <div className="icon-box">
         <Icon large player={p1.name} name={p1.main} highlight={p1slug === highlight} /> vs. <Icon large player={p2.name} name={p2.main} highlight={p2slug === highlight} /><br />
       </div>

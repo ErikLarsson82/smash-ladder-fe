@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Player from './Player'
 import Delay from './Delay'
 import ScheduledMatchCard from './ScheduledMatchCard'
@@ -11,6 +11,8 @@ import AddCircleIcon from '@material-ui/icons/AddCircle'
 import { StylesProvider } from '@material-ui/core/styles'
 
 export default function Dashboard(props) {
+
+  const [locatePlayers, setLocatePlayers] = useState([])
 
   const {
     schedule,
@@ -55,6 +57,7 @@ export default function Dashboard(props) {
                     <Player
                       {...player}
                       key={player.playerslug}
+                      locatePlayers={locatePlayers}
                       idx={idx}
                       highlight={highlight}
                       highlightPlayer={highlightPlayer} />
@@ -78,6 +81,7 @@ export default function Dashboard(props) {
                       createCandidate={createCandidate}
                       removefight={removefight}
                       setscreen={setscreen}
+                      setLocatePlayers={setLocatePlayers}
                       players={players} />
                 </CSSTransition>
               ))
@@ -107,6 +111,7 @@ export default function Dashboard(props) {
                   <Match
                     highlight={highlight}
                     matchData={matchData}
+                    setLocatePlayers={setLocatePlayers}
                     players={players} />
                 </CSSTransition>
               )

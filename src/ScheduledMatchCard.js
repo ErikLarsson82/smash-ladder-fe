@@ -4,7 +4,7 @@ import CancelIcon from '@material-ui/icons/Cancel'
 import { StylesProvider } from '@material-ui/core/styles'
 
 export default function ScheduledMatchCard(props) {
-  const {p1slug, p2slug, id, createCandidate, setscreen, players, removefight } = props
+  const {p1slug, p2slug, id, createCandidate, setscreen, players, removefight, setLocatePlayers } = props
 
   const callback = () => createCandidate(id, p1slug, p2slug, () => setscreen('RAPPORTERA'))
 
@@ -19,7 +19,7 @@ export default function ScheduledMatchCard(props) {
     removefight(id)
   }
   return (
-    <div onClick={callback} className='match-card'>
+    <div onClick={callback} className='match-card' onMouseEnter={() => setLocatePlayers([p1slug, p2slug]) } onMouseLeave={() => setLocatePlayers([]) }>
       <StylesProvider injectFirst>
         <CancelIcon className="remove-match" onClick={remove} />
       </StylesProvider>

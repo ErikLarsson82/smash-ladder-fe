@@ -1,9 +1,11 @@
 import React from 'react'
 import { QcIcon, Mugshot, Icon } from './helpers'
 import Trend from './Trend'
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
+import { StylesProvider } from '@material-ui/core/styles'
 
 export default function PlayerRow(props) {
-  const { delay, playerslug, name, main, secondary, trend, qc, idx, highlight, highlightPlayer } = props
+  const { delay, playerslug, name, main, secondary, trend, qc, idx, highlight, highlightPlayer, locatePlayers } = props
   const hasHighlight = playerslug === highlight
   const qcIcons = qc.map(x => <QcIcon key={`${name}-${x}`} place={x} />)
   const odd = idx % 2 === 0
@@ -22,7 +24,10 @@ export default function PlayerRow(props) {
     <tr
       className={[startClass].concat(delay ? delayedClass : []).join(' ')}
       onClick={() => highlightPlayer(playerslug)}>
-      <td style={ { textAlign: 'center' } }>
+      <td className="relative" style={ { textAlign: 'center' } }>
+        <StylesProvider injectFirst>
+          <ArrowForwardIcon className="locate-player" style={ {opacity: locatePlayers.includes(playerslug) ? 1 : 0 } } />
+        </StylesProvider>
         <Trend amount={trend} />
       </td>
       <td style={ { paddingLeft: '0', textAlign: 'right' } }>
