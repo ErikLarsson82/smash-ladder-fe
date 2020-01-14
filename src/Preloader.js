@@ -32,6 +32,7 @@ export default function() {
 				<img className="hidden" alt="preloading" src="battle-stance/leftfacing/shulk.png" />
 				<img className="hidden" alt="preloading" src="battle-stance/leftfacing/yoshi.png" />
 				<img className="hidden" alt="preloading" src="battle-stance/leftfacing/young-link.png" />
+				<img className="hidden" alt="preloading" src="battle-stance/leftfacing/toon-link.png" />
 				<img className="hidden" alt="preloading" src="battle-stance/rightfacing/bowser.png" />
 				<img className="hidden" alt="preloading" src="battle-stance/rightfacing/captain-falcon.png" />
 				<img className="hidden" alt="preloading" src="battle-stance/rightfacing/cloud.png" />
@@ -55,6 +56,7 @@ export default function() {
 				<img className="hidden" alt="preloading" src="battle-stance/rightfacing/shulk.png" />
 				<img className="hidden" alt="preloading" src="battle-stance/rightfacing/yoshi.png" />
 				<img className="hidden" alt="preloading" src="battle-stance/rightfacing/young-link.png" />
+				<img className="hidden" alt="preloading" src="battle-stance/rightfacing/toon-link.png" />
 				<img className="hidden" alt="preloading" src="heroes/bowser.png" />
 				<img className="hidden" alt="preloading" src="heroes/captain-falcon.png" />
 				<img className="hidden" alt="preloading" src="heroes/cloud.png" />
@@ -78,6 +80,7 @@ export default function() {
 				<img className="hidden" alt="preloading" src="heroes/shulk.png" />
 				<img className="hidden" alt="preloading" src="heroes/yoshi.png" />
 				<img className="hidden" alt="preloading" src="heroes/young-link.png" />
+				<img className="hidden" alt="preloading" src="heroes/toon-link.png" />
 			</div>
 		)
 	}
