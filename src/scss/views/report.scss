@@ -1,0 +1,78 @@
+
+.last {
+  margin-bottom: 70px;
+}
+
+.matchup-large-portraits {
+  display: flex;
+  min-width: 850px;
+  justify-content: space-between;
+}
+
+.matchup-large-portraits > img {
+  width: 375px;
+  height: 375px;
+}
+
+.matchup-icons {
+  flex-basis: 200px;
+  min-width: 1000px;
+  max-width: 1000px;
+}
+
+.winner-text {
+  flex-basis: 60px;
+}
+
+.scoreset {
+  h1 {
+    font-size: 100px;
+  }
+}
+
+.dim {
+  opacity: 0.2
+}
+
+.character-portrait {
+  border: 2px solid #be0dea;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 500px;
+  touch-action: manipulation;
+}
+
+.character-portrait:hover {
+  border: 2px solid #d776ef;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 500px;
+  position: relative;
+  cursor: pointer;
+}
+
+.resolve-icon {
+  background: rgba(0, 0, 0, 0.6);
+  height: 80px;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;    
+  justify-content: center;
+}
+
+.resolve-icon.middle {
+  border-top: 1px solid #34c159;
+}
+
+.resolve-icon.left {
+  padding-right: 490px;
+  padding-left: 30px;
+}
+
+.resolve-icon.right {
+  padding-left: 490px;
+  padding-right: 30px;
+}
+
+.icon-placeholder {
+  height: 80px;
+  margin: 0px;
+}

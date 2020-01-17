@@ -19,7 +19,7 @@ export default function ScheduledMatchCard(props) {
     removefight(id)
   }
   return (
-    <div onClick={callback} className='match-card' onMouseEnter={() => setLocatePlayers([p1slug, p2slug]) } onMouseLeave={() => setLocatePlayers([]) }>
+    <div onClick={callback} className="match-card" onMouseEnter={() => setLocatePlayers([p1slug, p2slug]) } onMouseLeave={() => setLocatePlayers([]) }>
       <StylesProvider injectFirst>
         <CancelIcon className="remove-match" onClick={remove} />
       </StylesProvider>

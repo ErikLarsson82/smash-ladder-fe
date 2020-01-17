@@ -1,0 +1,62 @@
+
+.challange-player-list {
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,1);
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,1);
+  width: 330px;
+  border-collapse: collapse;
+  margin-top: 5px;
+  margin-bottom: 25px;
+
+  th {
+    font-size: medium;
+    color: #bafcff;
+    font-style: italic;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .mono {
+    font-family: monospace;
+  }
+
+  .icon {
+    width: 26px;
+    text-align: center;
+  }
+
+  td {
+    padding: 2px;
+  }
+}
+
+.vs-logo {
+  width: 70px;
+  height: 70px;
+}
+
+.player-list {
+  font-size: larger;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.player-list:hover {
+  background-color: aliceblue;
+  color: black;
+}
+
+.selected {
+  background-color: rgb(222, 30, 123);
+}
+
+.button-holder {
+  height: 230px;
+}
+

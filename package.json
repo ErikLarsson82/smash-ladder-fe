@@ -8,7 +8,7 @@
     "fetch": "^1.1.0",
     "js-cookie": "^2.2.1",
     "node-fetch": "^2.6.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "pixi.js": "^5.2.0",
     "ramda": "^0.26.1",
     "react": "^16.12.0",

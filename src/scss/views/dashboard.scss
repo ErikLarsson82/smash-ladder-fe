@@ -1,0 +1,170 @@
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.matches {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+
+.locate-player {
+  position: absolute;
+  left: -34px;
+  color: cyan;
+}
+
+.matches-insert {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 600px;
+  align-items: baseline;
+}
+
+.matches-insert > div:nth-child(5) { 
+  display: none;
+}
+
+.challonge-container {
+  display: flex;
+  justify-content: space-between;
+  font-size: medium;
+}
+
+.content-separator {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  padding-top: 20px;
+}
+
+.players {
+  -webkit-box-shadow: 0px 0px 12px 0px rgba(0,157,214,1);
+  -moz-box-shadow: 0px 0px 12px 0px rgba(0,157,214,1);
+  box-shadow: 0px 0px 12px 0px rgba(0,157,214,1);
+  touch-action: manipulation;
+
+  flex-basis: 35%;
+
+  thead {
+    font-style: italic;
+  }
+
+  td {
+    padding: 8px;
+  }
+}
+
+.feed {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-basis: 600px;
+  font-size: x-large;
+}
+
+.add {
+  cursor: pointer;
+  position: absolute;
+  top: 236px;
+  right: 46px;
+  font-size: 60px;
+  fill: white;
+  transition: top 400ms ease-in-out;
+}
+
+.add:hover {
+  fill: #99f0ff;
+}
+
+.lower {
+  top: 310px;
+}
+
+.odd, .even {
+  background-color: rgba(120, 15, 70, 0);
+  opacity: 0;
+}
+
+.odd:hover, .even:hover, .fade-in-highlight:hover {
+  background-color: aliceblue;
+  color: black;
+  cursor: pointer;
+}
+
+.fade-in-highlight:hover {
+  background-color: rgb(6, 86, 117);
+  color: white;
+}
+
+.highlight {
+  background-color: rgba(14, 188, 255, 0);
+  opacity: 0;
+}
+
+.fade-in-highlight {
+  animation: fadeRowHighlight 0.5s;
+  background-color: rgba(14, 188, 255, 1);
+  color: #222222;
+  opacity: 1;
+}
+
+.fade-in-odd {
+  animation: fadeRowOdd 0.5s;
+  background-color: rgba(120, 15, 70, 0.8);
+  opacity: 1;
+}
+
+.fade-in-even {
+  animation: fadeRowEven 0.5s;
+  background-color: rgba(120, 15, 70, 0.3);
+  opacity: 1;
+}
+
+.shake {
+  animation: shake 0.32s cubic-bezier(.20,.07,.19,.70) both;
+}
+
+.loading {
+  padding: 100px;
+  min-height: 1000px;
+}
+
+.fader-new-enter {
+  opacity: 0.01;
+}
+
+.fader-new-enter.fader-new-enter-active {
+  opacity: 1;
+  transition: opacity 700ms ease-in;
+}
+
+.fader-new-delayed-enter {
+  opacity: 0.01;
+}
+
+.fader-new-delayed-enter.fader-new-delayed-enter-active {
+  opacity: 1;
+  transition: opacity 700ms ease-in;
+  transition-delay: 700ms; 
+}
+
+.fader-old-exit {
+  opacity: 1;
+}
+
+.fader-old-exit.fader-old-exit-active {
+  opacity: 0.01;
+  transition: opacity 700ms ease-out;
+}
+
+.footer {
+  margin-bottom: 80px;
+  margin-top: 50px;
+  font-size: xx-small;
+}

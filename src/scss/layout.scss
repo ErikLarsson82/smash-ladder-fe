@@ -1,0 +1,14 @@
+
+.matches-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
+}
+
+.spacer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-left: 30px;
+  padding-right: 30px;
+}

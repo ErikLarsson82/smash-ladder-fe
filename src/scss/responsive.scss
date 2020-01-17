@@ -1,0 +1,54 @@
+
+@media only screen and (max-width: 1400px) {
+  .feed {
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    flex-basis: unset;
+  }
+
+  .content-separator {
+    flex-direction: column;
+    align-items: center;
+    font-size: larger;
+  }
+
+  .players {
+    max-width: unset;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .players {
+    width: 100%;
+    font-size: 37px;
+    
+    td {
+      padding: 20px;
+    }
+
+    th {
+      font-size: 22px;
+    }
+
+    .mugshot {
+      width: 40px;
+      height: 40px;
+    }
+
+    .character-icon {
+      width: 42px;
+      height: 42px;
+    }
+  }
+
+
+  .challange-player-list {
+    width: unset;
+  }
+
+  .spacer {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}

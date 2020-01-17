@@ -1,0 +1,21 @@
+
+.unchanged {
+  opacity: 0.4;
+  font-size: 18px;
+}
+
+.trend-up {
+  fill: #00ff00;
+}
+
+.double-up {
+  transform: rotate(-90deg);
+}
+
+.double-down {
+  transform: rotate(90deg);
+}
+
+.trend-down {
+  fill: red;
+}
