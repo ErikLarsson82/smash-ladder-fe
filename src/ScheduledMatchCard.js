@@ -18,16 +18,25 @@ export default function ScheduledMatchCard(props) {
     e.stopPropagation()
     removefight(id)
   }
+
+  function getPlayerName(player){
+    return player.name !== undefined ? player.name.substring(0, player.name.indexOf(" ") + 2) : "";
+  }
+
   return (
-    <div onClick={callback} className='match-card' onMouseEnter={() => setLocatePlayers([p1slug, p2slug]) } onMouseLeave={() => setLocatePlayers([]) }>
+    <div onClick={callback} className='match-card' onMouseEnter={() => setLocatePlayers([p1slug, p2slug])} onMouseLeave={() => setLocatePlayers([])}>
       <StylesProvider injectFirst>
         <CancelIcon className="remove-match" onClick={remove} />
       </StylesProvider>
-      <div className="match-card-name p1">{p1.name}</div>
-      <div className="match-card-name p2">{p2.name}</div>
-      <img alt="p1" src={`battle-stance/rightfacing/${slug(p1.main)}.png`} className="match-card-character left" />
-      <img alt="p2" src={`battle-stance/leftfacing/${slug(p2.main)}.png`} className="match-card-character right" />
-      <img className="match-card-vs-logo" src="player-versus-player.png" alt="VS" />
+      <img alt="p1" src={`battle-stance/rightfacing/${slug(p1.main)}.png`} className="match-card-character left"/>
+      <img alt="p2" src={`battle-stance/rightfacing/${slug(p2.main)}.png`} className="match-card-character right"/>
+      <div className="match-card-background-container">
+        <div className="match-card-background p1"/>
+        <div className="match-card-background p2"/>
+      </div>
+      <div className="match-card-name p1">{getPlayerName(p1)}</div>
+      <div className="match-card-name p2">{getPlayerName(p2)}</div>
+      <div className="match-card-vs-text">vs</div>
     </div>
   )
 }

@@ -46,6 +46,7 @@ class App extends React.Component {
 
   setscreen(screen) {
     this.setState({ screen: screen })
+    cookie.set('hasViewedToday', true, { expires: 1, path: '' })
   }
 
   createCandidate(id, p1slug, p2slug, callback) {

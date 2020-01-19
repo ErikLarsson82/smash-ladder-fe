@@ -6,7 +6,7 @@ body {
   overflow-x: hidden;
   font-family: 'Montserrat', sans-serif;
   font-size: large;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 canvas {
@@ -30,13 +30,17 @@ h1 {
 
 h2 {
   text-transform: uppercase;
-  background: linear-gradient(to bottom, #000000 0%, #03b3e4 25%, #FFFFFF 49%, #000000 50%, #e51f80 75%, #FFFFFF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   font-size: 50px;
   font-family: 'Audiowide', cursive;
-  -webkit-text-stroke-width: 0.5px;
-  -webkit-text-stroke-color: #bafcff;
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+}
+
+h3 {
+  text-transform: uppercase;
+  font-size: 33px;
+  font-family: 'Audiowide', cursive;
   font-weight: normal;
   padding: 0;
   margin: 0;
@@ -65,6 +69,16 @@ th {
 p {
   margin-block-start: 0.4em;
   margin-block-end: 0.4em;
+}
+
+.hiqombo-logo {
+  height: 300px;
+  width: auto;
+  padding-top: 20px;
+}
+
+.hiqombo-logo.intro-animation {
+  animation: logo 1s ease-in-out backwards;
 }
 
 .dashboard {
@@ -194,57 +208,121 @@ p {
   margin-bottom: 10px;
 }
 
+.fight-cards-container{
+  display: flex;
+  justify-self: center;
+  flex-flow: wrap;
+  width: 620px;
+  padding-bottom: 45px;
+}
+
+.history-container{
+  display: flex;
+  justify-self: center;
+  flex-flow: wrap;
+  width: 550px;
+  padding-bottom: 45px;
+  justify-content: center;
+}
+
 .match-card {
   cursor: pointer;
   touch-action: manipulation;
   position: relative;
-  width: 490px;
-  height: 100px;
-  margin: 8px;
+  width: 290px;
+  height: 50px;
+  margin: 10px;
   box-shadow: 0px 0px 12px 0px #c500d6;
   background: rgba(70, 0, 59, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
+  float: left;
 }
 
 .match-card:hover {
-  background: rgba(144, 0, 121, 0.5);
+  background: rgba(144, 0, 121, 0.8);
+}
+
+.match-card-background-container{    
+  width: 100%;
+  height: 39%;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+}
+.match-card-background{
+  width: 45%;
+  height: 100%;
+  position: absolute;
+  opacity: 0.2;
+}
+
+.match-card-background.p1{
+  left: -20px;
+  background: #F52E2E;
+  -webkit-transform: skew(35deg);
+  -moz-transform: skew(35deg);
+  -o-transform: skew(35deg);
+  transform: skew(35deg);
+}
+
+.match-card-background.p2{
+  right: -20px;
+  background: #5463FF;
+  -webkit-transform: skew(-35deg);
+  -moz-transform: skew(-35deg);
+  -o-transform: skew(-35deg);
+  transform: skew(-35deg);
 }
 
 .match-card-character {
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: auto;
+  height: 100%;
 }
 
 .match-card-character.left {
-  top: -19px;
-  left: 5px;
+  top: 0px;
+  left: 0px;
 }
 
 .match-card-character.right {
-  bottom: -10px;
-  right: 3px;
+  transform: scaleX(-1);
+  top: 0px;
+  right: 0px;
 }
 
 .match-card-name {
   position: absolute;
-  font-size: 17px;
-  background: rgba(0,0,0, 0.5);
+  font-size: 70%;
+  background: rgba(0, 0, 0, 0.5);
   padding-left: 8px;
   padding-right: 8px;
-  border-radius: 18px;
+  width: 50%;
 }
 
 .match-card-name.p1 {
-  bottom: 7px;
-  left: 10px;
+  text-align: left;
+  bottom: 0px;
+  left: 0px;
 }
 
 .match-card-name.p2 {
-  top: 5px;
-  right: 5px;
+  text-align: right;
+  bottom: 0px;
+  right: 0px;
+}
+
+.match-card-vs-text{
+  height: 100%;
+  font-size: 160%;
+  font-weight: 100;
+  padding: 0px;
+  position: absolute;
+  bottom: -10px;
+  color: white;
+  text-shadow: -3px 0 10px black, 0 3px 10px black, 3px 0 10px black, 0 -3px 10px black
 }
 
 .match-card-vs-logo {
@@ -541,6 +619,11 @@ p {
   flex-direction: row-reverse;
   justify-content: space-evenly;
   padding-top: 20px;
+  animation: fadein 1s backwards;
+}
+
+.content-separator.intro-animation{
+  animation: fadein 1s 1.5s backwards;
 }
 
 .players {
@@ -548,7 +631,7 @@ p {
   -moz-box-shadow: 0px 0px 12px 0px rgba(0,157,214,1);
   box-shadow: 0px 0px 12px 0px rgba(0,157,214,1);
   touch-action: manipulation;
-
+  min-width: 550px;
   flex-basis: 35%;
 
   thead {
@@ -755,6 +838,7 @@ p {
   .players {
     width: 100%;
     font-size: 37px;
+    min-width: unset;
     
     td {
       padding: 20px;
@@ -773,6 +857,24 @@ p {
       width: 42px;
       height: 42px;
     }
+  }
+
+  
+  .match-card {
+    cursor: pointer;
+    touch-action: manipulation;
+    position: relative;
+    width: 100%;
+    height: 100px;
+  }
+
+  .match-card-name {
+    font-size: 133%;
+  }
+
+  .match-card-vs-text{
+    height: 100%;
+    font-size: 360%;
   }
 
 

@@ -4,14 +4,12 @@ import Delay from './Delay'
 import ScheduledMatchCard from './ScheduledMatchCard'
 import Match from './Match'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-
+import Cookies  from 'js-cookie'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
-import AddCircleIcon from '@material-ui/icons/AddCircle'
 import { StylesProvider } from '@material-ui/core/styles'
 
 export default function Dashboard(props) {
-
   const [locatePlayers, setLocatePlayers] = useState([])
 
   const {
@@ -27,16 +25,27 @@ export default function Dashboard(props) {
     api
   } = props
 
-  const circleClasses = ['add'].concat(schedule.length === 0 ? 'lower' : '')
+  let isFirstviewOfTheDay = Cookies.get('hasViewedToday') === undefined; 
 
   const fresh = matchData => {
     const now = new Date().getTime()
     return now - new Date(matchData.date).getTime() < 1000
   }
 
+  function logoClass(){
+    return isFirstviewOfTheDay ? "hiqombo-logo intro-animation" : "hiqombo-logo";
+  }
+
+  function containerClass() {
+    return isFirstviewOfTheDay ? "content-separator intro-animation" : "content-separator";
+  }
+  
+  window.onbeforeunload = () => {Cookies.set('hasViewedToday', true, { expires: 1, path: '' })}
+
   return (
     <div className="dashboard background red">
-      <div className="content-separator">
+      <img src="hiqombo-logo.png" className={logoClass()} alt="logo" />
+      <div className={containerClass()}>
         <table className="players" border="0" cellSpacing="0">
           <thead>
           <tr>
@@ -68,25 +77,26 @@ export default function Dashboard(props) {
           </tbody>
         </table>
         <div className="feed">
-          <StylesProvider injectFirst>
-            <AddCircleIcon onClick={ () => setscreen('UTMANING') } className={circleClasses.join(' ')} />
-          </StylesProvider>
-          <img src="hiqombo-logo.png" width="330" height="300" alt="logo" />
-          <TransitionGroup component={null}>
-            {
-              schedule.map(matchData => (
-                <CSSTransition classNames={fresh(matchData) ? 'fader-new' : 'fader-old' } timeout={700} key={`${matchData.p1slug}-${matchData.p2slug}-${matchData.date}-schedule`}>
-                    <ScheduledMatchCard
-                      {...matchData}
-                      createCandidate={createCandidate}
-                      removefight={removefight}
-                      setscreen={setscreen}
-                      setLocatePlayers={setLocatePlayers}
-                      players={players} />
-                </CSSTransition>
-              ))
-            }
-          </TransitionGroup>
+          <div className="fight-cards-container">
+            <TransitionGroup component={null}>
+              {
+                schedule.map(matchData => (
+                  <CSSTransition classNames={fresh(matchData) ? 'fader-new' : 'fader-old' } timeout={700} key={`${matchData.p1slug}-${matchData.p2slug}-${matchData.date}-schedule`}>
+                      <ScheduledMatchCard
+                        {...matchData}
+                        createCandidate={createCandidate}
+                        removefight={removefight}
+                        setscreen={setscreen}
+                        setLocatePlayers={setLocatePlayers}
+                        players={players} />
+                  </CSSTransition>
+                ))
+              }
+              <div onClick={ () => setscreen('UTMANING') } className='match-card'>
+                <p>Ny utmaning</p>
+              </div>
+            </TransitionGroup>
+          </div>
           {
             players.length === 0 && !error && (
               <div className="loading">
@@ -102,31 +112,33 @@ export default function Dashboard(props) {
               </div>
             )
           }
-          <h2 className="matches no-border-dim">Matcher</h2>
-          <div className="matches-insert">
-            <TransitionGroup component={null}>
-            {
-              matches.map(x => x).reverse().slice(0, 4).map(matchData =>
-                <CSSTransition classNames={fresh(matchData) ? 'fader-new-delayed' : '' } timeout={1400} key={`${matchData.p1slug}-${matchData.p2slug}-${matchData.date}-match`}>
-                  <Match
-                    highlight={highlight}
-                    matchData={matchData}
-                    setLocatePlayers={setLocatePlayers}
-                    players={players} />
-                </CSSTransition>
-              )
-            }
-            </TransitionGroup>
-            {
-              matches.length === 0 && <div>Inga matcher spelade än...</div>
-            }
+          <div className="history-container">
+            <h2 className="matches">Historik</h2>
+            <div className="matches-insert">
+              <TransitionGroup component={null}>
+              {
+                matches.map(x => x).reverse().slice(0, 4).map(matchData =>
+                  <CSSTransition classNames={fresh(matchData) ? 'fader-new-delayed' : '' } timeout={1400} key={`${matchData.p1slug}-${matchData.p2slug}-${matchData.date}-match`}>
+                    <Match
+                      highlight={highlight}
+                      matchData={matchData}
+                      setLocatePlayers={setLocatePlayers}
+                      players={players} />
+                  </CSSTransition>
+                )
+              }
+              </TransitionGroup>
+              {
+                matches.length === 0 && <div>Inga matcher spelade än...</div>
+              }
+            </div>
+            <StylesProvider injectFirst>
+              <Button className="button tiny" variant="contained" color="primary" onClick={ () => setscreen('MATCHER') }>
+                Mer ...
+              </Button>
+            </StylesProvider>
           </div>
-          <StylesProvider injectFirst>
-            <Button className="button tiny" variant="contained" color="primary" onClick={ () => setscreen('MATCHER') }>
-              Mer ...
-            </Button>
-          </StylesProvider>
-          <h2 className="matches">VÄLKOMNA BUTTON MASHERS!</h2>
+          <h3>VÄLKOMNA BUTTON MASHERS!</h3>
           <p>Nu är Season 3 live! Välkomna att börja SMASHA! Schemalägg, slåss direkt eller rapportera resultat!</p>
           <hr />
           <p>Vill du öva på dina 1 frame links, wiff punishes, short jump bair combos, okizeme eller bara ha de kul å spela lite smash?
