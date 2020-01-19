@@ -32,20 +32,16 @@ export default function Dashboard(props) {
     return now - new Date(matchData.date).getTime() < 1000
   }
 
-  function logoClass(){
-    return isFirstviewOfTheDay ? "hiqombo-logo intro-animation" : "hiqombo-logo";
-  }
-
-  function containerClass() {
-    return isFirstviewOfTheDay ? "content-separator intro-animation" : "content-separator";
+  function appendIntroAnimation(baseClass){
+    return isFirstviewOfTheDay ? baseClass + " intro-animation" : baseClass;
   }
   
   window.onbeforeunload = () => {Cookies.set('hasViewedToday', true, { expires: 1, path: '' })}
 
   return (
     <div className="dashboard background red">
-      <img src="hiqombo-logo.png" className={logoClass()} alt="logo" />
-      <div className={containerClass()}>
+      <img src="hiqombo-logo.png" className={appendIntroAnimation("hiqombo-logo")} alt="logo" />
+      <div className={appendIntroAnimation("content-separator")}>
         <table className="players" border="0" cellSpacing="0">
           <thead>
           <tr>
